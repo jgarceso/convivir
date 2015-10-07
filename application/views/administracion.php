@@ -12,7 +12,6 @@ foreach($css_files as $file): ?>
 <?php endforeach; ?>
 
         <link rel="stylesheet" href="/convivir/assets/appconvivir/css/demo.css">
-		<link rel="stylesheet" href="/convivir/assets/appconvivir/css/convivir.css">
 		<link rel="stylesheet" href="/convivir/assets/appconvivir/css/form-validation.css">
 </head>
 
