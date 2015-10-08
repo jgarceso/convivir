@@ -1,10 +1,10 @@
 <!DOCTYPE html>
 <html>
 
-<?php require 'head.php'; ?>
+<?php require_once 'head.php'; ?>
 <body>
 	<header class="cabecera" style="padding-bottom: 30px;">
-		<img src="assets/appconvivir/imagenes/logo-convivir.jpg" />
+             <?php require_once 'logo.php';?>
     </header>
 
 
