@@ -1,86 +1,61 @@
 <?php
-if (!defined('BASEPATH'))
-	exit('No direct script access allowed');
 
-class Administracion extends CI_Controller {
+if (!defined('BASEPATH')) {
+    exit('No direct script access allowed');
+}
+require_once 'BaseController.php';
 
+class Administracion extends BaseController {
+
+
+    private $archivos_css = array(
+        "convivir.css",
+        "demo.css",
+        "form-validation.css"
+    );
+    
+    private $archivos_js = array(
+
+    );
 	public function __construct() {
 		parent::__construct();
-                session_start();
-                if (!isset($_SESSION["usuario"])) {
-                        header("Location: /convivir/");
-                }
-		$this -> load -> database();
-		$this -> load -> helper('url');
-
-		$this -> load -> library('grocery_CRUD');
+                
+               $this->check_session();
 	}
-
-	public function _mostrar_pagina($output = null) {
-		$this -> load -> view('administracion.php', $output);
-	}
-
 
 	public function index() {
 		try {
-			$this -> load -> library('Grocery_CRUD');
-			$this -> load -> library('ajax_grocery_CRUD');
+			$this->grocery_crud -> set_table('producto');
+			$this->grocery_crud -> set_subject('Productos');
 
-			$crud = new ajax_grocery_CRUD();
-			$crud -> set_table('producto');
-			$crud -> set_subject('Productos');
-
-			$crud -> columns('Descripcion', 'IdTipo', 'IdCategoria', 'IdSubcategoria', 'IdEmpresa', 'IdEstadoCertificacion');
-			$crud -> fields('Descripcion', 'IdTipo', 'IdCategoria', 'IdSubcategoria', 'IdEmpresa', 'IdEstadoCertificacion');
-			$crud -> display_as('Descripcion', 'Producto') -> display_as('IdEmpresa', 'Empresa') -> display_as('IdCategoria', 'Categoría') 
+			$this->grocery_crud -> columns('Descripcion', 'IdTipo', 'IdCategoria', 'IdSubcategoria', 'IdEmpresa', 'IdEstadoCertificacion');
+			$this->grocery_crud-> fields('Descripcion', 'IdTipo', 'IdCategoria', 'IdSubcategoria', 'IdEmpresa', 'IdEstadoCertificacion');
+			$this->grocery_crud -> display_as('Descripcion', 'Producto') -> display_as('IdEmpresa', 'Empresa') -> display_as('IdCategoria', 'Categoría') 
 			-> display_as('IdSubcategoria', 'SubCategoría') -> display_as('IdTipo', 'Tipo') -> display_as('IdEstadoCertificacion', 'Certificación');
-			$crud -> required_fields('Descripcion', 'IdTipo', 'IdCategoria', 'IdSubcategoria', 'IdEmpresa', 'IdEstadoCertificacion');
-			/*$crud->required_fields('city');*/
-			$crud -> set_relation('IdTipo', 'tipoproducto', 'Nombre');
-			$crud -> set_relation('IdCategoria', 'categoriaproducto', 'Nombre');
-			//$crud->set_relation_dependency('IdCategoria','IdTipo','IdTipo');
-			$crud -> set_relation('IdSubcategoria', 'subcategoriaproducto', 'Nombre');
-			//$crud->set_relation_dependency('IdSubcategoria','IdCategoria','IdCategoria');
-			$crud -> set_relation('IdEmpresa', 'empresa', 'Nombre');
-			$crud -> set_relation('IdEstadoCertificacion', 'estadocertificacion', 'Nombre');
-			/*$crud->fields('Descripcion','IdCategoria','IdEmpresa');
+			$this->grocery_crud -> required_fields('Descripcion', 'IdTipo', 'IdCategoria', 'IdSubcategoria', 'IdEmpresa', 'IdEstadoCertificacion');
+			/*$this->grocery_crud->required_fields('city');*/
+			$this->grocery_crud -> set_relation('IdTipo', 'tipoproducto', 'Nombre');
+			$this->grocery_crud -> set_relation('IdCategoria', 'categoriaproducto', 'Nombre');
+			//$this->grocery_crud->set_relation_dependency('IdCategoria','IdTipo','IdTipo');
+			$this->grocery_crud -> set_relation('IdSubcategoria', 'subcategoriaproducto', 'Nombre');
+			//$this->grocery_crud->set_relation_dependency('IdSubcategoria','IdCategoria','IdCategoria');
+			$this->grocery_crud -> set_relation('IdEmpresa', 'empresa', 'Nombre');
+			$this->grocery_crud -> set_relation('IdEstadoCertificacion', 'estadocertificacion', 'Nombre');
+			/*$this->grocery_crud->fields('Descripcion','IdCategoria','IdEmpresa');
 			 $this->load->model('categoria_model');
 			 $categorias = $this->categoria_model->obtener_categorias();
-			 $crud->field_type('IdCategoria','dropdown', $categorias);
+			 $this->grocery_crud->field_type('IdCategoria','dropdown', $categorias);
 			 */
-			$crud -> unset_export();
-			$crud -> unset_print();
-			$crud->unset_back_to_list();
-			$output = $crud -> render();
+                        
+                        $this->set_css_files($this->archivos_css);
+                        $this->set_js_files($this->archivos_js);
 
-			$this -> _mostrar_pagina($output);
-
-		} catch(Exception $e) {
-			show_error($e -> getMessage() . ' --- ' . $e -> getTraceAsString());
-		}
-	}
-
-	public function listar_productos1() {
-		try {
-			$crud = new grocery_CRUD();
-
-			$crud -> set_theme('datatables');
-			$crud -> set_table('producto');
-			$crud -> set_subject('Productos');
-			/*$crud->required_fields('city');*/
-			$crud -> fields('Descripcion', 'IdCategoria', 'IdEmpresa');
-			$this -> load -> model('categoria_model');
-			$categorias = $this -> categoria_model -> obtener_categorias();
-			$crud -> field_type('IdCategoria', 'dropdown', $categorias);
-			$crud -> set_relation('IdEmpresa', 'empresa', 'Nombre');
-			$crud -> display_as('Descripcion', 'Producto') -> display_as('IdEmpresa', 'Empresa') -> display_as('IdCategoria', 'Categoria');
-			$output = $crud -> render();
-
-			$this -> _mostrar_pagina($output);
+			$output = $this->grocery_crud -> render();
+                        
+			$this -> mostrar_pagina("administracion", $output);
 
 		} catch(Exception $e) {
 			show_error($e -> getMessage() . ' --- ' . $e -> getTraceAsString());
 		}
 	}
-
 }
