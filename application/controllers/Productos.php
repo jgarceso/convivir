@@ -5,7 +5,7 @@ if (!defined('BASEPATH')) {
 }
 require_once 'BaseController.php';
 
-class Administracion extends BaseController {
+class Productos extends BaseController {
 
 
     private $archivos_css = array(
@@ -21,6 +21,7 @@ class Administracion extends BaseController {
 		parent::__construct();
                 
                $this->check_session();
+               $this->controllerName = "Productos";
 	}
 
 	public function index() {
@@ -52,7 +53,7 @@ class Administracion extends BaseController {
 
 			$output = $this->grocery_crud -> render();
                         
-			$this -> mostrar_pagina("administracion", $output);
+			$this -> mostrar_pagina("productos", $output);
 
 		} catch(Exception $e) {
 			show_error($e -> getMessage() . ' --- ' . $e -> getTraceAsString());

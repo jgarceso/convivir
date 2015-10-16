@@ -10,7 +10,7 @@ $correcto;
 if (mysqli_num_rows($consulta) > 0) {
 	session_start();
 	$_SESSION["usuario"] = $name;
-	$url = "administracion";
+	$url = "inicio";
 	$correcto = true;
 } else {
 	$correcto = false;
