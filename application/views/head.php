@@ -1,7 +1,3 @@
-<?php 
-//define('__ROOT__', dirname(dirname(__FILE__))); 
-//$this->load->
-//require_once(__ROOT__.'\libraries\Grocery_CRUD.php') ?>
 <head>
 	<meta charset="utf-8">
 		<meta http-equiv="X-UA-Compatible" content="IE=edge">

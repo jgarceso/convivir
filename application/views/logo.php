@@ -1,4 +1,4 @@
 <?php
 
-echo '<img src="'.$this->convivir->imagenes_path.'logo-convivir.jpg" />';
+echo '<img src="'.$this->config->site_url().$this->convivir->imagenes_path.'logo-convivir.jpg" />';
 

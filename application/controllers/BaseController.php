@@ -6,6 +6,7 @@ if (!defined('BASEPATH')) {
 class BaseController extends CI_Controller {
 
     public $convivir;
+    public $controllerName;
     
     public function __construct() {
 		parent::__construct();
