@@ -26,6 +26,7 @@ class Productos extends BaseController {
 
 	public function index() {
 		try {
+			
 			$this->grocery_crud -> set_table('producto');
 			$this->grocery_crud -> set_subject('Productos');
 
@@ -36,7 +37,9 @@ class Productos extends BaseController {
 			$this->grocery_crud -> required_fields('Descripcion', 'IdTipo', 'IdCategoria', 'IdSubcategoria', 'IdEmpresa', 'IdEstadoCertificacion');
 			/*$this->grocery_crud->required_fields('city');*/
 			$this->grocery_crud -> set_relation('IdTipo', 'tipoproducto', 'Nombre');
-			$this->grocery_crud -> set_relation('IdCategoria', 'categoriaproducto', 'Nombre');
+			//$this->grocery_crud -> set_relation('IdCategoria', 'categoriaproducto', 'Nombre');
+			//$ $this->grocery_crud-> set_relation ('IdCategoria', 'categoriaproducto', '{Nombre} ({Nombre} {Nombre})');
+			$this->grocery_crud -> set_relation ('IdCategoria', 'categoriaproducto', 'Nombre', array ('IdTipo' => 2));
 			//$this->grocery_crud->set_relation_dependency('IdCategoria','IdTipo','IdTipo');
 			$this->grocery_crud -> set_relation('IdSubcategoria', 'subcategoriaproducto', 'Nombre');
 			//$this->grocery_crud->set_relation_dependency('IdSubcategoria','IdCategoria','IdCategoria');
