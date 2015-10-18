@@ -1,5 +1,5 @@
 <?php
-$con = mysqli_connect('localhost', 'root', '', 'webauth');
+$con = mysqli_connect('localhost', 'root', '', 'convivir');
 $name = $_POST["usuario"];
 $pass = $_POST["password"];
 $query = "SELECT * FROM user_pwd WHERE name='$name' AND pass='$pass'";
