@@ -29,7 +29,7 @@ class Categorias extends BaseController {
 
 			$this->grocery_crud -> columns('Nombre', 'IdTipo');
 			$this->grocery_crud-> fields('Nombre', 'IdTipo');
-			$this->grocery_crud -> display_as('IdCategoria', 'IdCategoria') -> display_as('Nombre', 'Nombre') -> display_as('IdTipo', 'Tipo');
+			$this->grocery_crud -> display_as('IdCategoria', 'IdCategoria') -> display_as('Nombre', 'Nombre Categoría') -> display_as('IdTipo', 'Tipo');
 			$this->grocery_crud -> required_fields('IdCategoria', 'Nombre', 'IdTipo');
 			/*$this->grocery_crud->required_fields('city');*/
 			$this->grocery_crud -> set_relation('IdTipo', 'tipoproducto', 'Nombre');
