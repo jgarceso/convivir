@@ -29,7 +29,7 @@ class SubCategorias extends BaseController {
 
 			$this->grocery_crud -> columns('Nombre', 'IdCategoria');
 			$this->grocery_crud-> fields('Nombre', 'IdCategoria');
-			$this->grocery_crud -> display_as('IdCategoria', 'Categoría') -> display_as('Nombre', 'Nombre');
+			$this->grocery_crud -> display_as('IdCategoria', 'Nombre categoría') -> display_as('Nombre', 'Nombre subcategoría');
 			$this->grocery_crud -> required_fields('IdCategoria', 'Nombre');
 			$this->grocery_crud -> set_relation('IdCategoria', 'subcategoriaproducto', 'Nombre');
 			//$this->grocery_crud -> set_relation('IdCategoria', 'categoriaproducto', 'Nombre');
