@@ -17,22 +17,25 @@ $menuOptions = array(
         'displayName'=>'SubCategorías',
         'controller'=>'SubCategorias'
         ),
-      array(
+    array(
+         
         'displayName'=>'Empresas',
-        'controller'=>'Empresas'
+        'controller'=>'Empresas'          
         )
+		
     );
         
         
     foreach ($menuOptions as $item){
         $cssClass = "";
+              			
         if($item['controller'] == $this->controllerName)
         {
             $cssClass ='class="active"';
         }
         echo '<li>';
         echo '<a href="'.$this->config->site_url().$item['controller'].'" '.$cssClass.'>'.$item['displayName'].'</a>';
-         echo '</li>';
+        echo '</li>';
     }
 ?>
 
