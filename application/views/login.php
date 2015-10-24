@@ -34,7 +34,20 @@
                             <input id="input-password" type="password" name="password" maxlength="30" onpaste="return false;">
                         </label>
                     </div>
-
+                     <div class="captcha-section">
+                        <div class="verificacion">
+                            Código de verificación
+                        </div>
+                            <div class="codigo-verificacion">
+                            <?php
+                            echo '<img style="cursor:pointer;" src="'.$this->config->site_url().$this->convivir->imagenes_path.'refrescar.png" title="refrescar" id="refresh-captcha" />';
+                            ?>
+                            <img src="Security/obtenerCaptcha" alt="" id="captcha-result" />
+                            </div>
+                         <div>
+                            <input id="input-captcha" type="text" name="captcha" maxlength="5" onpaste="return false;">
+                         </div>
+                    </div>
                     <div class="form-row">
                         <button id="btn-login" type="button">Log in</button>
                     </div>
