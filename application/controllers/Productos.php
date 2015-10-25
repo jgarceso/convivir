@@ -42,9 +42,9 @@ class Productos extends BaseController {
 			$this->set_css_files($this->archivos_css);
 			$this->set_js_files($this->archivos_js);
                         
-                        $this->grocery_crud -> callback_column($this->unique_field_name('IdEstadoCertificacion'),array($this,'showImage'));
+            $this->grocery_crud -> callback_column($this->unique_field_name('IdEstadoCertificacion'),array($this,'showImage'));
 			$this->grocery_crud -> set_relation('IdEstadoCertificacion', 'estadocertificacion', 'Nombre');
-                        $this->grocery_crud ->order_by('Descripcion','asc');
+            $this->grocery_crud ->order_by('Descripcion','asc');
                         
 			$output = $this->grocery_crud -> render();
 			$this -> mostrar_pagina("productos", $output);
