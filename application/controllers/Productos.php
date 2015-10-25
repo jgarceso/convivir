@@ -28,14 +28,12 @@ class Productos extends BaseController {
 			
 			$this->grocery_crud -> set_table('producto');
 			$this->grocery_crud -> set_subject('Productos');
-
 			$this->grocery_crud -> columns('Descripcion', 'IdTipo', 'IdCategoria', 'IdSubcategoria', 'IdEmpresa', 'IdEstadoCertificacion');
 			$this->grocery_crud-> fields('Descripcion', 'IdTipo', 'IdCategoria', 'IdSubcategoria', 'IdEmpresa', 'IdEstadoCertificacion');
 			$this->grocery_crud -> display_as('Descripcion', 'Producto') -> display_as('IdEmpresa', 'Empresa') -> display_as('IdCategoria', 'Categoría') 
-			-> display_as('IdSubcategoria', 'SubCategoría') -> display_as('IdTipo', 'Tipo') -> display_as('IdEstadoCertificacion', 'Certificación');
+			-> display_as('IdSubcategoria', 'SubCategoría') -> display_as('IdTipo', 'Tipo') -> display_as('IdEstadoCertificacion', 'Estado');
 			$this->grocery_crud -> required_fields('Descripcion', 'IdTipo', 'IdCategoria', 'IdSubcategoria', 'IdEmpresa', 'IdEstadoCertificacion');
 			$this->grocery_crud -> set_relation('IdTipo', 'tipoproducto', 'Nombre');
-			
 			$this->grocery_crud -> set_relation('IdCategoria','categoriaproducto','Nombre');
 			$this->grocery_crud -> set_relation('IdSubcategoria', 'subcategoriaproducto', 'Nombre');
 			$this->grocery_crud -> set_relation('IdEmpresa', 'empresa', 'Nombre');
@@ -46,6 +44,8 @@ class Productos extends BaseController {
                         
                         $this->grocery_crud -> callback_column($this->unique_field_name('IdEstadoCertificacion'),array($this,'showImage'));
 			$this->grocery_crud -> set_relation('IdEstadoCertificacion', 'estadocertificacion', 'Nombre');
+                        $this->grocery_crud ->order_by('Descripcion','asc');
+                        
 			$output = $this->grocery_crud -> render();
 			$this -> mostrar_pagina("productos", $output);
 
@@ -55,11 +55,11 @@ class Productos extends BaseController {
 	}
       function showImage($value) {  
         if($value=='Vigente'){
-              return '<img style="cursor:pointer;" src="'.$this->config->site_url().$this->convivir->imagenes_path.'semaforo_verde.png" title="refrescar" id="refresh-captcha" width=20px/> '.$value;
+	      return '<p align="center"><div class="circuloVerde" title="'.$value.'"></div></p>';
         }else if($value=='Caducada'){
-              return '<img style="cursor:pointer;" src="'.$this->config->site_url().$this->convivir->imagenes_path.'semaforo_rojo.png" title="refrescar" id="refresh-captcha" width=20px/> '.$value;
+               return '<div class="circuloRojo" title="'.$value.'"></div>';
         }else if($value=='En Renovación'){
-              return '<img style="cursor:pointer;" src="'.$this->config->site_url().$this->convivir->imagenes_path.'semaforo_amarillo.png" title="refrescar" id="refresh-captcha" width=20px/> '.$value;
+               return '<div class="circuloAmarillo" title="'.$value.'"></div>';
         }
     }    
   
