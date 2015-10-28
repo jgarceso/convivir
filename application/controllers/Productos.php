@@ -48,7 +48,7 @@ class Productos extends BaseController {
                         
 			$output = $this->grocery_crud -> render();
 			$this -> mostrar_pagina("productos", $output);
-
+     
 		} catch(Exception $e) {
 			show_error($e -> getMessage() . ' --- ' . $e -> getTraceAsString());
 		}
