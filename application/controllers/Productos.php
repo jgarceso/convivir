@@ -37,7 +37,7 @@ class Productos extends BaseController {
 			$this->grocery_crud -> set_relation('IdCategoria','categoriaproducto','Nombre');
 			$this->grocery_crud -> set_relation('IdSubcategoria', 'subcategoriaproducto', 'Nombre');
 			$this->grocery_crud -> set_relation('IdEmpresa', 'empresa', 'Nombre');
-			$this->grocery_crud -> set_relation('IdEstadoCertificacion', 'estadocertificacion', 'Nombre');
+			//$this->grocery_crud -> set_relation('IdEstadoCertificacion', 'estadocertificacion', 'Nombre');
 			 
 			$this->set_css_files($this->archivos_css);
 			$this->set_js_files($this->archivos_js);
@@ -54,12 +54,13 @@ class Productos extends BaseController {
 		}
 	}
       function showImage($value) {  
+          $html = '';
         if($value=='Vigente'){
-	      return '<p align="center"><div class="circuloVerde" title="'.$value.'"></div></p>';
+	      return '<div class="circulo-estado-verde" title="'.$value.'"></div>';
         }else if($value=='Caducada'){
-               return '<div class="circuloRojo" title="'.$value.'"></div>';
+               return '<div class="circulo-estado-rojo" title="'.$value.'"></div>';
         }else if($value=='En Renovación'){
-               return '<div class="circuloAmarillo" title="'.$value.'"></div>';
+               return '<div class="circulo-estado-amarillo" title="'.$value.'"></div>';
         }
     }    
   

@@ -22,39 +22,25 @@ iframe
     height: 100%;
 }
 
-.circuloVerde { 
+
+.circulo-estado-verde, .circulo-estado-amarillo, .circulo-estado-rojo{
    width: 20px;
    height: 20px;
+   -moz-border-radius: 50px; 
+   -webkit-border-radius: 50px; 
+   border-radius: 50px;
+   margin: 0px 0 0 15px;     
+}
+
+.circulo-estado-verde { 
    background:#5cb85c; 
-   -moz-border-radius: 50px; 
-   -webkit-border-radius: 50px; 
-   border-radius: 50px;
-   position: absolute;
-   left: 117%;
-   margin: 0px 0 0 5px;
 }
-.circuloRojo { 
-   width: 20px;
-   height: 20px;
-   background: #F00707; 
-   -moz-border-radius: 50px; 
-   -webkit-border-radius: 50px; 
-   border-radius: 50px;
-   position: absolute;
-   left: 117%;
-   margin: 0px 0 0 5px;
+
+.circulo-estado-rojo { 
+   background:#F00707; 
 }
-.circuloAmarillo { 
-   width: 20px;
-   height: 20px;
+
+.circulo-estado-amarillo { 
    background:#F1F107; 
-   -moz-border-radius: 50px; 
-   -webkit-border-radius: 50px; 
-   border-radius: 50px;
-   position: absolute;
-   left: 117%;
-   margin: 0px 0 0 5px;
 }
-
-
 
