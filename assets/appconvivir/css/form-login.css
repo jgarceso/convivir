@@ -20,6 +20,19 @@ label.error{
     padding-bottom:5px;
 }
 
+.captcha-section .verificacion{
+    clear:both;
+    padding-bottom: 5px;
+}
+
+.captcha-section input{
+        margin-left: 75px;
+}
+
+.captcha-section .codigo-verificacion{
+    padding-bottom: 5px;
+}
+
 .form-login{
     max-width: 1000px;
     width: 100%;
@@ -71,7 +84,6 @@ label.error{
     box-sizing: border-box;
     color:  #5f5f5f;
     width: 125px;
-    text-align: right;
     padding-right: 25px;
 }
 
