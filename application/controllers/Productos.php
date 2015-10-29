@@ -25,7 +25,7 @@ class Productos extends BaseController {
 
 	public function index() {
 		try {
-			
+			$this->grocery_crud->set_model('producto_model');
 			$this->grocery_crud -> set_table('producto');
 			$this->grocery_crud -> set_subject('Productos');
 			$this->grocery_crud -> columns('Descripcion', 'IdTipo', 'IdCategoria', 'IdSubcategoria', 'IdEmpresa', 'IdEstadoCertificacion');
@@ -63,8 +63,4 @@ class Productos extends BaseController {
                return '<div class="circulo-estado-amarillo" title="'.$value.'"></div>';
         }
     }    
-  
-    function unique_field_name($field_name) {
-           return 's'.substr(md5($field_name),0,8); 
-   }
 }
