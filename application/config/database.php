@@ -75,10 +75,10 @@ $query_builder = TRUE;
 
 $db['default'] = array(
 	'dsn'	=> '',
-	'hostname' => 'localhost',
-	'username' => 'root',
-	'password' => '',
-	'database' => 'convivir',
+	'hostname' => '173.254.55.246',
+	'username' => 'jparcomp_conviv',
+	'password' => 'convivir2015',
+	'database' => 'jparcomp_convivir',
 	'dbdriver' => 'mysqli',
 	'dbprefix' => '',
 	'pconnect' => FALSE,
