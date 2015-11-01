@@ -50,7 +50,7 @@
 	$lang['update_error']			= 'Ocurrio un error al actualizar.';
 
 	/* Added in version 1.2.1 */
-	$lang['set_relation_title']		= 'Seleccionar {field_display_as}';
+	$lang['set_relation_title']		= 'Seleccione {field_display_as}';
 	$lang['list_record']			= 'Registro';
 	$lang['form_inactive']			= 'inactivo';
 	$lang['form_active']			= 'activo';
