@@ -2408,7 +2408,15 @@ class grocery_CRUD_Layout extends grocery_CRUD_Model_Driver
     		$all_values = array_values($value);
     		$read_only_value = implode(", ",$all_values);
     	}
-
+        
+        if(in_array($field_info->type, array('datetime', 'timestamp'))){
+             $ci = &get_instance();
+            $format = $ci->config->item('grocery_crud_default_datetime_format');
+            list($year,$month,$day) = explode("-",$value);
+            list($hours,$minutes) = explode(":",substr($value,11));
+            $read_only_value = date ($format, mktime ( (int)$hours , (int)$minutes ,0, (int)$month , (int)$day ,(int)$year));
+        }
+        
         return '<div id="field-'.$field_info->name.'" class="readonly_label">'.$read_only_value.'</div>';
 	}
 
