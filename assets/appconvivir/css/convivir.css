@@ -44,3 +44,9 @@ iframe
    background:#F1F107; 
 }
 
+.chosen-select{
+    width: 300px; 
+    display: none;
+    font-size: 12px;
+}
+
