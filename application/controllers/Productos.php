@@ -27,10 +27,11 @@ class Productos extends BaseController {
             $this->grocery_crud->set_model('producto_model');
             $this->grocery_crud->set_table('producto');
             $this->grocery_crud->set_subject('Productos');
-            $this->grocery_crud->columns('Descripcion', 'IdTipo', 'IdCategoria', 'IdSubcategoria', 'IdEmpresa', 'IdEstadoCertificacion', 'FechaModificacion');
+            $this->grocery_crud->columns('Descripcion', 'IdTipo', 'IdCategoria', 'IdSubcategoria', 'IdEmpresa', 'IdEstadoCertificacion');
             $this->grocery_crud->fields('Descripcion', 'IdTipo', 'IdCategoria', 'IdSubcategoria', 'IdEmpresa', 'IdEstadoCertificacion','FechaModificacion');
             $this->grocery_crud->display_as('Descripcion', 'Producto')->display_as('IdEmpresa', 'Empresa')->display_as('IdCategoria', 'Categoría')
-                    ->display_as('IdSubcategoria', 'SubCategoría')->display_as('IdTipo', 'Tipo')->display_as('IdEstadoCertificacion', 'Estado');
+                    ->display_as('IdSubcategoria', 'SubCategoría')->display_as('IdTipo', 'Tipo')->display_as('IdEstadoCertificacion', 'Estado')->display_as('FechaModificacion', 'Última Actualización');
+            $this->grocery_crud->add_fields('Descripcion', 'IdTipo', 'IdCategoria', 'IdSubcategoria', 'IdEmpresa', 'IdEstadoCertificacion');
             $this->grocery_crud->required_fields('Descripcion', 'IdTipo', 'IdCategoria', 'IdSubcategoria', 'IdEmpresa', 'IdEstadoCertificacion');
             $this->grocery_crud->set_relation('IdTipo', 'tipoproducto', 'Nombre');
             $this->grocery_crud->set_relation('IdCategoria', 'categoriaproducto', 'Nombre');
@@ -64,13 +65,13 @@ class Productos extends BaseController {
 
     function log_producto_after_insert($post_array, $primary_key) {
         $producto_log = $this->obtener_array_log_producto($primary_key,(object)$post_array, "Ingresar");
-        $this->db->insert('producto_log', $producto_log);
+        $this->db->insert('log_producto', $producto_log);
         return true;
     }
 
     function log_producto_after_update($post_array, $primary_key) {      
         $producto_log = $this->obtener_array_log_producto($primary_key,(object)$post_array, "Actualizar");
-        $this->db->insert('producto_log', $producto_log);
+        $this->db->insert('log_producto', $producto_log);
         return true;
     }
 
@@ -82,7 +83,7 @@ class Productos extends BaseController {
             return false;
 
         $producto_log = $this->obtener_array_log_producto($primary_key,$prod, "Eliminar");
-        $this->db->insert('producto_log', $producto_log);
+        $this->db->insert('log_producto', $producto_log);
         return true;
     }
     
