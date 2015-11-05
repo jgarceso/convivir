@@ -49,7 +49,7 @@ class Productos extends BaseController {
 			$this->grocery_crud ->callback_add_field('IdSubcategoria', array($this, 'empty_subcategoria_select'));
 			$this->grocery_crud ->callback_edit_field('IdSubcategoria', array($this, 'empty_subcategoria_select'));
                         $this->grocery_crud ->order_by('Descripcion','asc');
-                        
+                                                
 			$output = $this->grocery_crud -> render();
 			$dd_data = array(				
 				'dd_state' =>  $this->grocery_crud ->getState(),
@@ -63,6 +63,7 @@ class Productos extends BaseController {
 			show_error($e -> getMessage() . ' --- ' . $e -> getTraceAsString());
 		}
 	}
+        
     function showImage($value) {  
       if($value=='Vigente'){
             return '<div class="circulo-estado-verde" title="'.$value.'"></div>';
@@ -76,7 +77,7 @@ class Productos extends BaseController {
     function unique_field_name($field_name) {
              return 's'.substr(md5($field_name),0,8); 
     }
-    //CALLBACK FUNCTIONS
+   
     function empty_categoria_dropdown_select()
     {
             $empty_select = '<select name="IdCategoria" class="chosen-select" data-placeholder="Seleccione Categor&iacute;a">';
@@ -91,16 +92,17 @@ class Productos extends BaseController {
                                      ->where('IdProducto', $listingID);
                     $db = $this->db->get();
                     $row = $db->row(0);
-                    $IdTipo = $row->IdTipo;
-                    $stateID = $row->IdCategoria;
+                    $idTipo = $row->IdTipo;
+                    $idCategoria = $row->IdCategoria;
 
                     $this->db->select('*')
                                      ->from('categoriaproducto')
-                                     ->where('IdCategoria', $IdTipo);
+                                     ->where('IdTipo', $idTipo)
+                                     ->order_by('Nombre');
                     $db = $this->db->get();
                     
                     foreach($db->result() as $row):
-                            if($row->IdCategoria == $stateID) {
+                            if($row->IdCategoria == $idCategoria) {
                                     $empty_select .= '<option value="'.$row->IdCategoria.'" selected="selected">'.$row->Nombre.'</option>';
                             } else {
                                     $empty_select .= '<option value="'.$row->IdCategoria.'">'.$row->Nombre.'</option>';
@@ -126,16 +128,17 @@ class Productos extends BaseController {
                                      ->where('IdProducto', $listingID);
                     $db = $this->db->get();
                     $row = $db->row(0);
-                    $stateID = $row->IdCategoria;
-                    $cityID = $row->IdSubcategoria;
+                    $idCategoria = $row->IdCategoria;
+                    $idSubcategoria = $row->IdSubcategoria;
 
                     $this->db->select('*')
                                      ->from('subcategoriaproducto')
-                                     ->where('IdCategoria', $stateID);
+                                     ->where('IdCategoria', $idCategoria)
+                                     ->order_by('Nombre');
                     $db = $this->db->get();
 
                     foreach($db->result() as $row):
-                            if($row->IdSubcategoria == $cityID) {
+                            if($row->IdSubcategoria == $idSubcategoria) {
                                     $empty_select .= '<option value="'.$row->IdSubcategoria.'" selected="selected">'.$row->Nombre.'</option>';
                             } else {
                                     $empty_select .= '<option value="'.$row->IdSubcategoria.'">'.$row->Nombre.'</option>';
@@ -147,34 +150,33 @@ class Productos extends BaseController {
             }
     }
 				
-    function get_categorias()
-    {
-            $IdTipo = $this->uri->segment(3);
-            $this->db->select("*")
-                             ->from('categoriaproducto')
-                             ->where('IdTipo', $IdTipo);
-            $db = $this->db->get();
-
-            $array = array();
-            foreach($db->result() as $row):
-                    $array[] = array("value" => $row->IdCategoria, "property" => $row->Nombre);
-            endforeach;
-            echo json_encode($array);
-            exit;
+    function get_categorias(){
+        $IdTipo = $this->uri->segment(3);
+        $this->db->select("*")
+                         ->from('categoriaproducto')
+                         ->where('IdTipo', $IdTipo)
+                         ->order_by('Nombre');
+        $db = $this->db->get();
+        $array = array();
+        foreach($db->result() as $row):
+                $array[] = array("value" => $row->IdCategoria, "property" => $row->Nombre);
+        endforeach;
+        echo json_encode($array);
+        exit;
     }
 	
-    function get_subcategorias()
-    {
-            $stateID = $this->uri->segment(3);
-            $this->db->select("*")
-                             ->from('subcategoriaproducto')
-                             ->where('IdCategoria', $stateID);
-            $db = $this->db->get();
-            $array = array();
-            foreach($db->result() as $row):
-                    $array[] = array("value" => $row->IdSubcategoria, "property" => $row->Nombre);
-            endforeach;
-            echo json_encode($array);
-            exit;
+    function get_subcategorias(){
+        $stateID = $this->uri->segment(3);
+        $this->db->select("*")
+                         ->from('subcategoriaproducto')
+                         ->where('IdCategoria', $stateID)
+                         ->order_by('Nombre');
+        $db = $this->db->get();
+        $array = array();
+        foreach($db->result() as $row):
+                $array[] = array("value" => $row->IdSubcategoria, "property" => $row->Nombre);
+        endforeach;
+        echo json_encode($array);
+        exit;
     }
 }
