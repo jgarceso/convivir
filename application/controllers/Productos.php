@@ -14,6 +14,7 @@ class Productos extends BaseController {
     );
     private $archivos_js = array(
     );
+    
 
     public function __construct() {
         parent::__construct();

@@ -1836,7 +1836,8 @@ class grocery_CRUD_Layout extends grocery_CRUD_Model_Driver {
                 'success' => true,
                 'insert_primary_key' => $update_result,
                 'success_message' => $success_message,
-                'success_list_url' => $this->getListSuccessUrl($state_info->primary_key)
+                'success_list_url' => $this->getListSuccessUrl($state_info->primary_key),
+                'edit_list_url' => $this->getEditUrl($state_info->primary_key)
             ));
         }
         $this->set_echo_and_die();
