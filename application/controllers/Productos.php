@@ -64,14 +64,14 @@ class Productos extends BaseController {
     }
 
     function log_producto_after_insert($post_array, $primary_key) {
-        $producto_log = $this->obtener_array_log_producto($primary_key,(object)$post_array, "Ingresar");
-        $this->db->insert('log_producto', $producto_log);
+        $log_producto = $this->obtener_array_log_producto($primary_key,(object)$post_array, "Ingresar");
+        $this->db->insert('log_producto', $log_producto);
         return true;
     }
 
     function log_producto_after_update($post_array, $primary_key) {      
-        $producto_log = $this->obtener_array_log_producto($primary_key,(object)$post_array, "Actualizar");
-        $this->db->insert('log_producto', $producto_log);
+        $log_producto = $this->obtener_array_log_producto($primary_key,(object)$post_array, "Actualizar");
+        $this->db->insert('log_producto', $log_producto);
         return true;
     }
 
@@ -82,13 +82,13 @@ class Productos extends BaseController {
         if (empty($prod))
             return false;
 
-        $producto_log = $this->obtener_array_log_producto($primary_key,$prod, "Eliminar");
-        $this->db->insert('log_producto', $producto_log);
+        $log_producto = $this->obtener_array_log_producto($primary_key,$prod, "Eliminar");
+        $this->db->insert('log_producto', $log_producto);
         return true;
     }
     
     private function obtener_array_log_producto ($primary_key,$prod, $accion){
-         $producto_log = array(
+         $log_producto = array(
             "IdProducto" => $primary_key,
             "Descripcion" => $prod->Descripcion,
             "IdTipo" => $prod->IdTipo,
@@ -99,7 +99,7 @@ class Productos extends BaseController {
             "UsuarioModifica" => $_SESSION["usuario"],
             "Accion" => $accion
         );
-       return $producto_log;
+       return $log_producto;
     }
 
 }
