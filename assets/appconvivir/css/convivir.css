@@ -187,4 +187,15 @@ header a{
 
 .circulo-estado-amarillo { 
    background:#F1F107; 
+<<<<<<< HEAD
 }
+
+.chosen-select{
+    width: 300px; 
+    display: none;
+    font-size: 12px;
+}
+
+=======
+}
+>>>>>>> master
