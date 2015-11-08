@@ -81,6 +81,7 @@ class Example extends REST_Controller {
         {
             foreach ($users as $key => $value)
             {
+                echo 'key user->'.$key;
                 if (isset($value['id']) && $value['id'] === $id)
                 {
                     $user = $value;
