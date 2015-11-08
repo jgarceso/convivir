@@ -62,8 +62,8 @@ $(function(){
 
 									return true;
 								}
-
 								form_success_message(data.success_message);
+                                                                window.location = data.edit_list_url;
 							}
 							else
 							{

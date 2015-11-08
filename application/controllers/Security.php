@@ -7,7 +7,7 @@ class Security extends CI_Controller {
 
     public function obtenerCaptcha() {
         $width = 120;
-        $height = 30;
+        $height = 40;
         $string = "abcdefghijklmnopqrstuvwxyz0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ";
 
         $image = @imagecreatetruecolor($width, $height) or die("Cannot Initialize new GD image stream");
@@ -32,7 +32,7 @@ class Security extends CI_Controller {
         for ($x = 15; $x <= 95; $x += 20) {
             $pos = rand(0, 61);
             $str .= ($char = $string{$pos});
-            imagechar($image, rand(6, 10), $x, rand(2, 14), $char, $textcolor);
+            imagechar($image, rand(12, 16), $x, rand(6, 14), $char, $textcolor);
         }
 
         $_SESSION['captcha'] = $str;

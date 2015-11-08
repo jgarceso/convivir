@@ -1,27 +1,172 @@
+@import url('http://fonts.googleapis.com/css?family=Open+Sans:400,700');
+
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html{
+	background-color: #efefef;
+}
+
+body{
+	font:14px/1.5 Arial, Helvetica, sans-serif;
+	margin:0;
+}
+
+
+header{
+    box-sizing: border-box;
+	text-align: center;
+    width: 100%;
+    padding-top: 10px;
+    background-color: #FFFFFF;
+    overflow: hidden;
+}
+
+
+header h1{
+    float: left;
+	font: normal 24px/1.5 'Open Sans', sans-serif;
+	color: #fff;
+}
+
+header a{
+    color:#fff;
+    float: right;
+    text-decoration: none;
+    display: inline-block;
+    padding: 13px 50px;
+    border-radius: 3px;
+    font: bold 14px/1 'Open Sans', sans-serif;
+    text-transform: uppercase;
+    background-color:#F05283;
+
+}
+
+.cabecera-menu ul {
+    list-style: none;
+    border-bottom: 1px solid #EAEAEA;
+    background-color: #FFF;
+    padding: 20px;
+    margin-top: 0;
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+.cabecera-menu ul a{
+    text-decoration: none;
+    color: #FFF;
+    text-align: left;
+    background-color: #BCB8C2;
+    padding: 10px 16px;
+    border-radius: 2px;
+    opacity: 0.8;
+    font-size: 16px;
+    display: inline-block;
+    margin: 4px;
+    line-height: 1;
+    outline: none;
+
+    transition: 0.2s ease;
+}
+
+.cabecera-menu ul li a.active{
+    background-color: #F05283;
+    pointer-events: none;
+}
+
+.cabecera-menu ul li a:hover {
+    opacity: 1;
+}
+
+
+.cabecera-menu ul li{
+    display: inline-block;
+}
+
+.main-content{
+    margin-bottom: 30px;
+}
+
+.contenedor-user-info{
+    height: 30px;
+    width: 70%;
+    margin: 0 auto;
+    
+}
+
+.user-info{
+    width: 300px;
+    height: 30px;
+    background-color: #FFFFFF;
+    float: right;
+    max-width: 1000px;
+    box-shadow: 2px 7px 4px -1px rgba(0, 0, 0, 0.1);
+    padding: 5px;
+    color: #357ebd;
+}
+
+.user-icon{
+    background: url(../imagenes/glyphicons-halflings.png) no-repeat;
+    cursor: pointer;
+    width: 16px;
+    height: 16px;
+    border: none !important;
+    padding: 10px !important;
+    padding-bottom: 0px !important;
+    margin-left: 5px;
+    margin-top:3px;
+    display: block;
+    background-position: -168px 0;
+    float:left;
+}
+
+.icon-salir{
+    background: url(../imagenes/glyphicons-halflings.png) no-repeat;
+    cursor: pointer;
+    width: 16px;
+    height: 16px;
+    border: none !important;
+    padding: 10px !important;
+    padding-bottom: 0px !important;
+    margin-left: 5px;
+    margin-top:3px;
+    display: block;
+    background-position: -383px 0;
+    float:right;
+}
+
+.icon-inicio{
+    background: url(../imagenes/glyphicons-halflings.png) no-repeat;
+    cursor: pointer;
+    width: 16px;
+    height: 16px;
+    border: none !important;
+    padding: 10px !important;
+    padding-bottom: 0px !important;
+    margin-left: 5px;
+    margin-top:3px;
+    display: block;
+    background-position: 4px -25px;
+    float:right;
+}
+
 .contenedor-blanco
 {
     background-color: #ffffff;
     box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1);
     box-sizing: border-box;
-   /* font: bold 14px sans-serif;*/
     margin: 0 auto;
-    min-width: 640px;
-    max-width:1000px;
-    height:500px;
+    max-width: 70%;
+    height: 70%;
     padding-left: 50px;
     padding-right: 50px;
     padding-top: 20px;
+    padding-bottom: 20px;
+    padding-bottom: 20px;
 }
-
-iframe
-{
-    display: block;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-}
-
 
 .circulo-estado-verde, .circulo-estado-amarillo, .circulo-estado-rojo{
    width: 20px;
@@ -42,6 +187,7 @@ iframe
 
 .circulo-estado-amarillo { 
    background:#F1F107; 
+<<<<<<< HEAD
 }
 
 .chosen-select{
@@ -50,3 +196,6 @@ iframe
     font-size: 12px;
 }
 
+=======
+}
+>>>>>>> master
