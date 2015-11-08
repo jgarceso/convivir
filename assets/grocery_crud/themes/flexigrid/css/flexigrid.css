@@ -305,6 +305,7 @@ table th
 	background:#fff;
 	overflow:auto;
 	position:relative;
+        height:75%;
 }
 .flexigrid div.form-div {
 	background:#fff;
