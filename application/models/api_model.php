@@ -10,21 +10,67 @@ class api_model  extends CI_Model  {
 	
 	public function get_Tipos(){
 		$query = $this->db->query("SELECT * FROM tipoproducto");
- 
                 $result = $query->result_array();
-                
                 return $result;
 	
 	}
         
-        public function get_Productos(){
-		$query = $this->db->query("SELECT * FROM producto");
- 
-                $result = $query->result_array();
-                
-                return $result;
-	
+        public function get_Productos($id = null){
+            
+            if(! is_null($id)){
+                $query = $this->db->select("*")->from("producto")->where("IdProducto",$id)->get();
+                if($query->num_rows()==1){
+                    return $query->row_array();
+                }
+                return null;
+            }
+             $query = $this->db->select("*")->from("producto")->get();
+             
+            if($query->num_rows()>0){
+                return $query->result_array();
+            }
+            
+            return null;
 	}
+        
+         public function save($product){
+            
+           $this->db->set($this->_setProduct($product))->insert("products");
+           
+           if($this->db->affected_rows()==1){
+               return $this->db->insert_id();
+           }
+           return null;          
+	}
+        
+         public function update($product){
+              $this->db->set($this->_setProduct($product))->where("id",$id)->update("products");
+           
+           if($this->db->affected_rows()==1){
+               return true;
+           }
+           return null;     
+         }
+         
+         private function _setProduct($product){
+             return array(
+                 "categoria"    =>  $product["categoria"],
+                 "subcategoria" =>  $product["subcategoria"],
+                 "tipo"         =>  $product["tipo"],
+                 "empresa"      =>  $product["empresa"],
+                 "estadoCertificacion" =>  $product["estadoCertificacion"],
+                 "descripcion"  =>  $product["descripcion"]);
+             
+         }
+         
+          public function delete($id){
+              $this->db->where("id",$id)->delete("producto");
+           
+           if($this->db->affected_rows()==1){
+               return true;
+           }
+           return null;     
+         }
         
         
 }
