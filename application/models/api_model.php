@@ -16,4 +16,15 @@ class api_model  extends CI_Model  {
                 return $result;
 	
 	}
+        
+        public function get_Productos(){
+		$query = $this->db->query("SELECT * FROM producto");
+ 
+                $result = $query->result_array();
+                
+                return $result;
+	
+	}
+        
+        
 }
