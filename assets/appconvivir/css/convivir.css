@@ -187,7 +187,6 @@ header a{
 
 .circulo-estado-amarillo { 
    background:#F1F107; 
-<<<<<<< HEAD
 }
 
 .chosen-select{
@@ -196,6 +195,6 @@ header a{
     font-size: 12px;
 }
 
-=======
+.noty_message { 
+    text-align: left !important;
 }
->>>>>>> master
