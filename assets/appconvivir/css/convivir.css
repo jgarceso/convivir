@@ -11,7 +11,7 @@ html{
 }
 
 body{
-	font:14px/1.5 Arial, Helvetica, sans-serif;
+	font:13px Arial, Helvetica, sans-serif;
 	margin:0;
 }
 
@@ -49,10 +49,10 @@ header a{
     list-style: none;
     border-bottom: 1px solid #EAEAEA;
     background-color: #FFF;
-    padding: 20px;
+    padding: 15px;
     margin-top: 0;
     text-align: center;
-    margin-bottom: 30px;
+    margin-bottom: 15px;
 }
 
 .cabecera-menu ul a{
@@ -60,10 +60,10 @@ header a{
     color: #FFF;
     text-align: left;
     background-color: #BCB8C2;
-    padding: 10px 16px;
+    padding: 6px 16px;
     border-radius: 2px;
     opacity: 0.8;
-    font-size: 16px;
+    font-size: 14px;
     display: inline-block;
     margin: 4px;
     line-height: 1;
@@ -159,13 +159,12 @@ header a{
     box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1);
     box-sizing: border-box;
     margin: 0 auto;
-    max-width: 70%;
+    width: 70%;
     height: 70%;
-    padding-left: 50px;
-    padding-right: 50px;
-    padding-top: 20px;
-    padding-bottom: 20px;
-    padding-bottom: 20px;
+    padding-left: 30px;
+    padding-right: 30px;
+    padding-top: 10px;
+    padding-bottom: 10px;
 }
 
 .circulo-estado-verde, .circulo-estado-amarillo, .circulo-estado-rojo{
@@ -197,4 +196,16 @@ header a{
 
 .noty_message { 
     text-align: left !important;
+}
+
+.flexigrid div.bDiv table {
+    font-size: 13px;
+}
+
+.flexigrid .ftitle-left{
+    font-size: 18px;
+}
+
+.flexigrid div.form-div{
+    font-size: 13px;
 }
