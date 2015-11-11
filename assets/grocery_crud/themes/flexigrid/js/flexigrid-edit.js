@@ -77,7 +77,7 @@ $(function(){
 				}
 				else
 				{
-					$('.field_error').each(function(){
+					/*$('.field_error').each(function(){
 						$(this).removeClass('field_error');
 					});
 					$('#report-error').slideUp('fast');
@@ -88,7 +88,8 @@ $(function(){
 
 					$('#report-error').slideDown('normal');
 					$('#report-success').slideUp('fast').html('');
-
+                                */
+                                    form_error_message(data.error_message);
 				}
 			},
 			error: function(){

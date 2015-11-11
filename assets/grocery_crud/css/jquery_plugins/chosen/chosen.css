@@ -1,6 +1,6 @@
 /* @group Base */
 .chzn-container {
-  font-size: 15px;
+  font-size: 13px;
   position: relative;
   display: inline-block;
   zoom: 1;
@@ -47,7 +47,7 @@
   overflow: hidden;
   white-space: nowrap;
   position: relative;
-  line-height: 35px;
+  line-height: 30px;
   padding: 0 0 0 8px;
   color: #444444;
   text-decoration: none;
