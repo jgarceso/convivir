@@ -7,7 +7,7 @@ require_once 'BaseController.php';
 class Login extends BaseController {
 
     private $archivos_css = array(
-        "demo.css",
+        "convivir.css",
         "form-login.css"
     );
     

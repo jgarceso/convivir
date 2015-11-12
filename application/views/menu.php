@@ -21,7 +21,11 @@ $menuOptions = array(
          
         'displayName'=>'Empresas',
         'controller'=>'Empresas'          
-        )
+        ),
+    array(
+        'displayName'=>'Log Productos',
+        'controller'=>'LogProductos'
+        ),
 		
     );
         
