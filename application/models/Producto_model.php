@@ -1,5 +1,5 @@
 <?php
-class producto_model  extends grocery_CRUD_Model{
+class Producto_model  extends grocery_CRUD_Model{
   
 	function db_update($post_array, $primary_key_value)
 	{
