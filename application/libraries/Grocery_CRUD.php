@@ -667,7 +667,7 @@ class grocery_CRUD_Model_Driver extends grocery_CRUD_Field_Types {
         return $validation_result;
     }
 
-    protected function form_validation() {
+    public function form_validation() {
         if ($this->form_validation === null) {
             $this->form_validation = new grocery_CRUD_Form_validation();
             $ci = &get_instance();
