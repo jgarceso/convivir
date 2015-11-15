@@ -10,11 +10,16 @@
                     <?php  require 'menu.php'; ?>
 		</ul>
 </div>
-<?php require_once 'sesionSection.php'?>
+		<?php require_once 'sesionSection.php'?>
 		<div class="main-content">
 			<div class="contenedor-blanco">
 			 <?php echo $output; ?>
 			</div>
 		</div>
+    <?php
+if(isset($dropdown_setup)) {
+	$this->load->view('dependent_dropdown', $dropdown_setup);
+}
+?>
 	</body>
 </html>
