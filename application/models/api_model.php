@@ -8,15 +8,24 @@ class api_model  extends CI_Model  {
 		$this->load->database();
     }
 	
-	public function get_Tipos(){
-		$query = $this->db->query("SELECT * FROM tipoproducto");
-                $result = $query->result_array();
-                return $result;
+	public function get_Tipos($id = null){
+              if(! is_null($id)){
+                $query = $this->db->select("*")->from("tipoproducto")->where("IdTipo",$id)->get();
+                if($query->num_rows()==1){
+                    return $query->row_array();
+                }
+                return null;
+            }
+             $query = $this->db->select("*")->from("tipoproducto")->get();
+             
+            if($query->num_rows()>0){
+                return $query->result_array();
+            }
+            return null;
 	
 	}
         
         public function get_Productos($id = null){
-            
             if(! is_null($id)){
                 $query = $this->db->select("*")->from("producto")->where("IdProducto",$id)->get();
                 if($query->num_rows()==1){
@@ -25,7 +34,59 @@ class api_model  extends CI_Model  {
                 return null;
             }
              $query = $this->db->select("*")->from("producto")->get();
+            if($query->num_rows()>0){
+                return $query->result_array();
+            }
+            
+            return null;
+	}
+        
+          public function get_CategoriasxTipo($id = null){
+            if(! is_null($id)){
+                $query = $this->db->select("*")->from("categoriaproducto")->where("IdTipo",$id)->get();
+                if($query->num_rows()>0){
+                    return $query->result_array();
+                }else{
+                      return null;
+                }
+            }
+             $query = $this->db->select("*")->from("categoriaproducto")->get();
              
+            if($query->num_rows()>0){
+                return $query->result_array();
+            }
+            
+            return null;
+	}
+        
+         public function get_SubCategoriasxTipo($idCat = null){
+            if(! is_null($idCat)){
+                $query = $this->db->select("*")->from("subcategoriaproducto")->where("IdCategoria",$idCat)->get();
+                if($query->num_rows()>0){
+                    return $query->result_array();
+                }else{
+                      return null;
+                }
+            }
+             $query = $this->db->select("*")->from("subcategoriaproducto")->get();
+             
+            if($query->num_rows()>0){
+                return $query->result_array();
+            }
+            
+            return null;
+	}
+        
+        
+        public function get_Empresas($id = null){
+            if(! is_null($id)){
+                $query = $this->db->select("*")->from("empresa")->where("IdEmpresa",$id)->get();
+                if($query->num_rows()==1){
+                    return $query->row_array();
+                }
+                return null;
+            }
+             $query = $this->db->select("*")->from("empresa")->get();
             if($query->num_rows()>0){
                 return $query->result_array();
             }
