@@ -8,9 +8,7 @@ require_once 'BaseController.php';
 class Categorias extends BaseController {
 
     private $archivos_css = array(
-        "convivir.css",
-        "demo.css",
-        "form-validation.css"
+        "convivir.css"
     );
     private $archivos_js = array(
     );
