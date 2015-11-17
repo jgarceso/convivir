@@ -16,5 +16,10 @@
 			 <?php echo $output; ?>
 			</div>
 		</div>
+    <?php
+if(isset($dropdown_setup)) {
+	$this->load->view('dependent_dropdown', $dropdown_setup);
+}
+?>
 	</body>
 </html>

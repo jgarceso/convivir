@@ -23,6 +23,10 @@ $menuOptions = array(
         'controller'=>'Empresas'          
         ),
     array(
+        'displayName'=>'Puntos de Venta',
+        'controller'=>'PuntosVenta'
+        ),
+    array(
         'displayName'=>'Log Productos',
         'controller'=>'LogProductos'
         ),
