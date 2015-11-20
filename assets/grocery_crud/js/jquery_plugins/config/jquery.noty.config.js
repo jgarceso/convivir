@@ -64,7 +64,7 @@ function form_error_message(error_message) {
 	 $('#report-success').slideUp('fast').html('');*/
 
 	noty({
-		text : "El formulario tiene errores. Verifique los campos requeridos.",
+		text : error_message,
 		type : 'error',
 		modal : true,
 		dismissQueue : true,

@@ -87,4 +87,5 @@ INSERT INTO `categoriaproducto` (`IdCategoria`, `Nombre`, `IdTipo`) VALUES
 (84, 'Terapia de sustitución tiroidea', 2),
 (85, 'Vitamina D3', 2),
 (86, 'Suplemento Nutricional', 2),
-(87, 'Sin Categoría ', 2);
+(87, 'Sin Categoría ', 1),
+(88, 'Sin Categoría ', 2);

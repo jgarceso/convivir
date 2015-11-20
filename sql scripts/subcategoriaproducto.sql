@@ -393,6 +393,7 @@ INSERT INTO `subcategoriaproducto` (`IdSubcategoria`, `Nombre`, `IdCategoria`) V
 (401, 'Suplemento nutricional completo', 86),
 (402, 'Glutamina y probióticos', 86),
 (403, 'Goma de mascar', 4),
+(404, 'Sin SubCategoria', 88),
 (405, 'Sin SubCategoria', 87),
 (406, 'Lápiz Labial', 39),
 (411, 'Crackers y snacks', 14),
