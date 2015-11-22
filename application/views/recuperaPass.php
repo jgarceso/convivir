@@ -8,7 +8,7 @@
     </header>
     <div class="main-content">
 
-        <form id="usuario-form" class="form-login" method="post" >
+        <form id="email-form" class="form-login" method="post" >
 
             <div class="form-log-in-with-email">
 
@@ -20,12 +20,12 @@
 
                     <div class="form-row">
                         <label>
-                            <span>Introduce tu dirección de correo electrónico registrada y te enviaremos instrucciones de ayuda.</span>
+                            <span>Introduce tu dirección de correo electrónico y te enviaremos instrucciones de ayuda.</span>
                         </label>
                         <br/><br/><input id="input-usuario" type="text" name="email" maxlength="30" autocomplete="off" onpaste="return false;">                       
                     </div>
                     <div class="form-row">
-                        <button id="btn-login" type="button">Log in</button>
+                        <button id="btn-login" type="button">Enviar</button>
                     </div>
 
                 </div>
