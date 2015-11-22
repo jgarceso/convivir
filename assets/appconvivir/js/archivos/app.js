@@ -9,31 +9,30 @@ $(document).ready(function() {
 
 	$("#login-form").validate({
 		rules : {
-			usuario : {
+			email : {
 				required : true,
 				minlength : 4
-			},
-			password : {
-				required : true,
-				minlength : 4
-			},
-                        captcha:{
-                                required: true,
-                                minlength : 5
-                        }
+			}
 		},
 		messages : {
 			usuario : {
 				required : "Debe escribir un usuario",
 				minlength : jQuery.validator.format("El usuario debe tener al menos {0} caracteres")
-			},
-			password : {
-				required : "Debe escribir un password",
-				minlength : jQuery.validator.format("El password debe tener al menos {0} caracteres")
-			},
-                        captcha : {
-				required : "Debe escribir el código de verificación",
-				minlength : jQuery.validator.format("El código de verificación debe tener al menos {0} caracteres")
+			}
+		}
+	});
+        
+        $("#email-form").validate({
+		rules : {
+			email : {
+				required : true,
+				minlength : 4
+			}
+		},
+		messages : {
+			usuario : {
+				required : "Debe escribir un usuario",
+				minlength : jQuery.validator.format("El usuario debe tener al menos {0} caracteres")
 			}
 		}
 	});
@@ -44,7 +43,7 @@ $(document).ready(function() {
 });
 
 function CheckButton() {
-	if ($("#login-form").valid()) {
+	if ($("#email-form").valid()) {
 		$('#btn-login').prop('disabled', false);
 	} else {
 		$('#btn-login').prop('disabled', 'disabled');
