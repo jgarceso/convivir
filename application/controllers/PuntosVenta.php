@@ -33,7 +33,7 @@ class PuntosVenta extends BaseController {
         $this->grocery_crud->display_as('Direccion', 'Dirección')->display_as('IdRegion', 'Región')->display_as('IdProvincia', 'Provincia')->display_as('IdComuna', 'Comuna');
         $this->grocery_crud->required_fields('Nombre', 'Direccion', 'IdRegion', 'IdProvincia', 'IdComuna');
         $this->grocery_crud->set_rules('Direccion', 'Dirección', 'required|callback_validar_direccion');
-        $this->grocery_crud->form_validation()->set_message('obtener_coordenadas', 'Dirección no válida');
+        $this->grocery_crud->form_validation()->set_message('validar_direccion', 'Dirección no válida');
         $this->grocery_crud->set_relation('IdComuna', 'comuna', 'Nombre');
         $this->grocery_crud->set_relation('IdRegion', 'region', 'Nombre');
         $this->grocery_crud->set_relation('IdProvincia', 'provincia', 'Nombre');
@@ -48,7 +48,7 @@ class PuntosVenta extends BaseController {
          $dd_data = array(
                 'dd_state' => $this->grocery_crud->getState(),
                 'dd_dropdowns' => array('IdRegion', 'IdProvincia', 'IdComuna'),
-                'dd_url' => array('', site_url() . '/puntosventa/get_provincias/', site_url() . '/puntosventa/get_comunas/'),
+                'dd_url' => array('', site_url() . $this->controllerName.'/get_provincias/', site_url() . $this->controllerName.'/get_comunas/'),
                 'dd_ajax_loader' => $this->config->site_url() . $this->convivir->imagenes_path . 'ajax-loader.gif'
             );
             $output->dropdown_setup = $dd_data;

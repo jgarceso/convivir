@@ -52,7 +52,7 @@ class Productos extends BaseController {
             $dd_data = array(
                 'dd_state' => $this->grocery_crud->getState(),
                 'dd_dropdowns' => array('IdTipo', 'IdCategoria', 'IdSubcategoria'),
-                'dd_url' => array('', site_url() . '/productos/get_categorias/', site_url() . '/productos/get_subcategorias/'),
+                'dd_url' => array('', site_url() . $this->controllerName.'/get_categorias/', site_url() . $this->controllerName.'/get_subcategorias/'),
                 'dd_ajax_loader' => $this->config->site_url() . $this->convivir->imagenes_path . 'ajax-loader.gif'
             );
             $output->dropdown_setup = $dd_data;
