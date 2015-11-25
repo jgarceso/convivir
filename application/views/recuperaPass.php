@@ -7,35 +7,32 @@
              <?php require_once 'logo.php';?>
     </header>
     <div class="main-content">
-
-        <form id="email-form" class="form-login" method="post" >
-
+        <form id="newPass-form" class="form-login" method="post" >
             <div class="form-log-in-with-email">
-
                 <div class="form-white-background">
 
                     <div class="form-title-row">
                         <h1>Recupera contraseña</h1>
                     </div>
-
                     <div class="form-row">
                         <label>
-                            <span>Introduce tu dirección de correo electrónico y te enviaremos instrucciones de ayuda.</span>
+                            <span>Ingrese su nueva contraseña.</span>
                         </label>
-                        <br/><br/><input id="input-usuario" type="text" name="email" maxlength="30" autocomplete="off" onpaste="return false;">                       
+                        <input id="input-newPass" type="text" name="newPass" maxlength="30" autocomplete="off" onpaste="return true;">                       
                     </div>
                     <div class="form-row">
-                        <button id="btn-login" type="button">Enviar</button>
+                        <label>
+                            <span>Confirme su nueva contraseña.</span>
+                        </label>
+                        <input id="input-newPassConfirm" type="text" name="newPassConfirm" maxlength="30" autocomplete="off" onpaste="return true;">                       
                     </div>
-
+                  
+                    <div class="form-row">
+                        <button id="btn-newPass" type="button">Guardar</button>
+                    </div>
                 </div>
-
             </div>
-
         </form>
-
     </div>
-
 </body>
-
 </html>

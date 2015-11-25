@@ -31,7 +31,9 @@
                     <div class="form-row">
                         <label>
                             <span>Password</span>
-                            <input id="input-password" type="password" name="password" maxlength="30" onpaste="return false;">
+                            <input id="input-password" type="password" name="password" maxlength="30" onpaste="return false;"><br>
+                            <span class="link"><a href="enviaPass" >¿Olvido su contraseña?</a></span>
+                             <br>
                         </label>
                     </div>
                      <div class="captcha-section">
@@ -45,7 +47,8 @@
                             <img src="Security/obtenerCaptcha" alt="" id="captcha-result" />
                             </div>
                          <div>
-                            <input id="input-captcha" type="text" name="captcha" maxlength="5" onpaste="return false;">
+                             <input id="input-captcha" type="text" name="captcha" maxlength="5" onpaste="return false;"><br>
+                            
                          </div>
                     </div>
                     <div class="form-row">

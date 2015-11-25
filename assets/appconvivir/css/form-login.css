@@ -67,6 +67,12 @@ label.error{
     margin:0;
 }
 
+.link{
+    font-size: 11px;
+    align:right;
+    margin:0,0,0,100 px;
+}
+
 .form-log-in-with-email .form-row > label span{
     display: inline-block;
     box-sizing: border-box;
