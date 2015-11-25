@@ -53,6 +53,7 @@ class RecuperaPass extends BaseController {
             $url = "";
             $correcto = false;
             $this->load->model('sesion_model');
+            $pass = md5($pass);
 
             if ($this->sesion_model->changePass($name, $pass)) {
                 $url = "inicio";
