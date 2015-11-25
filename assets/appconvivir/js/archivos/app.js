@@ -147,7 +147,7 @@ function enviarEmail() {
 	//$("#validar-celular").loader();
        // alert($("#input-email").val());
 	$.ajax({
-		url : "SendEmail/send",
+		url : "EnviaPass/sendMailGmail",
 		type : 'POST',
 		dataType : 'json',
 		data : {
