@@ -173,6 +173,7 @@ function enviarEmail() {
 	});
 };
 
+//ESTO DEBERIA ESTAR EN SU PROPIO ARCHIVO. CADA VISTA DEBE TENER SU PROPIO ARCHIVO JS CON LA LOGICA QUE CORRESPONDE.
 function guardarPass() {
 	//$("#validar-celular").loader();
         alert("1111");
@@ -181,7 +182,8 @@ function guardarPass() {
 		type : 'POST',
 		dataType : 'json',
 		data : {
-			newPass : $("#input-newPass").val()
+			password : $("#input-newPass").val(),//ACA DEBERIA IR LO QUE QUIERES ENVIAR Y ESE MISMO NOMBRE USARLO EN EL CONTROLADOR.
+                        nombre:'jsantibanez'//ejemplo
 		},
                
 		success : function(data) {

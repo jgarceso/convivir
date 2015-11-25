@@ -46,15 +46,16 @@ class RecuperaPass extends BaseController {
  
 	public function changePass()
 	{
-           
-            $pass = $_POST["password"];
-            $name = $_POST["name"];
+           //LLEGA ACA PERO TE DA ERROR PORQUE NO ESTÁS ENVIANDO "password" ni "name"
+            $pass = $_POST["password"];//aquí trata de buscar ese valor en el arreglo de variables POST, pero como no lo recibió no existe, por eso te dice undefined index
+            $name = $_POST["nombre"];//Estos nombres deben ser los mismo que envías en el ajax request.
             $mensaje = "";
             $url = "";
             $correcto = false;
             $this->load->model('sesion_model');
             $pass = md5($pass);
 
+            
             if ($this->sesion_model->changePass($name, $pass)) {
                 $url = "inicio";
                 $correcto = true;
