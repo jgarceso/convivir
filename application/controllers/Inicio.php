@@ -7,14 +7,6 @@ require_once 'BaseController.php';
 
 class Inicio extends BaseController {
 
-
-    private $archivos_css = array(
-        "convivir.css"
-    );
-    
-    private $archivos_js = array(
-
-    );
 	public function __construct() {
 		parent::__construct();
                 
@@ -24,8 +16,7 @@ class Inicio extends BaseController {
 
 	public function index() {
 		try {
-                        $this->set_css_files($this->archivos_css);
-                        $this->set_js_files($this->archivos_js);
+                        $this->set_js_core_files(array("jquery-1.11.1.min.js"));
 			$this -> mostrar_pagina("inicio", null);
 
 		} catch(Exception $e) {

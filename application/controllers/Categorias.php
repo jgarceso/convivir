@@ -7,12 +7,6 @@ require_once 'BaseController.php';
 
 class Categorias extends BaseController {
 
-    private $archivos_css = array(
-        "convivir.css"
-    );
-    private $archivos_js = array(
-    );
-
     public function __construct() {
         parent::__construct();
 
@@ -29,9 +23,6 @@ class Categorias extends BaseController {
         $this->grocery_crud->display_as('IdCategoria', 'IdCategoria')->display_as('Nombre', 'Nombre categoría')->display_as('IdTipo', 'Tipo');
         $this->grocery_crud->required_fields('IdCategoria', 'Nombre', 'IdTipo');
         $this->grocery_crud->set_relation('IdTipo', 'tipoproducto', 'Nombre');
-
-        $this->set_css_files($this->archivos_css);
-        $this->set_js_files($this->archivos_js);
 
         $output = $this->grocery_crud->render();
 
