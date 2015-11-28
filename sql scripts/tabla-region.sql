@@ -2,7 +2,7 @@
 
 CREATE TABLE `region` (
   `IdRegion` int(11) NOT NULL COMMENT 'ID unico',
-  `Descripcion` varchar(60) COLLATE latin1_spanish_ci NOT NULL COMMENT 'Nombre extenso',
+  `Nombre` varchar(60) COLLATE latin1_spanish_ci NOT NULL COMMENT 'Nombre extenso',
   `NumRomano` varchar(5) COLLATE latin1_spanish_ci NOT NULL COMMENT 'Número de región',
   PRIMARY KEY (`IdRegion`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_spanish_ci COMMENT='Lista de regiones de Chile';

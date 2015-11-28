@@ -7,12 +7,6 @@ require_once 'BaseController.php';
 
 class Productos extends BaseController {
 
-    private $archivos_css = array(
-        "convivir.css"
-    );
-    private $archivos_js = array(
-    );
-
     public function __construct() {
         parent::__construct();
 
@@ -46,13 +40,11 @@ class Productos extends BaseController {
             $this->grocery_crud->callback_after_insert(array($this, 'log_producto_after_insert'));
             $this->grocery_crud->callback_after_update(array($this, 'log_producto_after_update'));
             $this->grocery_crud->callback_before_delete(array($this, 'log_producto_before_delete'));
-            $this->set_css_files($this->archivos_css);
-            $this->set_js_files($this->archivos_js);
             $output = $this->grocery_crud->render();
             $dd_data = array(
                 'dd_state' => $this->grocery_crud->getState(),
                 'dd_dropdowns' => array('IdTipo', 'IdCategoria', 'IdSubcategoria'),
-                'dd_url' => array('', site_url() . '/productos/get_categorias/', site_url() . '/productos/get_subcategorias/'),
+                'dd_url' => array('', site_url() . $this->controllerName.'/get_categorias/', site_url() . $this->controllerName.'/get_subcategorias/'),
                 'dd_ajax_loader' => $this->config->site_url() . $this->convivir->imagenes_path . 'ajax-loader.gif'
             );
             $output->dropdown_setup = $dd_data;

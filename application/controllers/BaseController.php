@@ -43,6 +43,13 @@ class BaseController extends CI_Controller {
         }
     }
 
+    protected function set_js_core_files($array_js) {
+
+        foreach ($array_js as $archivo) {
+            $this->grocery_crud->set_js($this->convivir->core_js_path . $archivo);
+        }
+    }
+    
     protected function check_session() {
         session_start();
         if (!isset($_SESSION["usuario"])) {
