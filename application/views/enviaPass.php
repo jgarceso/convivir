@@ -18,7 +18,7 @@
                         <label>
                             <span>Introduce tu dirección de correo electrónico y te enviaremos instrucciones de ayuda.</span>
                         </label>
-                        <br/><br/><input id="input-email" type="text" name="email" maxlength="30" autocomplete="off" onpaste="return false;">                       
+                        <br/><br/><input id="input-email" type="text" name="email" maxlength="60" autocomplete="off" onpaste="return true;">                       
                     </div>
                     <div class="form-row">
                         <button id="btn-email" type="button">Enviar</button>

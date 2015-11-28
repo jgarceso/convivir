@@ -17,7 +17,7 @@ class Sesion_model  extends CI_Model  {
 	
 	}
         
-        public function updatePass($name, $pass){
+        public function changePass($name, $pass){
 		$query = $this->db->query("UPDATE `user_pwd` SET `pass`='$pass' WHERE `name`='$name'");
 
                 return true;

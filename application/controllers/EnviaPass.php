@@ -31,15 +31,14 @@ class EnviaPass extends BaseController {
     }
         
     public function sendMailGmail(){
-        echo 'llegueeeeeeeeeee';
-		//cargamos la libreria email de ci
+
+        //cargamos la libreria email de ci
         $email = $_POST["email"];
-        echo $email;
         $mensaje = "asdhsh sssjsj aaaaa";
         $url = "sss";
         $correcto = false;
         
-		$this->load->library("email");
+		//$this->load->library("email");
  
 		//configuracion para gmail
 //		$configGmail = array(
@@ -47,14 +46,29 @@ class EnviaPass extends BaseController {
 //			'smtp_host' => 'ssl://smtp.gmail.com',
 //			'smtp_port' => 465,
 //			'smtp_user' => 'fabiola.aviles.munoz@gmail.com',
-//			'smtp_pass' => '******',
+//			'smtp_pass' => 'Paciencia2016',
 //			'mailtype' => 'html',
 //			'charset' => 'utf-8',
 //			'newline' => "\r\n"
 //		);    
- 
-		//cargamos la configuración para enviar con gmail
+// 
+//		//cargamos la configuración para enviar con gmail
 //		$this->email->initialize($configGmail);
+//                
+//                $configYahoo = array(
+//			'protocol' => 'smtp',
+//			'smtp_host' => 'smtp.mail.yahoo.com',
+//			'smtp_port' => 587,
+//			'smtp_crypto' => 'tls',
+//			'smtp_user' => 'solStgo@yahoo.com',
+//			'smtp_pass' => 'Paciencia2016',
+//			'mailtype' => 'html',
+//			'charset' => 'utf-8',
+//			'newline' => "\r\n"
+//		); 
+ 
+		//cargamos la configuración para enviar con yahoo
+//		$this->email->initialize($configYahoo);
 // 
 //		$this->email->from('Fabiola');
 //		$this->email->to("fabiola.aviles.munoz@gmail.com");
@@ -62,10 +76,32 @@ class EnviaPass extends BaseController {
 //		$this->email->message('<h2>Email enviado con codeigniter haciendo uso del smtp de gmail</h2><hr><br> Bienvenido al blog');
 //		$this->email->send();
 		//con esto podemos ver el resultado
-		 $obj = (object) array('Correcto' => $correcto, 'Url' => $url, 'Mensaje' => $mensaje);
-		 echo json_encode($obj);
+//		 $obj = (object) array('Correcto' => $correcto, 'Url' => $url, 'Mensaje' => $mensaje);
+//		 echo json_encode($obj);
         
-		var_dump($this->email->print_debugger());
+		//var_dump($this->email->print_debugger());
+                
+            $config = Array(
+                'protocol' => 'smtp',
+                'smtp_host' => 'ssl://smtp.gmail.com',
+                'smtp_port' => 465,
+		'smtp_user' => 'fabiola.aviles.munoz@gmail.com',
+		'smtp_pass' => 'Paciencia2016',
+                'mailtype'  => 'html', 
+                'charset'   => 'iso-8859-1'
+            );
+            $this->load->library('email', $config);
+            $this->email->set_newline("\r\n");
+
+            $this->email->from('dkumara85@gmail.com','my name');
+            $this->email->to("dkumara85@gmail.com"); // email array
+            $this->email->subject('email subject');   
+            $this->email->message("my mail body");
+
+            $result = $this->email->send();
+
+
+            show_error($this->email->print_debugger());  // for debugging purpose :: remove this once it works...
 	}
  
 	public function sendMailYahoo()

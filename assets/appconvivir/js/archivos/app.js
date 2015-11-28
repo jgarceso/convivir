@@ -175,27 +175,24 @@ function enviarEmail() {
 
 //ESTO DEBERIA ESTAR EN SU PROPIO ARCHIVO. CADA VISTA DEBE TENER SU PROPIO ARCHIVO JS CON LA LOGICA QUE CORRESPONDE.
 function guardarPass() {
-	//$("#validar-celular").loader();
-        alert("1111");
 	$.ajax({
 		url : "RecuperaPass/changePass",
 		type : 'POST',
 		dataType : 'json',
 		data : {
-			password : $("#input-newPass").val(),//ACA DEBERIA IR LO QUE QUIERES ENVIAR Y ESE MISMO NOMBRE USARLO EN EL CONTROLADOR.
-                        nombre:'jsantibanez'//ejemplo
+			pass : $("#input-newPass").val()//ACA DEBERIA IR LO QUE QUIERES ENVIAR Y ESE MISMO NOMBRE USARLO EN EL CONTROLADOR.
+                      //  nombre:'jsantibanez'//ejemplo
 		},
                
 		success : function(data) {
-                     alert('22222');
                     alert(data.Correcto);
 			if (data.Correcto == false) {
                           //  $("#captcha-result").attr("src","Security/obtenerCaptcha?rnd=" + Math.random());
 			//	alert(data.Mensaje);
-                                      alert(" NO hecho");    
+                             alert(" NO hecho");    
 			}else{
-                            alert(" hecho");
-				//window.location = data.Url;
+                            alert(data.Mensaje);
+                            window.location = data.Url;
 			}
 			
 			//$.loader.close();

@@ -50,7 +50,7 @@ class Security extends CI_Controller {
         } else {
             $this->load->model('sesion_model');
 
-            if ($this->sesion_model->verificar_usuario($name, $pass)) {
+            if ($this->sesion_model->verificar_usuario($name, md5($pass))) {
                 $_SESSION["usuario"] = $name;
 
                 $url = "inicio";
