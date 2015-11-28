@@ -209,3 +209,62 @@ header a{
 .flexigrid div.form-div{
     font-size: 13px;
 }
+
+.default-form{
+    font: bold 13px sans-serif;
+}
+
+.default-form .form-row{
+    text-align: left;
+    margin-bottom: 14px;
+}
+
+.default-form .form-row  > label span{
+    display: inline-block;
+    box-sizing: border-box;
+    color: #5f5f5f;
+    width: 100%;
+    padding-right: 25px;
+}
+
+.default-form input{
+    color: #5f5f5f;
+    box-sizing: border-box;
+    width: 100%;
+    box-shadow: 1px 2px 4px 0 rgba(0, 0, 0, 0.08);
+    padding: 10px 18px;
+    border: 1px solid #dbdbdb;
+}
+
+.default-form button{
+    display: block;
+    border-radius: 2px;
+    background-color:  #6caee0;
+    color: #ffffff;
+    font-weight: bold;
+    box-shadow: 1px 2px 4px 0 rgba(0, 0, 0, 0.08);
+    padding: 8px 35px;
+    border: 0;
+    margin: 20px auto 0;
+    cursor: pointer;
+}
+
+input.error{
+    border-color:red !important;
+}
+
+label.error{
+    color:red;
+    font-style:italic;
+    width:100%;
+}
+
+.user-menu a{
+    text-decoration: none;
+    color: #357ebd;
+}
+
+.user-menu a:hover{
+    color: midnightblue;
+    font-style:italic;
+}

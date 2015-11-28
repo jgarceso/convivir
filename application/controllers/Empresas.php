@@ -7,14 +7,6 @@ require_once 'BaseController.php';
 
 class Empresas extends BaseController {
 
-
-    private $archivos_css = array(
-        "convivir.css"
-    );
-    
-    private $archivos_js = array(
-
-    );
 	public function __construct() {
 		parent::__construct();
                 
@@ -33,8 +25,6 @@ class Empresas extends BaseController {
 			$this->grocery_crud -> required_fields('IdEmpresa', 'Nombre','NombreContacto', 'EmailContacto', 'TelefonoContacto');
                         $this->grocery_crud->set_rules('TelefonoContacto','Telefono Contacto','numeric|required');
                         $this->grocery_crud->set_rules('EmailContacto', 'Email', 'valid_email|required');
-			$this->set_css_files($this->archivos_css);
-			$this->set_js_files($this->archivos_js);
 
 			$output = $this->grocery_crud -> render();
                         

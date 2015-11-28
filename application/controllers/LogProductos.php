@@ -7,12 +7,6 @@ require_once 'BaseController.php';
 
 class LogProductos extends BaseController {
 
-    private $archivos_css = array(
-        "convivir.css"
-    );
-    private $archivos_js = array(
-    );
-
     public function __construct() {
         parent::__construct();
 
@@ -41,8 +35,6 @@ class LogProductos extends BaseController {
             $this->grocery_crud->callback_column($this->unique_field_name('IdEstadoCertificacion'), array($this, 'showImage'));
             $this->grocery_crud->set_relation('IdEstadoCertificacion', 'estadocertificacion', 'Nombre');
             $this->grocery_crud->order_by('FechaModificacion', 'desc');
-            $this->set_css_files($this->archivos_css);
-            $this->set_js_files($this->archivos_js);
             $output = $this->grocery_crud->render();
             $this->mostrar_pagina("logProductos", $output);
         } catch (Exception $e) {

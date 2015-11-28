@@ -7,11 +7,6 @@ require_once 'BaseController.php';
 
 class PuntosVenta extends BaseController {
 
-    private $archivos_css = array(
-        "convivir.css"
-    );
-    private $archivos_js = array(
-    );
     private $latitud;
     private $longitud;
 
@@ -41,8 +36,6 @@ class PuntosVenta extends BaseController {
         $this->grocery_crud->callback_update(array($this, 'actualizar_punto_venta'));
         $this->grocery_crud->callback_field('IdProvincia', array($this, 'provincia_select'));
         $this->grocery_crud->callback_field('IdComuna', array($this, 'comuna_select'));
-        $this->set_css_files($this->archivos_css);
-        $this->set_js_files($this->archivos_js);
 
         $output = $this->grocery_crud->render();
          $dd_data = array(
