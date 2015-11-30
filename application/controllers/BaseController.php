@@ -50,6 +50,13 @@ class BaseController extends CI_Controller {
         }
     }
     
+    protected function set_css_core_files($array_css) {
+
+        foreach ($array_css as $archivo) {
+            $this->grocery_crud->set_css($this->convivir->core_css_path . $archivo);
+        }
+    }
+    
     protected function check_session() {
         session_start();
         if (!isset($_SESSION["usuario"])) {

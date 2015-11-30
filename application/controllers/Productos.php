@@ -188,7 +188,7 @@ class Productos extends BaseController {
         echo json_encode($array);
         exit;
     }
-
+    
     private function obtener_array_log_producto($primary_key, $prod, $accion) {
         $log_producto = array(
             "IdProducto" => $primary_key,
