@@ -27,4 +27,5 @@ class Login extends BaseController {
             $this->set_js_files($this->archivos_js);
             $this -> mostrar_pagina("login");
 	}
+        
 }

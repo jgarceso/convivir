@@ -7,9 +7,7 @@ $(document).ready(function() {
 			return;
 		}
 	});
-        
-       
-        
+
         $("#email-form").validate({
 		rules : {
                         email:{
@@ -32,7 +30,7 @@ $(document).ready(function() {
 
 function enviarEmail() {
 	$.ajax({
-		url : "EnviaPass/sendMailGmail",
+		url : "Security/sendEmail",
 		type : 'POST',
 		dataType : 'json',
 		data : {
@@ -41,48 +39,18 @@ function enviarEmail() {
             
 		success : function(data) {
 			if (data.Correcto == false) {
-                            alert("No enviado");
+                            alert(data.Mensaje);
 			}else{
-                            alert("enviado");
+                            alert(data.Mensaje);
 			}
-			
 		},
 		error : function(xhr, ajaxOptions, thrownError) {
 		}
 	});
 };
 
-function guardarPass() {
-	$.ajax({
-		url : "RecuperaPass/changePass",
-		type : 'POST',
-		dataType : 'json',
-		data : {
-			pass : $("#input-newPass").val(),
-                        validaPassActual:false
-		},
-               
-		success : function(data) {
-			if (data.Correcto == false) {
-		   	     alert(data.Mensaje);
- 			}else{
-                            alert(data.Mensaje);
-                            window.location = data.Url;
-			}
-			
-		},
-		error : function(xhr, ajaxOptions, thrownError) {
-		}
-	});
-};
 
 var nav4 = window.Event ? true : false;
-function AceptaNumero(evt) {
-	var key = nav4 ? evt.which : evt.keyCode;
-	return (key <= 13 || (key >= 48 && key <= 57));
-};
 
-//function redirectPass() {
-//  header('Location: http://www.commentcamarche.net/forum/');  
-//};
+
 

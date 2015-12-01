@@ -19,7 +19,6 @@
                     <div class="form-title-row">
                         <h1>Iniciar Sesión</h1>
                     </div>
-
                     <div class="form-row">
                         <label>
                             <span>Usuario</span>

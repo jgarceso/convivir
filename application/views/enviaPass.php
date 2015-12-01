@@ -12,11 +12,11 @@
                 <div class="form-white-background">
 
                     <div class="form-title-row">
-                        <h1>Recupera contraseña</h1>
+                        <h1>Recuperar contraseña</h1>
                     </div>
                     <div class="form-row">
                         <label>
-                            <span>Introduce tu dirección de correo electrónico y te enviaremos instrucciones de ayuda.</span>
+                            <span>Introduzca la dirección de correo electrónico registrada y enviaremos instrucciones de ayuda.</span>
                         </label>
                         <br/><br/><input id="input-email" type="text" name="email" maxlength="60" autocomplete="off" onpaste="return true;">                       
                     </div>

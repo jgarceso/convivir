@@ -2,6 +2,7 @@
 
 if (!defined('BASEPATH'))
     exit('No direct script access allowed');
+require_once 'Encripter.php';
 
 class Security extends CI_Controller {
 
@@ -66,8 +67,112 @@ class Security extends CI_Controller {
         session_destroy();
         header("Location: /convivir/");
     }
-//     public function test() {
-//    echo 'algoooo';
-//    }
+    
+    public function changePass()
+     {
+       try{
+           if(isset($_POST["username"])){
+                 $username =   $_POST["username"];
+           }
+         $pass = $_POST["pass"];
+         $validaPassActual = $_POST["validaPassActual"];
+         $url = "";
+         $correcto = false;
+          $this->load->model('sesion_model');
+             if(isset($_POST["passActual"])){
+                 $passActual = $_POST["passActual"];
+
+                 if($validaPassActual=='true'){
+                      session_start();
+                       $usuario = $_SESSION["usuario"];
+
+                         if($this->sesion_model->isExits($usuario, md5($passActual))) 
+                         { 
+                            if ($this->sesion_model->changePass($usuario, md5($pass))) {
+                               $url = "login";
+                               $correcto = true;
+                               $mensaje = "La contraseña fué cambiada.";
+                               session_destroy();
+                           } else {
+                               $mensaje = "No se pudo cambiar la contraseña.";
+                           }
+                         }else{
+                               $mensaje = "Contraseña inválida, vuelva a intentar.";
+                         } 
+                   }
+             }else{
+                 if(isset($username)){
+                     $passActual = false;
+                     $mensaje = "";
+                     $this->load->model('sesion_model');
+                     $userDesencriptado = Encrypter::decrypt($username);
+
+                     if($validaPassActual=='false'){
+                          if ($this->sesion_model->changePass($userDesencriptado, md5($pass))) {
+                                   $url = "inicio";
+                                   $correcto = true;
+                                   $mensaje = "La contraseña fué cambiada. Ahora debe iniciar sesión con su nueva contraseña.";
+                         } else {
+                             $mensaje = "No se pudo cambiar la contraseña...";
+                         }
+                     }
+                 }else{
+                     $mensaje = "No fué posible obtener el nombre de usuario";
+                 }
+           }
+
+       }catch(Exception $e){
+           $mensaje = 'Ocurrio un error su contraseña no fué cambiada.';
+       }  
+
+        $obj = (object) array('Correcto' => $correcto, 'Url' => $url, 'Mensaje' => $mensaje);
+        echo json_encode($obj);
+     }
+     
+       public function sendEmail(){
+
+        $email = $_POST["email"];
+        $this->load->model('sesion_model');
+        $mensaje = "";
+        $url = "";
+        $correcto = false;
+        $user = $this->sesion_model->existsEmail($email);
+            
+        if(isset($user)){
+                    $configGmail = array(
+                            'protocol' => 'smtp',
+                            'smtp_host' => 'ssl://smtp.gmail.com',
+                            'smtp_port' => 465,
+                            'smtp_user' => 'fabiola.aviles.munoz@gmail.com',
+                            'smtp_pass' => '**********',
+                            'mailtype' => 'html',
+                            'charset' => 'utf-8',
+                            'newline' => "\r\n"
+                    );    
+
+//                    $this->email->initialize($configGmail);
+//                    $this->email->from('Fabiola');
+//                    $this->email->to("fabiola.aviles.munoz@gmail.com");
+//                    $this->email->subject('Bienvenido/a a uno-de-piera.com');
+//                    $this->email->message('<h2>Email enviado con codeigniter haciendo uso del smtp de gmail</h2><hr><br> Bienvenido al blog');
+//
+//                    if(!$this->email->send()){
+//                        show_error($this->email->print_debugger());
+//                        $correcto = true;
+//                        $mensaje = "El correo fué enviado.  Favor verifique y siga las instrucciones.";
+//                    }else{
+//                        $correcto = false;
+//                        $mensaje = "El correo electrónico no pudo ser enviado, intente más tarde.";
+//                        echo 'tu email ha sido enviado.';
+//                    }
+                    $correcto = true;
+                    $mensaje = "El correo fué enviado.  Favor verifique y siga las instrucciones.";
+            }else{
+                $correcto = false;
+                $mensaje = "La dirección de correo electrónico no coincide con la ingresada.  Favor verifique.";
+            }
+                 $obj = (object) array('Correcto' => $correcto, 'Url' => $url, 'Mensaje' => $mensaje);
+                 echo json_encode($obj);
+	}
 
 }

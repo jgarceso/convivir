@@ -114,11 +114,11 @@ function SetearEventosFormulario(){
 
 function CambiarClave (){
     $.ajax({
-		url : "RecuperaPass/changePass",
+		url : "Security/changePass",
 		type : 'POST',
 		dataType : 'json',
 		data : {
-			pass : $("#input-password").val(),//ACA DEBERIA IR LO QUE QUIERES ENVIAR Y ESE MISMO NOMBRE USARLO EN EL CONTROLADOR.
+			pass : $("#input-password").val(),
                         validaPassActual:true,
                         passActual:$("#input-passwordActual").val()
 		},
@@ -128,8 +128,7 @@ function CambiarClave (){
 			    alert(data.Mensaje);
 			}else{
                             alert(data.Mensaje);
-//                            var myModal = $('#cambiar-pass-form').jBox('Modal');
-//                            myModal.close();
+                            window.location = data.Url;
 			}
 		},
 		error : function(xhr, ajaxOptions, thrownError) {
@@ -137,10 +136,4 @@ function CambiarClave (){
 	});
 }
 
-function OkRespuesta(){
-    var html = 
-   '<p>listoooooooooo'+
-    '</p>';
-            return html;
-};
 

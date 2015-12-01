@@ -119,7 +119,7 @@ function guardarPass() {
      $aux = getUrlVars()["username"];
      
 	$.ajax({
-		url : "RecuperaPass/changePass",
+		url : "Security/changePass",
 		type : 'POST',
 		dataType : 'json',
 		data : {
@@ -147,8 +147,6 @@ function AceptaNumero(evt) {
 	var key = nav4 ? evt.which : evt.keyCode;
 	return (key <= 13 || (key >= 48 && key <= 57));
 };
-
-
 
 function getUrlVars()
 {
