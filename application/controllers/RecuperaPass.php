@@ -26,7 +26,6 @@ class RecuperaPass extends BaseController {
       
             $this->set_css_files($this->archivos_css);
             $this->set_js_files($this->archivos_js);
-            
             $this -> mostrar_pagina("recuperaPass");
     }
         
