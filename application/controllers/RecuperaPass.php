@@ -3,6 +3,7 @@ if (!defined('BASEPATH')) {
     exit('No direct script access allowed');
 }
 require_once 'BaseController.php';
+require_once 'Encripter.php';
 
 class RecuperaPass extends BaseController {
 
@@ -14,7 +15,7 @@ class RecuperaPass extends BaseController {
     private $archivos_js = array(
         "lib/jquery-1.10.2.min.js",
         "lib/jquery.validate.min.js",
-        "archivos/app.js"
+        "archivos/login.js"
     );
     
     public function __construct() {
@@ -25,20 +26,19 @@ class RecuperaPass extends BaseController {
     }
         
     public function index() {
-        $this->set_css_files($this->archivos_css);
-        $this->set_js_files($this->archivos_js);
-        
-        $password = '12345';
-        $md5 = md5($password);
-        
-        $password2 = '12345';
-        $md5 = md5($password2);
-        
-//        if($password->equals()){
-//            
-//        }
- 
-       //echo $md5; // Salida: 2f559f951c7b56f9a63fa70522df586d
+        try{
+            $this->set_css_files($this->archivos_css);
+            $this->set_js_files($this->archivos_js);
+            if(isset($_GET["email"])){
+                $email= $_GET["email"];
+                 $texto_original = Encrypter::decrypt($email);
+                // session_start();
+                 $_SESSION['email'] = $texto_original;
+                 //echo $_SESSION['usuario'];
+            }
+        }catch(Exception $e){
+            
+        }
         $this -> mostrar_pagina("recuperaPass");
     }
         
@@ -46,39 +46,62 @@ class RecuperaPass extends BaseController {
  
 	public function changePass()
 	{
-           //LLEGA ACA PERO TE DA ERROR PORQUE NO ESTÁS ENVIANDO "password" ni "name"
-          // $pass = $_POST["password"];//aquí trata de buscar ese valor en el arreglo de variables POST, pero como no lo recibió no existe, por eso te dice undefined index
           try{
-            $pass = $_POST["pass"];//Estos nombres deben ser los mismo que envías en el ajax request.
-            
+              
+            $pass = $_POST["pass"];
+            $validaPassActual = $_POST["validaPassActual"];
             $url = "";
             $correcto = false;
-            $mensaje = "";
-            $this->load->model('sesion_model');
-
-            if ($this->sesion_model->changePass('jsantibanez', md5($pass))) {
-                $url = "inicio";
-                $correcto = true;
-                $mensaje = "La contraseña fué cambiada. Ahora debe iniciar sesión con su nueva contraseña.";
-            } else {
-                $mensaje = "No se pudo cambiar la contraseña";
-            }
+             $this->load->model('sesion_model');
             
-           
+                if(isset($_POST["passActual"])){
+                    $passActual = $_POST["passActual"];
+                    //$username = $_SESSION["usuario"];
+                    
+                    if($validaPassActual=='true'){
+                            if($this->sesion_model->isExits(md5($passActual))) 
+                            { 
+                                   //echo '222';
+                               if ($this->sesion_model->changePass(md5($pass))) {
+                                  $url = "inicio";
+                                  $correcto = true;
+                                  $mensaje = "La contraseña fué cambiada.";
+                              } else {
+                                  $mensaje = "No se pudo cambiar la contraseña.";
+                              }
+                            }else{
+                                  $mensaje = "Contraseña inválida, vuelva a intentar.";
+                            } 
+                      }
+                }else{
+                    //echo $_SESSION['email'];
+//                    if(isset($_SESSION['email'])){
+//                    }else{
+//                        $mensaje = "problemas con la sesion, no se puede obtener el email. ";
+//                    }
+                     //$email = $_SESSION['email'] ;
+                        $passActual = false;
+                        $mensaje = "";
+                        $this->load->model('sesion_model');
+
+                        if($validaPassActual=='false'){
+                             if ($this->sesion_model->changePass(md5($pass))) {
+                                      $url = "inicio";
+                                      $correcto = true;
+                                      $mensaje = "La contraseña fué cambiada. Ahora debe iniciar sesión con su nueva contraseña.";
+                            } else {
+                                $mensaje = "No se pudo cambiar la contraseña...";
+                            }
+                        }
+                    
+                }
+            
           }catch(Exception $e){
-              $mensaje = 'Ocurrio un error el recuperar los datos';
+              $mensaje = 'Ocurrio un error su contraseña no fué cambiada.';
           }  
 
            $obj = (object) array('Correcto' => $correcto, 'Url' => $url, 'Mensaje' => $mensaje);
-            echo json_encode($obj);
-              
-            //$this->load->model('Sesion_model');
-//            $this->db->query("UPDATE `user_pwd` SET `pass`='$pass' WHERE `name`='$name'");
-//            
-//            if($this->db->affected_rows()==1) 
-//            { 
-//                return $this->db->affected_rows(); 
-//            } 
+           echo json_encode($obj);
 	}
         
         

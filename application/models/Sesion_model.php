@@ -17,12 +17,35 @@ class Sesion_model  extends CI_Model  {
 	
 	}
         
-        public function changePass($name, $pass){
-		$query = $this->db->query("UPDATE `user_pwd` SET `pass`='$pass' WHERE `name`='$name'");
-
-                return true;
-	
+        public function changePass($pass){
+		$query = $this->db->query("UPDATE `user_pwd` SET `pass`='$pass' WHERE `name`='jsantibanez'");
+                 return true;
+               // echo 'filas->'.$this->db->affected_rows();
+//                if ($this->db->affected_rows()==1){
+//                     return true;
+//                }else{
+//                     return false;
+//                } 
 	}
         
+        public function isExits($pass){
+		$query = $this->db->query("SELECT * FROM user_pwd WHERE pass='$pass' ");
+                $row = $query->row();
+                if (isset($row)){
+                     return true;
+                }else{
+                     return false;
+                } 
+        }
         
+        public function getUserEmail($name, $pass){
+		$query = $this->db->query("SELECT email FROM user_pwd WHERE name='$name' AND pass='$pass'");
+                foreach ($this->db->result() as $row):
+                    $email = $row->email;
+                echo $email;
+                endforeach;
+                
+                return email;
+	}
+         
 }

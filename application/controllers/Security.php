@@ -49,10 +49,14 @@ class Security extends CI_Controller {
             $mensaje = "Código de verificación incorrecto";
         } else {
             $this->load->model('sesion_model');
-
             if ($this->sesion_model->verificar_usuario($name, md5($pass))) {
+                
+                $email = $this->sesion_model->verificar_usuario($name, md5($pass));
+               // echo $email;
                 $_SESSION["usuario"] = $name;
-
+                $_SESSION["email"] = $email;
+               //echo $_SESSION["email"];
+                
                 $url = "inicio";
                 $correcto = true;
             } else {
@@ -68,5 +72,8 @@ class Security extends CI_Controller {
         session_destroy();
         header("Location: /convivir/");
     }
+//     public function test() {
+//    echo 'algoooo';
+//    }
 
 }

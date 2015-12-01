@@ -14,7 +14,7 @@ class EnviaPass extends BaseController {
     private $archivos_js = array(
         "lib/jquery-1.10.2.min.js",
         "lib/jquery.validate.min.js",
-        "archivos/app.js"
+        "archivos/sendEmail.js"
     );
     
     public function __construct() {
@@ -81,27 +81,36 @@ class EnviaPass extends BaseController {
         
 		//var_dump($this->email->print_debugger());
                 
-            $config = Array(
-                'protocol' => 'smtp',
-                'smtp_host' => 'ssl://smtp.gmail.com',
-                'smtp_port' => 465,
-		'smtp_user' => 'fabiola.aviles.munoz@gmail.com',
-		'smtp_pass' => 'Paciencia2016',
-                'mailtype'  => 'html', 
-                'charset'   => 'iso-8859-1'
-            );
-            $this->load->library('email', $config);
-            $this->email->set_newline("\r\n");
+//            $config = Array(
+//                'protocol' => 'smtp',
+//                'smtp_host' => 'ssl://smtp.gmail.com',
+//                'smtp_port' => 465,
+//		'smtp_user' => 'fabiola.aviles.munoz@gmail.com',
+//		'smtp_pass' => '********',
+//                'mailtype'  => 'html', 
+//                'charset'   => 'iso-8859-1'
+//            );
+//            $this->load->library('email', $config);
+//            $this->email->set_newline("\r\n");
+//
+//            $this->email->from('dkumara85@gmail.com','my name');
+//            $this->email->to("dkumara85@gmail.com"); // email array
+//            $this->email->subject('email subject');  
+//            
+//            $this->email->message("<a href='RecuperaPass/changePass' >Haga click aquí para recuperar su contraseña.</a>");
+//
+//            $result = $this->email->send();
+//
+//
+//            show_error($this->email->print_debugger());  // for debugging purpose :: remove this once it works...
+        
+            $mensaje = "Esto es una prueba 1\r\nA ver si te llega correctamente 2\r\nUn saludo 3\r\n\n\n\nwww.ejemplocodigo.com";
 
-            $this->email->from('dkumara85@gmail.com','my name');
-            $this->email->to("dkumara85@gmail.com"); // email array
-            $this->email->subject('email subject');   
-            $this->email->message("my mail body");
-
-            $result = $this->email->send();
-
-
-            show_error($this->email->print_debugger());  // for debugging purpose :: remove this once it works...
+            // Si cualquier línea es más larga de 70 caracteres, se debería usar wordwrap()
+            $mensaje = wordwrap($mensaje, 70, "\r\n");
+            // Enviarlo
+            mail('fabiola.aviles.munoz@gmail.com', 'Probando la funcion MAIL desde PHP', $mensaje);
+            echo "EMAIL ENVIADO...";
 	}
  
 	public function sendMailYahoo()

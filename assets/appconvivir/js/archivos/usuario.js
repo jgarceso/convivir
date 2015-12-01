@@ -41,7 +41,7 @@ function ObtenerCambioClaveHtml(){
                         '<label>'+
                             '<span>Contraseña Actual</span>'+
                         '</label>'+
-                        '<input id="input-usuario" type="password" name="claveActual" maxlength="12" onpaste="return false;">'+
+                        '<input id="input-passwordActual" type="password" name="claveActual" maxlength="12" onpaste="return false;">'+
                         
                     '</div>'+
 
@@ -54,7 +54,7 @@ function ObtenerCambioClaveHtml(){
                      '<div class="form-row">'+
                        '<label>'+
                             '<span>Confirme Contraseña</span>'+
-                            '<input id="input-password" type="password" name="confClave" maxlength="12" onpaste="return false;">'+
+                            '<input id="input-confirmPass" type="password" name="confClave" maxlength="12" onpaste="return false;">'+
                         '</label>'+
                     '</div>'+
                     '<div class="form-row">'+
@@ -78,7 +78,7 @@ function SetearEventosFormulario(){
                         },
                         confClave:{
                                 required: true,
-                                equalTo: "#claveNueva"
+                                equalTo: "#input-password"
                         }
 		},
 		messages : {
@@ -113,6 +113,34 @@ function SetearEventosFormulario(){
 };
 
 function CambiarClave (){
-    
+    $.ajax({
+		url : "RecuperaPass/changePass",
+		type : 'POST',
+		dataType : 'json',
+		data : {
+			pass : $("#input-password").val(),//ACA DEBERIA IR LO QUE QUIERES ENVIAR Y ESE MISMO NOMBRE USARLO EN EL CONTROLADOR.
+                        validaPassActual:true,
+                        passActual:$("#input-passwordActual").val()
+		},
+               
+		success : function(data) {
+			if (data.Correcto == false) {
+			    alert(data.Mensaje);
+			}else{
+                            alert(data.Mensaje);
+//                            var myModal = $('#cambiar-pass-form').jBox('Modal');
+//                            myModal.close();
+			}
+		},
+		error : function(xhr, ajaxOptions, thrownError) {
+		}
+	});
 }
+
+function OkRespuesta(){
+    var html = 
+   '<p>listoooooooooo'+
+    '</p>';
+            return html;
+};
 

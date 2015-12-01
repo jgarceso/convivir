@@ -144,8 +144,6 @@ function IniciarSesion() {
 };
 
 function enviarEmail() {
-	//$("#validar-celular").loader();
-       // alert($("#input-email").val());
 	$.ajax({
 		url : "EnviaPass/sendMailGmail",
 		type : 'POST',
@@ -155,50 +153,38 @@ function enviarEmail() {
 		},
             
 		success : function(data) {
-                    alert(data.Correcto);
 			if (data.Correcto == false) {
-                          //  $("#captcha-result").attr("src","Security/obtenerCaptcha?rnd=" + Math.random());
-			//	alert(data.Mensaje);
                             alert("No enviado");
 			}else{
-                            alert(" enviado");
-				//window.location = data.Url;
+                            alert("enviado");
 			}
 			
-			//$.loader.close();
 		},
 		error : function(xhr, ajaxOptions, thrownError) {
-			//$.loader.close();
 		}
 	});
 };
 
-//ESTO DEBERIA ESTAR EN SU PROPIO ARCHIVO. CADA VISTA DEBE TENER SU PROPIO ARCHIVO JS CON LA LOGICA QUE CORRESPONDE.
 function guardarPass() {
 	$.ajax({
 		url : "RecuperaPass/changePass",
 		type : 'POST',
 		dataType : 'json',
 		data : {
-			pass : $("#input-newPass").val()//ACA DEBERIA IR LO QUE QUIERES ENVIAR Y ESE MISMO NOMBRE USARLO EN EL CONTROLADOR.
-                      //  nombre:'jsantibanez'//ejemplo
+			pass : $("#input-newPass").val(),
+                        validaPassActual:false
 		},
                
 		success : function(data) {
-                    alert(data.Correcto);
 			if (data.Correcto == false) {
-                          //  $("#captcha-result").attr("src","Security/obtenerCaptcha?rnd=" + Math.random());
-			//	alert(data.Mensaje);
-                             alert(" NO hecho");    
-			}else{
+		   	     alert(data.Mensaje);
+ 			}else{
                             alert(data.Mensaje);
                             window.location = data.Url;
 			}
 			
-			//$.loader.close();
 		},
 		error : function(xhr, ajaxOptions, thrownError) {
-			//$.loader.close();
 		}
 	});
 };
@@ -208,3 +194,8 @@ function AceptaNumero(evt) {
 	var key = nav4 ? evt.which : evt.keyCode;
 	return (key <= 13 || (key >= 48 && key <= 57));
 };
+
+//function redirectPass() {
+//  header('Location: http://www.commentcamarche.net/forum/');  
+//};
+
