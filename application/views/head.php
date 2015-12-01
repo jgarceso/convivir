@@ -16,6 +16,7 @@
     <?php
     echo '<script src="' . $this->config->site_url() . $this->convivir->js_path . 'lib/jquery.validate.min.js"></script>';
     echo '<script src="' . $this->config->site_url() . $this->convivir->core_js_path . 'jquery_plugins/jBox.min.js"></script>';
+    echo '<script src="' . $this->config->site_url() . $this->convivir->js_path . 'archivos/common.js"></script>';
     if ($this->controllerName != "") {
         echo '<script src="' . $this->config->site_url() . $this->convivir->js_path . 'archivos/usuario.js"></script>';
     }

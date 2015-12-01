@@ -236,7 +236,7 @@ header a{
     border: 1px solid #dbdbdb;
 }
 
-.default-form button{
+.default-form button, .default-btn button{
     display: block;
     border-radius: 2px;
     background-color:  #6caee0;
@@ -247,6 +247,14 @@ header a{
     border: 0;
     margin: 20px auto 0;
     cursor: pointer;
+}
+
+.default-btn button{
+    margin:0;
+}
+
+.default-form button:hover, .default-btn button:hover{
+    background-color:#357ebd;
 }
 
 input.error{
