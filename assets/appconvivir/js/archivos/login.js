@@ -8,14 +8,6 @@ $(document).ready(function() {
 		}
 	});
         
-        $("#btn-email").on("click", function() {
-		if ($("#email-form").valid()) {
-                       enviarEmail();
-		} else {
-			return;
-		}
-	});
-        
         $("#btn-newPass").on("click", function() {
 		if ($("#newPass-form").valid()) {
                        guardarPass();
@@ -55,22 +47,6 @@ $(document).ready(function() {
 		}
 	});
         
-        $("#email-form").validate({
-		rules : {
-                        email:{
-                                required: true,
-                                minlength : 10,
-                                email:true
-                        }
-		},
-		messages : {
-                        email : {
-				required : "Debe escribir un email.",
-				minlength : jQuery.validator.format("El email debe tener al menos {0} caracteres"),
-                                email : jQuery.validator.format("Debe ingresar una dirección de correo electrónico válida")
-			}
-		}
-	});
         
         $("#newPass-form").validate({
 		rules : {
@@ -139,28 +115,6 @@ function IniciarSesion() {
 		},
 		error : function(xhr, ajaxOptions, thrownError) {
 			//$.loader.close();
-		}
-	});
-};
-
-function enviarEmail() {
-	$.ajax({
-		url : "EnviaPass/sendMailGmail",
-		type : 'POST',
-		dataType : 'json',
-		data : {
-			email : $("#input-email").val()
-		},
-            
-		success : function(data) {
-			if (data.Correcto == false) {
-                            alert("No enviado");
-			}else{
-                            alert("enviado");
-			}
-			
-		},
-		error : function(xhr, ajaxOptions, thrownError) {
 		}
 	});
 };

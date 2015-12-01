@@ -46,7 +46,7 @@ class EnviaPass extends BaseController {
 //			'smtp_host' => 'ssl://smtp.gmail.com',
 //			'smtp_port' => 465,
 //			'smtp_user' => 'fabiola.aviles.munoz@gmail.com',
-//			'smtp_pass' => 'Paciencia2016',
+//			'smtp_pass' => '**********',
 //			'mailtype' => 'html',
 //			'charset' => 'utf-8',
 //			'newline' => "\r\n"
@@ -61,7 +61,7 @@ class EnviaPass extends BaseController {
 //			'smtp_port' => 587,
 //			'smtp_crypto' => 'tls',
 //			'smtp_user' => 'solStgo@yahoo.com',
-//			'smtp_pass' => 'Paciencia2016',
+//			'smtp_pass' => '*********',
 //			'mailtype' => 'html',
 //			'charset' => 'utf-8',
 //			'newline' => "\r\n"
