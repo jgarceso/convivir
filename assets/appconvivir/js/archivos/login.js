@@ -93,7 +93,6 @@ function CheckButton() {
 };
 
 function IniciarSesion() {
-	//$("#validar-celular").loader();
 	$.ajax({
 		url : "Security/login",
 		type : 'POST',
@@ -110,23 +109,23 @@ function IniciarSesion() {
 			}else{
 				window.location = data.Url;
 			}
-			
-			//$.loader.close();
 		},
 		error : function(xhr, ajaxOptions, thrownError) {
-			//$.loader.close();
 		}
 	});
 };
 
 function guardarPass() {
+     $aux = getUrlVars()["username"];
+     
 	$.ajax({
 		url : "RecuperaPass/changePass",
 		type : 'POST',
 		dataType : 'json',
 		data : {
 			pass : $("#input-newPass").val(),
-                        validaPassActual:false
+                        validaPassActual:false,
+                        username:$aux 
 		},
                
 		success : function(data) {
@@ -149,7 +148,17 @@ function AceptaNumero(evt) {
 	return (key <= 13 || (key >= 48 && key <= 57));
 };
 
-//function redirectPass() {
-//  header('Location: http://www.commentcamarche.net/forum/');  
-//};
 
+
+function getUrlVars()
+{
+    var vars = [], hash;
+    var hashes = window.location.href.slice(window.location.href.indexOf('?') + 1).split('&');
+    for(var i = 0; i < hashes.length; i++)
+    {
+        hash = hashes[i].split('=');
+        vars.push(hash[0]);
+        vars[hash[0]] = hash[1];
+    }
+    return vars;
+}

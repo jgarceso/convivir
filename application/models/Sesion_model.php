@@ -17,8 +17,8 @@ class Sesion_model  extends CI_Model  {
 	
 	}
         
-        public function changePass($pass){
-		$query = $this->db->query("UPDATE `user_pwd` SET `pass`='$pass' WHERE `name`='jsantibanez'");
+        public function changePass($user, $pass){
+		$query = $this->db->query("UPDATE `user_pwd` SET `pass`='$pass' WHERE `name`='$user'");
                  return true;
                // echo 'filas->'.$this->db->affected_rows();
 //                if ($this->db->affected_rows()==1){
@@ -38,14 +38,15 @@ class Sesion_model  extends CI_Model  {
                 } 
         }
         
-        public function getUserEmail($name, $pass){
+        public function getUser($name, $pass){
 		$query = $this->db->query("SELECT email FROM user_pwd WHERE name='$name' AND pass='$pass'");
-                foreach ($this->db->result() as $row):
-                    $email = $row->email;
-                echo $email;
-                endforeach;
-                
-                return email;
+                return $query->result_array();
+//                foreach ($this->db->result() as $row):
+//                    $email = $row->email;
+//                echo $email;
+//                endforeach;
+//                
+//                return email;
 	}
          
 }
