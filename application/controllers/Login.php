@@ -17,12 +17,11 @@ class Login extends BaseController {
     
     public function __construct() {
 		parent::__construct();
- 
-                session_start();
-                session_destroy();
     }
         
 	public function index() {
+            session_start();
+            session_destroy();
             $this->set_js_core_files(array("jquery-1.11.1.min.js"));
             $this->set_css_files($this->archivos_css);
             $this->set_js_files($this->archivos_js);

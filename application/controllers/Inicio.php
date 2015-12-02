@@ -25,10 +25,4 @@ class Inicio extends BaseController {
 			show_error($e -> getMessage() . ' --- ' . $e -> getTraceAsString());
 		}
 	}
-        
-    public function obtener_productos_alerta (){
-        $this->load->model('alerta_model');
-        $resultado = $this->alerta_model->obtener_productos_en_alerta();
-        echo json_encode($resultado);
-    }
 }

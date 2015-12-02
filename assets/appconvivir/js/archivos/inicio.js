@@ -4,7 +4,7 @@ jQuery(function () {
 
 function ObtenerProductosAlerta(){
     $.ajax({
-		url : "Inicio/obtener_productos_alerta",
+		url : "Alerta/obtener_productos_alerta",
 		type : 'POST',
 		dataType : 'json',
 		success : function(data) {
@@ -78,6 +78,34 @@ function ObtenerHtmlAlerta(){
 function SetearEventos(modal){
     var page = this;
     $("#btn-alerta").on("click", function() {
-            page.modal.close();
+            //page.modal.close();
+            GuardarAlertas();
 	});
+}
+
+function GuardarAlertas(){
+    $.ajax({
+		url : "Alerta/guardar_alertas",
+		type : 'POST',
+		dataType : 'json',
+                data : {
+			productos : ObtenerProductos(),
+			opcionSeleccionada : $("#alerta-selector").val()
+		},
+		success : function(result) {
+                
+		},
+		error : function(xhr, ajaxOptions, thrownError) {
+
+		}
+	});
+}
+
+function ObtenerProductos(){
+    var records = w2ui['grid'].records;
+    var arrIds = [];
+    for (var i = 0; i<records.length;i++){
+        arrIds.push(records[i].recid);
+    }
+    return arrIds;
 }
