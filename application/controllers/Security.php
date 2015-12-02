@@ -131,48 +131,54 @@ class Security extends CI_Controller {
      
        public function sendEmail(){
 
-        $email = $_POST["email"];
-        $this->load->model('sesion_model');
         $mensaje = "";
         $url = "";
         $correcto = false;
-        $user = $this->sesion_model->existsEmail($email);
-            
-        if(isset($user)){
-                    $configGmail = array(
-                            'protocol' => 'smtp',
-                            'smtp_host' => 'ssl://smtp.gmail.com',
-                            'smtp_port' => 465,
-                            'smtp_user' => 'fabiola.aviles.munoz@gmail.com',
-                            'smtp_pass' => '**********',
-                            'mailtype' => 'html',
-                            'charset' => 'utf-8',
-                            'newline' => "\r\n"
-                    );    
+        
+            try{
+                $email = $_POST["email"];
+                $this->load->model('sesion_model');
+                $user = $this->sesion_model->existsEmail($email);
 
-//                    $this->email->initialize($configGmail);
-//                    $this->email->from('Fabiola');
-//                    $this->email->to("fabiola.aviles.munoz@gmail.com");
-//                    $this->email->subject('Bienvenido/a a uno-de-piera.com');
-//                    $this->email->message('<h2>Email enviado con codeigniter haciendo uso del smtp de gmail</h2><hr><br> Bienvenido al blog');
-//
-//                    if(!$this->email->send()){
-//                        show_error($this->email->print_debugger());
-//                        $correcto = true;
-//                        $mensaje = "El correo fué enviado.  Favor verifique y siga las instrucciones.";
-//                    }else{
-//                        $correcto = false;
-//                        $mensaje = "El correo electrónico no pudo ser enviado, intente más tarde.";
-//                        echo 'tu email ha sido enviado.';
-//                    }
-                    $correcto = true;
-                    $mensaje = "El correo fué enviado.  Favor verifique y siga las instrucciones.";
-            }else{
-                $correcto = false;
-                $mensaje = "La dirección de correo electrónico no coincide con la ingresada.  Favor verifique.";
+                if(isset($user)){
+                        $configGmail = array(
+                                'protocol' => 'smtp',
+                                'smtp_host' => 'ssl://smtp.gmail.com',
+                                'smtp_port' => 465,
+                                'smtp_user' => 'fabiola.aviles.munoz@gmail.com',
+                                'smtp_pass' => '**********',
+                                'mailtype' => 'html',
+                                'charset' => 'utf-8',
+                                'newline' => "\r\n"
+                        );    
+
+                        $this->email->initialize($configGmail);
+                        $this->email->from('Fabiola');
+                        $this->email->to("fabiola.aviles.munoz@gmail.com");
+                        $this->email->subject('Bienvenido/a a uno-de-piera.com');
+                        $this->email->message('<h2>Email enviado con codeigniter haciendo uso del smtp de gmail</h2><hr><br> Bienvenido al blog');
+
+                        if(!$this->email->send()){
+                            show_error($this->email->print_debugger());
+                            $correcto = true;
+                            $mensaje = "El correo fué enviado.  Favor verifique y siga las instrucciones.";
+                        }else{
+                            $correcto = false;
+                            $mensaje = "El correo electrónico no pudo ser enviado, intente más tarde.";
+                            echo 'tu email ha sido enviado.';
+                        }
+                        $correcto = true;
+                        $mensaje = "El correo fué enviado.  Favor verifique y siga las instrucciones.";
+                }else{
+                    $correcto = false;
+                    $mensaje = "La dirección de correo electrónico no coincide con la ingresada.  Favor verifique.";
+                }
+            }catch(Expection $e){
+                $mensaje =  'Ha ocurrido un error al tratar de enviar el email. Favor intente más tarde.';
             }
-                 $obj = (object) array('Correcto' => $correcto, 'Url' => $url, 'Mensaje' => $mensaje);
-                 echo json_encode($obj);
+            
+        $obj = (object) array('Correcto' => $correcto, 'Url' => $url, 'Mensaje' => $mensaje);
+        echo json_encode($obj);
 	}
 
 }
