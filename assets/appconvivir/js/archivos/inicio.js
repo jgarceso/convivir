@@ -62,7 +62,7 @@ function CrearGrilla(data) {
                 }
             },
             {field: 'TelefonoContacto', caption: 'Teléfono', size: '120px'},
-            {field: 'IdOpcionAlerta', caption: 'Recordar', size: '120px', editable: {type: 'select', items: opciones},
+            {field: 'IdOpcionAlerta', caption: 'Recordar', size: '120px', editable: {type: 'select', intag:'Seleccione...', items: opciones},
                 render: function (record, index, col_index) {
                     var html = '';
                     for (var p in opciones) {
