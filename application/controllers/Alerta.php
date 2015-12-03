@@ -19,9 +19,8 @@ class Alerta extends BaseController {
     }
     
     public function guardar_alertas (){
-        $idsProductos = $_POST["productos"];
-        $opcionSeleccionada = $_POST["opcionSeleccionada"];
-        $resultado = $this->alerta_model->guardar_alertas($idsProductos,$opcionSeleccionada);
+        $alerta = json_decode($_POST["alerta"]);
+        $resultado = $this->alerta_model->guardar_alertas($alerta);
         echo json_encode($resultado);
     }
 }

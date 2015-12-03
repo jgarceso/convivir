@@ -1,8 +1,9 @@
 FuncionesComunes = {
-    CrearNotice: function (segundos, contenido, fnClose) {
-        var notice = new jBox('Notice', {
+    MostrarNotificacion: function (segundos, color, contenido, fnClose) {
+        new jBox('Notice', {
             content: contenido,
-            autoClose: 1000 * segundos,
+            color: color,
+            autoClose: segundos * 1000,
             position: {
                 x: 'center',
                 y: 'center'
@@ -13,7 +14,6 @@ FuncionesComunes = {
                 }
             } 
         });
-        return notice;
     }
 };
 

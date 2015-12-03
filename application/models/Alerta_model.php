@@ -21,7 +21,29 @@ class Alerta_model extends CI_Model {
         return $result;
     }
 
-    public function guardar_alertas($idsProductos, $opcionSeleccionada){
+    public function guardar_alertas($alerta){
+        $opcionSeleccionada = $alerta->IdOpcionAlerta;
+        $query; $resultado;        
+            $strFechaRecordatorio;
+            $query = "INSERT INTO alertaproducto
+                        VALUES (%s,%s,%s,NOW()) ON DUPLICATE KEY UPDATE
+                        IdOpcionAlerta = %s,
+                        FechaRecordatorio = %s,
+                        FechaModificacion = NOW()";
+            
+            if($opcionSeleccionada == '4' || $opcionSeleccionada == '5'){//Recordar siempre / No recordar. Fecha recordatorio NULL
+                $strFechaRecordatorio = "NULL";
+                
+            }else{
+                $strFechaRecordatorio = sprintf("DATE_ADD(NOW(),INTERVAL %s DAY)",$opcionSeleccionada);
+            }          
+                 $query = sprintf($query,$alerta->recid,$opcionSeleccionada,$strFechaRecordatorio,$opcionSeleccionada,$strFechaRecordatorio);
+                 $resultado = $this->db->query($query);
+
+        return $resultado;
+    }
+    
+    /*public function guardar_alertas($alerta){
         var_dump($idsProductos);
         $query; $resultado;        
         if($opcionSeleccionada == '4'){//Recordar siempre. Eliminar alertas guardadas.
@@ -49,5 +71,5 @@ class Alerta_model extends CI_Model {
              }
         }
         return $resultado;
-    }
+    }*/
 }
