@@ -181,8 +181,6 @@ class Security extends CI_Controller {
                  $obj = (object) array('Correcto' => $correcto, 'Url' => $url, 'Mensaje' => $mensaje);
                 $mensaje =  'Ha ocurrido un error al tratar de enviar el email. Favor intente más tarde.';
             }
-            
-        
 	}
 
 }

@@ -6,6 +6,13 @@ if (!defined('BASEPATH')) {
 require_once 'BaseController.php';
 
 class Productos extends BaseController {
+    
+    private $archivos_js = array(
+        "lib/jquery-1.10.2.min.js",
+        "lib/jquery.validate.min.js",
+        "archivos/empresaModal.js"
+    );
+        
 
     public function __construct() {
         parent::__construct();
@@ -16,6 +23,7 @@ class Productos extends BaseController {
 
     public function index() {
         try {
+            $this->set_js_files($this->archivos_js);
             $this->grocery_crud->set_model('producto_model');
             $this->grocery_crud->set_table('producto');
             $this->grocery_crud->set_subject('Productos');
@@ -31,8 +39,13 @@ class Productos extends BaseController {
             $this->grocery_crud->set_relation('IdEmpresa', 'empresa', 'Nombre');
             $this->grocery_crud->callback_column($this->unique_field_name('IdEstadoCertificacion'), array($this, 'showImage'));
             $this->grocery_crud->set_relation('IdEstadoCertificacion', 'estadocertificacion', 'Nombre');
-            $this->grocery_crud->callback_add_field('IdCategoria', array($this, 'empty_categoria_dropdown_select'));
-            $this->grocery_crud->callback_edit_field('IdCategoria', array($this, 'empty_categoria_dropdown_select'));
+            
+           // $this->grocery_crud->callback_add_field('IdCategoria', array($this, 'empty_categoria_dropdown_select'));
+             $this->grocery_crud->callback_add_field('IdCategoria', array($this, 'empty_categoria_dropdown_select'));
+            $this->grocery_crud->callback_add_field('IdEmpresa',array($this,'add_field_callback_1'));
+            
+           
+          //  $this->grocery_crud->callback_edit_field('IdCategoria', array($this, 'empty_categoria_dropdown_select'));
             $this->grocery_crud->callback_add_field('IdSubcategoria', array($this, 'empty_subcategoria_select'));
             $this->grocery_crud->callback_edit_field('IdSubcategoria', array($this, 'empty_subcategoria_select'));
             $this->grocery_crud->order_by('Descripcion', 'asc');
@@ -53,6 +66,13 @@ class Productos extends BaseController {
             show_error($e->getMessage() . ' --- ' . $e->getTraceAsString());
         }
     }
+    
+    
+function add_field_callback_1()
+{
+   return '<a href="#" style="color:black;" id="link-Empresa">Tizag Home</a>';
+}
+
 
     function showImage($value) {
         if ($value == 'Vigente') {
