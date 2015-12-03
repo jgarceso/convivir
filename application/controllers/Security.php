@@ -141,6 +141,7 @@ class Security extends CI_Controller {
                 $user = $this->sesion_model->existsEmail($email);
 
                 if(isset($user)){
+                        $this->load->library("email");
                         $configGmail = array(
                                 'protocol' => 'smtp',
                                 'smtp_host' => 'ssl://smtp.gmail.com',
@@ -173,12 +174,15 @@ class Security extends CI_Controller {
                     $correcto = false;
                     $mensaje = "La dirección de correo electrónico no coincide con la ingresada.  Favor verifique.";
                 }
+                
+                $obj = (object) array('Correcto' => $correcto, 'Url' => $url, 'Mensaje' => $mensaje);
+                //echo json_encode($obj);
             }catch(Expection $e){
+                 $obj = (object) array('Correcto' => $correcto, 'Url' => $url, 'Mensaje' => $mensaje);
                 $mensaje =  'Ha ocurrido un error al tratar de enviar el email. Favor intente más tarde.';
             }
             
-        $obj = (object) array('Correcto' => $correcto, 'Url' => $url, 'Mensaje' => $mensaje);
-        echo json_encode($obj);
+        
 	}
 
 }
