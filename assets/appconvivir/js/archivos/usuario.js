@@ -42,25 +42,23 @@ function ObtenerCambioClaveHtml(){
                             '<span>Contraseña Actual</span>'+
                         '</label>'+
                         '<input id="input-passwordActual" type="password" name="claveActual" maxlength="12" onpaste="return false;">'+
-                        
-                    '</div>'+
-
-                    '<div class="form-row">'+
-                       '<label>'+
-                            '<span>Nueva Contraseña</span>'+
-                            '<input id="input-password" type="password" name="claveNueva" maxlength="12" onpaste="return false;">'+
-                        '</label>'+
-                    '</div>'+
-                     '<div class="form-row">'+
-                       '<label>'+
-                            '<span>Confirme Contraseña</span>'+
-                            '<input id="input-confirmPass" type="password" name="confClave" maxlength="12" onpaste="return false;">'+
-                        '</label>'+
-                    '</div>'+
-                    '<div class="form-row">'+
-                        '<button id="btn-cambio-clave" type="button">Cambiar</button>'+
-                    '</div>'+
-          '</div>'+
+            '</div>'+
+            '<div class="form-row">'+
+               '<label>'+
+                    '<span>Nueva Contraseña</span>'+
+                    '<input id="input-password" type="password" name="claveNueva" maxlength="12" onpaste="return false;">'+
+                '</label>'+
+            '</div>'+
+            '<div class="form-row">'+
+              '<label>'+
+                   '<span>Confirme Contraseña</span>'+
+                   '<input id="input-confirmPass" type="password" name="confClave" maxlength="12" onpaste="return false;">'+
+               '</label>'+
+           '</div>'+
+           '<div class="form-row">'+
+                '<button id="btn-cambio-clave" type="button">Cambiar</button>'+
+            '</div>'+
+           '</div>'+
     '</form>';
             return html;
 };

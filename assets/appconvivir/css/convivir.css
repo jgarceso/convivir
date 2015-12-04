@@ -153,6 +153,50 @@ header a{
     float:right;
 }
 
+.addEmpresa-icon{
+    background: url(../imagenes/glyphicons-halflings.png) no-repeat;
+    cursor: pointer;
+    width: 16px;
+    height: 16px;
+    border: none !important;
+    padding: 8px !important;
+    padding-bottom: 0px !important;
+    margin-left: 635px;
+    margin-top:7px;
+    display: block;
+    background-position: -407px -96px;
+    float:center;
+}
+.addCategory-icon{
+    background: url(../imagenes/glyphicons-halflings.png) no-repeat;
+    cursor: pointer;
+    width: 16px;
+    height: 16px;
+    border: none !important;
+    padding: 8px !important;
+    padding-bottom: 0px !important;
+    margin-left: 635px;
+    margin-top:7px;
+    display: block;
+    background-position: -407px -96px;
+    float:center;
+}
+
+.addSubCategory-icon{
+    background: url(../imagenes/glyphicons-halflings.png) no-repeat;
+    cursor: pointer;
+    width: 16px;
+    height: 16px;
+    border: none !important;
+    padding: 8px !important;
+    padding-bottom: 0px !important;
+    margin-left: 635px;
+    margin-top:7px;
+    display: block;
+    background-position: -407px -96px;
+    float:center;
+}
+
 .contenedor-blanco
 {
     background-color: #ffffff;

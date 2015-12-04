@@ -10,7 +10,9 @@ class Productos extends BaseController {
     private $archivos_js = array(
         "lib/jquery-1.10.2.min.js",
         "lib/jquery.validate.min.js",
-        "archivos/empresaModal.js"
+        "archivos/empresaModal.js",
+        "archivos/categoriaModal.js",
+        "archivos/subcategoriaModal.js"
     );
         
 
@@ -42,7 +44,7 @@ class Productos extends BaseController {
             
            // $this->grocery_crud->callback_add_field('IdCategoria', array($this, 'empty_categoria_dropdown_select'));
              $this->grocery_crud->callback_add_field('IdCategoria', array($this, 'empty_categoria_dropdown_select'));
-            $this->grocery_crud->callback_add_field('IdEmpresa',array($this,'add_field_callback_1'));
+            //$this->grocery_crud->callback_add_field('IdEmpresa',array($this,'add_field_callback_1'));
             
            
           //  $this->grocery_crud->callback_edit_field('IdCategoria', array($this, 'empty_categoria_dropdown_select'));
@@ -70,7 +72,9 @@ class Productos extends BaseController {
     
 function add_field_callback_1()
 {
-   return '<a href="#" style="color:black;" id="link-Empresa">Tizag Home</a>';
+    $empty_select = '<select name="IdEmpresa" class="chosen-select" data-placeholder="Seleccione Empresa"><a href="#" style="color:black;" id="link-Empresa">Tizag Home</a>';
+    $empty_select_closed = '</select>';
+    return $empty_select . $empty_select_closed;
 }
 
 
