@@ -25,7 +25,7 @@ function MostrarModalAlerta(data) {
         closeOnEsc:false,
         closeOnClick:false,
         title: 'Certificación',
-        width: 600,
+        width: 800,
         content: ObtenerHtmlAlerta(),
         closeButton: 'title',
         onCreated: function () {
@@ -46,25 +46,26 @@ function CrearGrilla(data) {
         {id: 2, text: '2 días'},
         {id: 3, text: '3 días'},
         {id: 4, text: 'Siempre'},
-        {id: 5, text: 'No volver a recordar'}
+        {id: 5, text: 'No recordar'}
     ];
     $('#grid-productos-alerta').w2grid({
         name: 'grid',
         fixedBody: true,
         columns: [
-            {field: 'Descripcion', caption: 'Producto', size: '30%'},
-            {field: 'Empresa', caption: 'Empresa', size: '30%'},
-            {field: 'NombreContacto', caption: 'Contacto', size: '30%'},
-            {field: 'EmailContacto', caption: 'Email', size: '40%', 
+            {field: 'Descripcion', caption: 'Producto', size: '150px'},
+            {field: 'Empresa', caption: 'Empresa', size: '100px'},
+            {field: 'FechaVencimiento', caption: 'Vencimiento', size: '85px'},
+            {field: 'NombreContacto', caption: 'Contacto', size: '110px'},
+            {field: 'EmailContacto', caption: 'Email', size: '115px', 
             render: function (record, index, col_index) {
                     var html = '<a href="mailto:'+record.EmailContacto+'">'+record.EmailContacto+'</a>';
                     return html;
                 }
             },
-            {field: 'TelefonoContacto', caption: 'Teléfono', size: '120px'},
-            {field: 'IdOpcionAlerta', caption: 'Recordar', size: '120px', editable: {type: 'select', intag:'Seleccione...', items: opciones},
+            {field: 'TelefonoContacto', caption: 'Teléfono', size: '90px'},
+            {field: 'IdOpcionAlerta', caption: 'Recordar', size: '120px', editable: {type: 'select', items: opciones},
                 render: function (record, index, col_index) {
-                    var html = '';
+                    var html = '<span class="icon-mano" id="icono-usuario" onClick="EditarAlerta('+record.recid+','+col_index+');" title="Modificar Recordatorio"></span>';
                     for (var p in opciones) {
                         if (opciones[p].id == this.getCellValue(index, col_index))
                             html = opciones[p].text;
@@ -82,6 +83,10 @@ function CrearGrilla(data) {
     });
 }
 
+function EditarAlerta(recordId,colIndex){
+ w2ui.grid.editField(recordId, colIndex);    
+}
+
 function ObtenerHtmlAlerta() {
     var html = '<div>' +
                 '<div style="margin-bottom:10px;">La certificación de los siguientes productos está próxima a vencer</div>' +
@@ -89,7 +94,7 @@ function ObtenerHtmlAlerta() {
                     '<div style="margin-top:10px;">' +
                     
                     '<div style="float:right;" class="default-btn">' +
-                    '<button id="btn-alerta" type="button">Cancelar</button>' +
+                    '<button id="btn-alerta" type="button">Cerrar</button>' +
                     '</div>' +
                 '</div>' +
             '</div>';
@@ -104,12 +109,20 @@ function SetearEventos(modal) {
 }
 
 function GuardarAlertas() {
+    var alerta = w2ui['grid'].getChanges()[0];
+    
+    if(alerta.IdOpcionAlerta == "")
+    {
+       w2ui.grid.save();//guardar solo en forma local
+       return; 
+    }
+    
     $.ajax({
         url: "Alerta/guardar_alertas",
         type: 'POST',
         dataType: 'json',
         data: {
-            alerta: JSON.stringify(w2ui['grid'].getChanges()[0])
+            alerta: JSON.stringify(alerta)
         },
         success: function (exitoso) {
             AfterSave(exitoso);

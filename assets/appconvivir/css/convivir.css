@@ -153,6 +153,20 @@ header a{
     float:right;
 }
 
+.icon-mano{
+    background: url(../imagenes/glyphicons-halflings.png) no-repeat;
+    cursor: pointer;
+    width: 16px;
+    height: 16px;
+    border: none !important;
+    padding: 10px !important;
+    padding-bottom: 0px !important;
+    margin-left: 30px !important;
+    margin-top:3px;
+    display: block;
+    background-position: -357px -143px;
+}
+
 .contenedor-blanco
 {
     background-color: #ffffff;
