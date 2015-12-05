@@ -1,6 +1,6 @@
 <?php
 
-class Common_model extends CI_Model {
+class Alerta_model extends CI_Model {
 
     function __construct() {
         parent::__construct();
@@ -23,20 +23,7 @@ class Common_model extends CI_Model {
                 ->order_by($campoTexto);
         $db = $this->db->get();
        
-        return $db->result();
-         /*$array = array();
-          foreach($db->result() as $row):
-          $array[] = array("value" => $row->$campoValor, "property" => $row->$campoTexto);
-          endforeach;
-        
-          return $array;
-        
-       /* foreach ($db->result_array() as $row) {
-            $data[$row[$campoValor]] = $row[$campoTexto];
-        }
-        return $data;
-        * */
-        
+        return $db->result();        
     }
 
 }

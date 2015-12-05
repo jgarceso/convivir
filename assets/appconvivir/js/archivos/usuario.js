@@ -34,7 +34,7 @@ function CrearModales(){
 
 function ObtenerCambioClaveHtml(){
     var html = 
-   '<form  id="cambiar-pass-form" class="form-login">'+
+   '<form  id="cambiar-pass-form" >'+
 
          '<div class="default-form">'+
             '<div class="form-row">'+
