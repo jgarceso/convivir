@@ -7,14 +7,6 @@ $(document).ready(function() {
 			return;
 		}
 	});
-        
-        $("#btn-newPass").on("click", function() {
-		if ($("#newPass-form").valid()) {
-                       guardarPass();
-		} else {
-			return;
-		}
-	});
 
 	$("#login-form").validate({
 		rules : {
@@ -46,38 +38,6 @@ $(document).ready(function() {
 			}
 		}
 	});
-        
-        
-        $("#newPass-form").validate({
-		rules : {
-                        newPass:{
-                                required: true,
-                                pwcheck: true,
-                                minlength: 8
-                        },
-                        newPassConfirm:{
-                                required: true,
-                                equalTo: "#input-newPass"
-                        }
-		},
-		messages : {
-                        newPass : {
-				required: "Especifique la contraseña",
-                                pwcheck: "La contraseña no cumple los criterios.",
-                                minlength: "La contraseña no cumple los criterios."
-                                
-			},
-                        newPassConfirm : {
-				required: "Especifique la contraseña",
-                                equalTo: "Las contraseñas no coinciden"
-			}
-		}
-	});
-        
-        $.validator.addMethod("pwcheck",
-                        function(value, element) {
-                            return /^[A-Za-z0-9\d=!\-@._*]+$/.test(value);
-                    });
         
         $("#refresh-captcha").on("click", function(){
             $("#captcha-result").attr("src","Security/obtenerCaptcha?rnd=" + Math.random());
