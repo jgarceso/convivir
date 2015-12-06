@@ -85,21 +85,14 @@ function SetearEventosEmpresaForm(){
                         }
 		}
 	});
-       
-        $("#btn-nueva-empresa").on("click", function() {
-		if ($("#agrega-empresa-form").valid()) {
-                      // CambiarClave();
-		} else {
-			return;
-		}
-	});
         
-      
-        
-        
+         $("#btn-nueva-empresa").on("click", function() {
+            if ($("#agrega-empresa-form").valid()) {
+                  alert('lalalla');
+            } else {
+                    return;
+            }
+    });
+         
 };
-
-
-
-
 
