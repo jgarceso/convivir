@@ -7,8 +7,8 @@ class Alerta_model extends CI_Model {
         $this->load->database();
     }
 
-    public function obtener_productos_en_alerta() {
-
+    public function obtener_productos_en_alerta($diasCertificacionMenosAlerta) {
+        
         $query = $this->db->query("SELECT p.IdProducto as recid, p.Descripcion, ap.FechaRecordatorio, DATE_FORMAT(FechaCertificacion, '%d-%m-%Y') as FechaCertificacion, 
                                     DATE_FORMAT(DATE_ADD(FechaCertificacion,INTERVAL 365 DAY),'%d-%m-%Y') as FechaVencimiento,
                                     e.Nombre as Empresa, e.NombreContacto,e.EmailContacto,e.TelefonoContacto
@@ -17,7 +17,7 @@ class Alerta_model extends CI_Model {
                                         ON p.IdEmpresa = e.IdEmpresa
                                     LEFT JOIN alertaproducto ap
                                         ON p.IdProducto = ap.IdProducto
-                                    WHERE DATEDIFF(NOW(),FechaCertificacion) >= (365-20)
+                                    WHERE DATEDIFF(NOW(),FechaCertificacion) >= ".$diasCertificacionMenosAlerta."
                                         AND YEAR(p.FechaCertificacion) > '2010'
                                         AND (ap.IdOpcionAlerta <> 5 OR ap.IdOpcionAlerta IS NULL) /*DISTINTO A NO RECORDAR*/
                                         AND (CURDATE() >= ap.FechaRecordatorio OR ap.IdOpcionAlerta = 4 OR ap.IdProducto IS NULL)");

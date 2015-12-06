@@ -1,5 +1,5 @@
 FuncionesComunes = {
-    MostrarNotificacion: function (segundos, color, contenido, fnClose) {
+    mostrarNotificacion: function (segundos, color, contenido, fnClose) {
         new jBox('Notice', {
             content: contenido,
             color: color,
@@ -14,6 +14,17 @@ FuncionesComunes = {
                 }
             } 
         });
+    },
+    afterSave: function (exitoso){
+    var mensaje; var color;
+    if(exitoso){
+       mensaje = "Cambios guardados.";
+       color = 'green';
+     }else{
+       mensaje = "Ha ocurrido un error al guardar.";
+       color = 'red';       
+    }
+    this.mostrarNotificacion(1.5,color, mensaje);
     }
 };
 

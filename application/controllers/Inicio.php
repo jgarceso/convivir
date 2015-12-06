@@ -16,8 +16,7 @@ class Inicio extends BaseController {
 
 	public function index() {
 		try {
-                        $this->set_js_core_files(array("jquery-1.11.1.min.js","jquery_plugins/w2ui-1.4.3.min.js"));
-                        $this->set_css_core_files(array("jquery_plugins/w2ui-1.4.3.min.css"));
+                        $this->set_js_core_files(array("jquery-1.11.1.min.js"));
                         $this->set_js_files(array("archivos/inicio.js"));
 			$this -> mostrar_pagina("inicio", null);
 
