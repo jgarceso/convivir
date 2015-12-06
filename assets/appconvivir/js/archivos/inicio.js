@@ -65,10 +65,10 @@ function CrearGrilla(data) {
             {field: 'TelefonoContacto', caption: 'Teléfono', size: '90px'},
             {field: 'IdOpcionAlerta', caption: 'Recordar', size: '120px', editable: {type: 'select', items: opciones},
                 render: function (record, index, col_index) {
-                    var html = '<span class="icon-mano" id="icono-usuario" onClick="w2ui.grid.editField('+record.recid+','+col_index+');" title="Modificar Recordatorio"></span>';
+                    var html = '<span class="icon-mano" id="icono-usuario" onClick="w2ui.grid.editField('+record.recid+','+col_index+');" title="Elegir recordatorio"></span>';
                     for (var p in opciones) {
                         if (opciones[p].id == this.getCellValue(index, col_index))
-                            html = opciones[p].text;
+                            html = '<div title="Click para editar" onClick="w2ui.grid.editField('+record.recid+','+col_index+');">'+opciones[p].text+'</div>';
                     }
                     return html;
                 }

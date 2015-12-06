@@ -174,7 +174,7 @@ function CrearGrillaConfig(data) {
             {field: 'Descripcion', caption: 'Setting', size: '300px'},
             {field: 'Valor', caption: 'Valor', size: '68px',render: 'int', editable: { type: 'int', min: 0, max: 1000 },
             render: function (record, index, col_index) {
-                    var html = '<div onClick="w2ui.gridConfig.editField('+record.recid+','+col_index+');">'+record.Valor+'</div>';
+                    var html = '<div title="Click para editar" onClick="w2ui.gridConfig.editField('+record.recid+','+col_index+');">'+record.Valor+'</div>';
                     return html;
                 }}
         ],
@@ -195,6 +195,11 @@ function CrearGrillaConfig(data) {
 
 function GuardarSetting() {
     var setting = w2ui['gridConfig'].getChanges()[0];
+     if(setting.Valor == "")
+    {
+       w2ui.gridConfig.save();//guardar solo en forma local
+       return; 
+    }
     
     $.ajax({
         url: SiteName+"Setting/guardar_settings",
