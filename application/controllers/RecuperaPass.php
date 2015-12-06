@@ -15,7 +15,7 @@ class RecuperaPass extends BaseController {
     private $archivos_js = array(
         "lib/jquery-1.10.2.min.js",
         "lib/jquery.validate.min.js",
-        "archivos/login.js"
+        "archivos/cambiaContrasena.js"
     );
     
     public function __construct() {

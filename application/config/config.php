@@ -3,6 +3,21 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 /*
 |--------------------------------------------------------------------------
+| Valores para configuración de envío de email
+|--------------------------------------------------------------------------
+|
+*/
+$config['protocol_email'] = 'smtp';
+$config['smtp_host_email'] = 'ssl://smtp.googlemail.com';
+$config['smtp_port_email'] = 465;
+$config['smtp_user_email'] = 'fabiola.aviles.munoz@gmail.com';
+$config['smtp_pass_email'] = 'ChanchitaLinda';
+$config['mailtype'] = 'html';
+$config['charset_email'] = 'utf-8';
+$config['newline_email'] = '\r\n';
+
+/*
+|--------------------------------------------------------------------------
 | Base Site URL
 |--------------------------------------------------------------------------
 |

@@ -91,7 +91,7 @@ class Security extends CI_Controller {
                             if ($this->sesion_model->changePass($usuario, md5($pass))) {
                                $url = "login";
                                $correcto = true;
-                               $mensaje = "La contraseña fué cambiada.";
+                               $mensaje = "La contraseña fué cambiada. Ahora deberá iniciar sesión con su nueva contraseña.";
                                session_destroy();
                            } else {
                                $mensaje = "No se pudo cambiar la contraseña.";
@@ -109,7 +109,7 @@ class Security extends CI_Controller {
 
                      if($validaPassActual=='false'){
                           if ($this->sesion_model->changePass($userDesencriptado, md5($pass))) {
-                                   $url = "inicio";
+                                   $url = "login";
                                    $correcto = true;
                                    $mensaje = "La contraseña fué cambiada. Ahora debe iniciar sesión con su nueva contraseña.";
                          } else {
@@ -117,20 +117,17 @@ class Security extends CI_Controller {
                          }
                      }
                  }else{
-                     $mensaje = "No fué posible obtener el nombre de usuario";
+                     $mensaje = "Error al cambiar la contraseña. No fué posible obtener el nombre de usuario";
                  }
            }
-
        }catch(Exception $e){
            $mensaje = 'Ocurrio un error su contraseña no fué cambiada.';
        }  
-
         $obj = (object) array('Correcto' => $correcto, 'Url' => $url, 'Mensaje' => $mensaje);
         echo json_encode($obj);
      }
      
        public function sendEmail(){
-
         $mensaje = "";
         $url = "";
         $correcto = false;
@@ -139,25 +136,33 @@ class Security extends CI_Controller {
                 $email = $_POST["email"];
                 $this->load->model('sesion_model');
                 $user = $this->sesion_model->existsEmail($email);
-
-                if(isset($user)){
+             
+                 if(isset($user)){
                         $this->load->library("email");
+                        //ejemplo 
+                        $enlace =  'http://'.$_SERVER['HTTP_HOST'].'/convivir/RecuperaPass?name='.Encrypter::encrypt($user);
                         $configGmail = array(
-                                'protocol' => 'smtp',
-                                'smtp_host' => 'ssl://smtp.gmail.com',
-                                'smtp_port' => 465,
-                                'smtp_user' => 'fabiola.aviles.munoz@gmail.com',
-                                'smtp_pass' => '**********',
-                                'mailtype' => 'html',
-                                'charset' => 'utf-8',
-                                'newline' => "\r\n"
+                                'protocol' => $this->config->item('protocol_email'),
+                                'smtp_host' => $this->config->item('smtp_host_email'),
+                                'smtp_port' => $this->config->item('smtp_port_email'),
+                                'smtp_user' => $this->config->item('smtp_user_email'),
+                                'smtp_pass' => $this->config->item('smtp_pass_email'),
+                                'mailtype' => $this->config->item('mailtype'),
+                                'charset' => $this->config->item('charset_email'),
+                                'newline' => $this->config->item('newline_email')
                         );    
-
+                        
                         $this->email->initialize($configGmail);
-                        $this->email->from('Fabiola');
-                        $this->email->to("fabiola.aviles.munoz@gmail.com");
-                        $this->email->subject('Bienvenido/a a uno-de-piera.com');
-                        $this->email->message('<h2>Email enviado con codeigniter haciendo uso del smtp de gmail</h2><hr><br> Bienvenido al blog');
+                        $this->email->set_newline("\r\n");
+                        $this->email->from('Administrador');
+                        $this->email->to($email);
+                        $this->email->subject('Instrucciones de recuperaci&oacute;n de contrase&ntilde;a Convivir');
+                        $this->email->message('<p>Hemos recibido su solicitud de recuperaci&oacute;n de contrase&ntilde;a.'.
+                                                'Si hace click en el enlace, le enviaremos a una p&aacute;gina en donde'. 
+                                                'podr&aacute; cambiar o recuperar su contrase&ntilde;a.</p>'.
+                                                '<p>Si el enlace no funciona, copie y pegue el enlace en la barra'.
+                                                'de direcciones de su navegador.</p>'.
+                                                '<p>Enlace: <a href="'.$enlace.'">'.$enlace.'</a></p><br><br>');
 
                         if(!$this->email->send()){
                             show_error($this->email->print_debugger());
@@ -176,7 +181,7 @@ class Security extends CI_Controller {
                 }
                 
                 $obj = (object) array('Correcto' => $correcto, 'Url' => $url, 'Mensaje' => $mensaje);
-                //echo json_encode($obj);
+                echo json_encode($obj);
             }catch(Expection $e){
                  $obj = (object) array('Correcto' => $correcto, 'Url' => $url, 'Mensaje' => $mensaje);
                 $mensaje =  'Ha ocurrido un error al tratar de enviar el email. Favor intente más tarde.';
