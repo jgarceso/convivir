@@ -7,6 +7,7 @@ jQuery(function () {
         content: '<ul class="user-menu">' +
                 '<li><a id="usuario-datos" href="#">Mis datos</a></li>' +
                 '<li><a id="cambio-clave" href="#">Cambiar Contraseña</a></li>' +
+                '<li><a id="config-sistema" href="#">Configuración</a></li>' +
                 '</ul>',
         closeOnMouseleave: true,
         onCreated: function () {
@@ -29,7 +30,23 @@ function CrearModales(){
             onClose: function(){
                 $("#cambiar-pass-form").validate().resetForm();
             }
-     });        
+     }); 
+     
+     new jBox('Modal', {
+            constructOnInit:true,
+            attach: $('#config-sistema'),
+            title: 'Configuración Sistema',
+            width:400,
+            content: ObtenerHtmlConfig(),
+            closeButton:'title',
+            onCreated: function () {
+                ObtenerSettings();
+                SetearEventosConfig(this);
+            },
+            onClose: function(){
+                
+            }
+     });
 };
 
 function ObtenerCambioClaveHtml(){
@@ -116,3 +133,83 @@ function CambiarClave (){
     
 }
 
+function ObtenerHtmlConfig() {
+    var html = '<div>' +
+                '<div style="margin-bottom:10px;">En esta grilla puede modificar parámetros usados por el sistema</div>' +
+                    '<div id="grid-configuracion" style=" width:370px; height: 200px;"></div>' +
+                    '<div style="margin-top:10px;">' +
+                    
+                    '<div style="float:right;" class="default-btn">' +
+                    '<button id="btn-config" type="button">Cerrar</button>' +
+                    '</div>' +
+                '</div>' +
+            '</div>';
+    return html;
+}
+
+function ObtenerSettings() {
+    $.ajax({
+        url: SiteName+"Setting/obtener_settings",
+        type: 'POST',
+        dataType: 'json',
+        success: function (data) {
+            if (data.length > 0) {
+                CrearGrillaConfig(data);
+            }
+            //$.loader.close();
+        },
+        error: function (xhr, ajaxOptions, thrownError) {
+            //$.loader.close();
+        }
+    });
+}
+
+
+function CrearGrillaConfig(data) {
+
+    $('#grid-configuracion').w2grid({
+        name: 'gridConfig',
+        fixedBody: true,
+        columns: [
+            {field: 'Descripcion', caption: 'Setting', size: '300px'},
+            {field: 'Valor', caption: 'Valor', size: '68px',render: 'int', editable: { type: 'int', min: 0, max: 1000 },
+            render: function (record, index, col_index) {
+                    var html = '<div onClick="w2ui.gridConfig.editField('+record.recid+','+col_index+');">'+record.Valor+'</div>';
+                    return html;
+                }}
+        ],
+        records: data,
+        onChange: function (target, event) {
+            event.onComplete = function () {
+                GuardarSetting();
+            }
+        }
+    });
+ };
+ 
+ function SetearEventosConfig(modal) {
+       $("#btn-config").on("click", function () {
+        modal.close();
+    });
+}
+
+function GuardarSetting() {
+    var setting = w2ui['gridConfig'].getChanges()[0];
+    
+    $.ajax({
+        url: SiteName+"Setting/guardar_settings",
+        type: 'POST',
+        dataType: 'json',
+        data: {
+            setting: JSON.stringify(setting)
+        },
+        success: function (exitoso) {
+            if(exitoso)
+                w2ui['gridConfig'].save();
+            FuncionesComunes.afterSave(exitoso);
+        },
+        error: function (xhr, ajaxOptions, thrownError) {
+
+        }
+    });
+}

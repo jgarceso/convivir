@@ -65,7 +65,7 @@ function CrearGrilla(data) {
             {field: 'TelefonoContacto', caption: 'Teléfono', size: '90px'},
             {field: 'IdOpcionAlerta', caption: 'Recordar', size: '120px', editable: {type: 'select', items: opciones},
                 render: function (record, index, col_index) {
-                    var html = '<span class="icon-mano" id="icono-usuario" onClick="EditarAlerta('+record.recid+','+col_index+');" title="Modificar Recordatorio"></span>';
+                    var html = '<span class="icon-mano" id="icono-usuario" onClick="w2ui.grid.editField('+record.recid+','+col_index+');" title="Modificar Recordatorio"></span>';
                     for (var p in opciones) {
                         if (opciones[p].id == this.getCellValue(index, col_index))
                             html = opciones[p].text;
@@ -81,10 +81,6 @@ function CrearGrilla(data) {
             }
         }
     });
-}
-
-function EditarAlerta(recordId,colIndex){
- w2ui.grid.editField(recordId, colIndex);    
 }
 
 function ObtenerHtmlAlerta() {
@@ -125,7 +121,9 @@ function GuardarAlertas() {
             alerta: JSON.stringify(alerta)
         },
         success: function (exitoso) {
-            AfterSave(exitoso);
+            if(exitoso)
+                w2ui.grid.save();
+            FuncionesComunes.afterSave(exitoso);
         },
         error: function (xhr, ajaxOptions, thrownError) {
 
@@ -133,24 +131,3 @@ function GuardarAlertas() {
     });
 }
 
-function AfterSave(exitoso){
-    var mensaje; var color;
-    if(exitoso){
-       w2ui.grid.save();
-       mensaje = "Cambios guardados.";
-       color = 'green';
-     }else{
-       mensaje = "Ha ocurrido un error al actualizar.";
-       color = 'red';       
-    }
-    FuncionesComunes.MostrarNotificacion(1.5,color, mensaje);
-}
-
-function ObtenerProductos() {
-    var records = w2ui['grid'].records;
-    var arrIds = [];
-    for (var i = 0; i < records.length; i++) {
-        arrIds.push(records[i].recid);
-    }
-    return arrIds;
-}
