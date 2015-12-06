@@ -1,5 +1,6 @@
 $(document).ready(function() {
     $('<span class="addCategory-icon" Id="add-category"></span>').insertAfter('#IdCategoria_input_box');
+    //$('new_content').insertBefore('#input-tipo');
 });
 
 jQuery(function () {
@@ -14,6 +15,8 @@ jQuery(function () {
         closeOnMouseleave: true,
         onCreated: function () {
             CrearModalCategoria();
+            //ObtieneTipos();
+            
         }
     });    
 });
@@ -28,42 +31,13 @@ function CrearModalCategoria(){
             content: AgregarCategoria(),
             closeButton:'title',
             onCreated: function () {
-                SetearEventosFormulario();
+                SetearEventosCategoriaForm();
             },
             onClose: function(){
                 $("#agrega-categoria-form").validate().resetForm();
             }
      });
      
-      new jBox('Modal', {
-            constructOnInit:true,
-            attach: $('#agrega-empresa'),
-            title: 'Empresa',
-            width:400,
-            content: AgregarEmpresaHtml(),
-            closeButton:'title',
-            onCreated: function () {
-                SetearEventosFormulario();
-            },
-            onClose: function(){
-                $("#agrega-empresa-form").validate().resetForm();
-            }
-     });
-     
-     new jBox('Modal', {
-            constructOnInit:true,
-            attach: $('#agrega-subcategoria'),
-            title: 'SubCategoría',
-            width:400,
-            content: AgregarSubCategoria(),
-            closeButton:'title',
-            onCreated: function () {
-                SetearEventosCategoriaForm();
-            },
-            onClose: function(){
-                $("#agrega-subcategoria-form").validate().resetForm();
-            }
-     });
 };
 
 function AgregarCategoria(){
@@ -80,7 +54,11 @@ function AgregarCategoria(){
             '<div class="form-row">'+
                '<label>'+
                     '<span>Tipo</span>'+
-                    '<input id="input-tipo" type="text" name="tipo" maxlength="50" onpaste="return false;">'+
+                    '<select name="sometext" id="lista-tipo" class="combos_modales" >'+
+                    '<option value="default">-- Seleccione Tipo --</option>'+
+                    '<option>Alimentos</option>'+
+                    '<option>Medicamentos</option>'+
+                    '</select>'+
                 '</label>'+
             '</div>'+
            '<div class="form-row">'+
@@ -90,28 +68,60 @@ function AgregarCategoria(){
     '</form>';
     return html;
 };
+ // add the rule here
+ $.validator.addMethod("valueNotEquals", function(value, element, arg){
+  return arg != value;
+ }, "Value must not equal arg.");
 
 function SetearEventosCategoriaForm(){
         $("#agrega-categoria-form").validate({
 		rules : {
-                        nuevaEmpresa:{
+                        nombreCategoria:{
                                 required: true
+                        },
+                        tipo:{
+                                SelectName: { valueNotEquals: "default" }
                         }
 		},
 		messages : {
-                        nuevaEmpresa:{
-                                required: "Debe ingresar el nombre de la empresa."
+                        nombreCategoria:{
+                                required: "Debe ingresar el nombre de la categoría."
+                        },
+                        tipo:{
+                                SelectName: { valueNotEquals: "Porfavor seleccione un tipo de <categoría." }
                         }
 		}
 	});
         
-                
-//        $("#btn-nueva-empresa").on("click", function() {
-//		if ($("#agrega-empresa-form").valid()) {
-//                      // CambiarClave();
-//		} else {
-//			return;
+        $("#btn-nueva-categoria").on("click", function() {
+		if ($("#agrega-categoria-form").valid()) {
+                       alert('catt');
+		} else {
+			return;
+		}
+	});
+};
+
+//function ObtieneTipos (){
+//    $.ajax({
+//		url : "RecuperaPass/test",
+//		type : 'POST',
+//		dataType : 'json',
+//		data : {
+//			prueba : 'lalalalasssddddddddddddddd dsdvedbg vsgb',
+//                        validaual:true
+//		},
+//               
+//		success : function(data) {
+//			if (data.Correcto == false) {
+//			    alert(data.Mensaje);
+//			}else{
+//                            alert(data.Mensaje);
+//			}
+//		},
+//		error : function(xhr, ajaxOptions, thrownError) {
 //		}
 //	});
-};
+//}
+
 
