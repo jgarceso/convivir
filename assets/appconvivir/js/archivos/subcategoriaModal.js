@@ -49,7 +49,7 @@ function AgregarSubCategoria(){
             '<div class="form-row">'+
                '<label>'+
                     '<span>Categoría</span>'+
-                    '<input id="input-tipo" type="text" name="tipo" maxlength="50" onpaste="return false;">'+
+                    '<input id="input-tipo" type="text" name="categoria" maxlength="50" onpaste="return false;">'+
                 '</label>'+
             '</div>'+
            '<div class="form-row">'+
@@ -63,22 +63,28 @@ function AgregarSubCategoria(){
 function SetearEventosSubCateForm(){
         $("#agrega-subcategoria-form").validate({
 		rules : {
-                        nuevaEmpresa:{
+                        nombreSubCategoria:{
                                 required: true
-                        }
+                        },
+                        categoria:{
+                                required: true
+                        },
 		},
 		messages : {
-                        nuevaEmpresa:{
-                                required: "Debe ingresar el nombre de la empresa."
+                        nombreSubCategoria:{
+                                required: "Debe ingresar el nombre de la subcategoría."
+                        },
+                        categoria:{
+                                required: "Debe ingresar una categoría."
                         }
 		}
 	});
          
-//        $("#btn-nueva-empresa").on("click", function() {
-//		if ($("#agrega-empresa-form").valid()) {
-//                      // CambiarClave();
-//		} else {
-//			return;
-//		}
-//	});
+        $("#btn-nueva-subcategoria").on("click", function() {
+		if ($("#agrega-subcategoria-form").valid()) {
+                       alert('lalal');
+		} else {
+			return;
+		}
+	});
 }
