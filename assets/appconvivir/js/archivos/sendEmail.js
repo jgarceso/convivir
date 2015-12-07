@@ -37,12 +37,8 @@ function enviarEmail() {
 			email : $("#input-email").val()
 		},
             
-		success : function(data) {
-			if (data.Correcto == false) {
-                            alert(data.Mensaje);
-			}else{
-                            alert(data.Mensaje);
-			}
+		success : function(resultado) {
+			FuncionesComunes.afterSave(resultado.Correcto, resultado.Mensaje);
 		},
 		error : function(xhr, ajaxOptions, thrownError) {
 		}

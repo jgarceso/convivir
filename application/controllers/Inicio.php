@@ -17,6 +17,7 @@ class Inicio extends BaseController {
 	public function index() {
 		try {
                         $this->set_js_core_files(array("jquery-1.11.1.min.js"));
+                        $this->set_js_files(array("archivos/inicio.js"));
 			$this -> mostrar_pagina("inicio", null);
 
 		} catch(Exception $e) {

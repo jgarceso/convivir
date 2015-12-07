@@ -20,11 +20,11 @@ class Productos extends BaseController {
             $this->grocery_crud->set_table('producto');
             $this->grocery_crud->set_subject('Productos');
             $this->grocery_crud->columns('Descripcion', 'IdTipo', 'IdCategoria', 'IdSubcategoria', 'IdEmpresa', 'IdEstadoCertificacion');
-            $this->grocery_crud->fields('Descripcion', 'IdTipo', 'IdCategoria', 'IdSubcategoria', 'IdEmpresa', 'IdEstadoCertificacion', 'FechaModificacion');
-            $this->grocery_crud->display_as('Descripcion', 'Producto')->display_as('IdEmpresa', 'Empresa')->display_as('IdCategoria', 'Categoría')
-                    ->display_as('IdSubcategoria', 'SubCategoría')->display_as('IdTipo', 'Tipo')->display_as('IdEstadoCertificacion', 'Estado')->display_as('FechaModificacion', 'Última Actualización');
-            $this->grocery_crud->add_fields('Descripcion', 'IdTipo', 'IdCategoria', 'IdSubcategoria', 'IdEmpresa', 'IdEstadoCertificacion');
-            $this->grocery_crud->required_fields('Descripcion', 'IdTipo', 'IdCategoria', 'IdSubcategoria', 'IdEmpresa', 'IdEstadoCertificacion');
+            $this->grocery_crud->fields('Descripcion', 'IdTipo', 'IdCategoria', 'IdSubcategoria', 'IdEmpresa', 'IdEstadoCertificacion', 'FechaCertificacion','FechaModificacion');
+            $this->grocery_crud->display_as('Descripcion', 'Producto')->display_as('IdEmpresa', 'Empresa')->display_as('IdCategoria', 'Categoría')->display_as('FechaCertificacion', 'Fecha Certificación')
+                    ->display_as('IdSubcategoria', 'SubCategoría')->display_as('IdTipo', 'Tipo')->display_as('IdEstadoCertificacion', 'Estado Certificación')->display_as('FechaModificacion', 'Última Actualización');
+            $this->grocery_crud->add_fields('Descripcion', 'IdTipo', 'IdCategoria', 'IdSubcategoria', 'IdEmpresa', 'IdEstadoCertificacion', 'FechaCertificacion');
+            $this->grocery_crud->required_fields('Descripcion', 'IdTipo', 'IdCategoria', 'IdSubcategoria', 'IdEmpresa', 'IdEstadoCertificacion','FechaCertificacion');
             $this->grocery_crud->set_relation('IdTipo', 'tipoproducto', 'Nombre');
             $this->grocery_crud->set_relation('IdCategoria', 'categoriaproducto', 'Nombre');
             $this->grocery_crud->set_relation('IdSubcategoria', 'subcategoriaproducto', 'Nombre');
@@ -188,7 +188,7 @@ class Productos extends BaseController {
         echo json_encode($array);
         exit;
     }
-
+    
     private function obtener_array_log_producto($primary_key, $prod, $accion) {
         $log_producto = array(
             "IdProducto" => $primary_key,

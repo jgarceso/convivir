@@ -85,7 +85,7 @@ class Security extends CI_Controller {
                     session_start();
                     $usuario = $_SESSION["usuario"];
 
-                    if ($this->sesion_model->isExits($usuario, md5($passActual))) {
+                    if ($this->sesion_model->validarClaveActual($usuario, md5($passActual))) {
                         if ($this->sesion_model->changePass($usuario, md5($pass))) {
                             $url = "login";
                             $correcto = true;
@@ -100,12 +100,10 @@ class Security extends CI_Controller {
                 }
             } else {
                 if (isset($username)) {
-                    $passActual = false;
                     $mensaje = "";
                     $this->load->model('sesion_model');
                     $userDesencriptado = Encrypter::decrypt($username);
 
-                    if ($validaPassActual == 'false') {
                         if ($this->sesion_model->changePass($userDesencriptado, md5($pass))) {
                             $url = "login";
                             $correcto = true;
@@ -113,7 +111,6 @@ class Security extends CI_Controller {
                         } else {
                             $mensaje = "No se pudo cambiar la contraseña...";
                         }
-                    }
                 } else {
                     $mensaje = "Error al cambiar la contraseña. No fué posible obtener el nombre de usuario";
                 }
@@ -127,19 +124,18 @@ class Security extends CI_Controller {
 
     public function sendEmail() {
         $mensaje = "";
-        $url = "";
         $correcto = false;
 
         try {
             $email = $_POST["email"];
             $this->load->model('sesion_model');
-            $user = $this->sesion_model->existsEmail($email);
+            $user = $this->sesion_model->existeEmail($email);
 
             if (isset($user)) {
                 $this->load->library("email");
                 //ejemplo 
                 $enlace = $this->config->site_url().'RecuperaPass?name=' . Encrypter::encrypt($user);
-                $configGmail = array(
+                $config = array(
                     'protocol' => $this->config->item('protocol_email'),
                     'smtp_host' => $this->config->item('smtp_host_email'),
                     'smtp_port' => $this->config->item('smtp_port_email'),
@@ -150,7 +146,7 @@ class Security extends CI_Controller {
                     'newline' => $this->config->item('newline_email')
                 );
 
-                $this->email->initialize($configGmail);
+                $this->email->initialize($config);
                 $this->email->set_newline("\r\n");
                 $this->email->from('Administrador');
                 $this->email->to($email);
@@ -178,9 +174,9 @@ class Security extends CI_Controller {
                 $mensaje = "La dirección de correo electrónico no coincide con la ingresada.  Favor verifique.";
             }
 
-            $obj = (object) array('Correcto' => $correcto, 'Url' => $url, 'Mensaje' => $mensaje);
+            $obj = (object) array('Correcto' => $correcto, 'Mensaje' => $mensaje);
         } catch (Expection $e) {
-            $obj = (object) array('Correcto' => $correcto, 'Url' => $url, 'Mensaje' => $mensaje);
+            $obj = (object) array('Correcto' => $correcto, 'Mensaje' => $mensaje);
             $mensaje = 'Ha ocurrido un error al tratar de enviar el email. Favor intente más tarde.';
         }
 
