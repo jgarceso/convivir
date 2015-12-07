@@ -51,8 +51,9 @@ function guardarPass() {
 		},
 		success : function(resultado) {
 		FuncionesComunes.afterSave(resultado.Correcto, resultado.Mensaje);
-                if(resultado.Correcto)
-                    window.location = resultado.Url;		
+                 setTimeout(function(){
+                                window.location = resultado.Url;
+                              }, 2500);		
 		},
 		error : function(xhr, ajaxOptions, thrownError) {
 		}
