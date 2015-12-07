@@ -75,7 +75,5 @@ function IniciarSesion() {
 	});
 };
 
-var nav4 = window.Event ? true : false;
-
 
 

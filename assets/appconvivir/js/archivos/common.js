@@ -2,22 +2,27 @@ FuncionesComunes = {
     mostrarNotificacion: function (segundos, color, contenido, fnClose) {
         new jBox('Notice', {
             content: contenido,
+            width: 200,
             color: color,
-            autoClose: segundos * 1000,
             position: {
                 x: 'center',
-                y: 'center'
+                y: 'top'
             },
-            onCloseComplete: function(){
-                if(jQuery.isFunction(fnClose)){
+            offset: {x: 15, y: 100},
+            autoClose: segundos * 1000,
+            onCloseComplete: function () {
+                if (jQuery.isFunction(fnClose)) {
                     fnClose.call();
                 }
-            } 
+            }
         });
     },
-    afterSave: function (exitoso, mensaje){
-    var color = exitoso?'green':'red';
-    this.mostrarNotificacion(1.5,color, mensaje);
+    afterSave: function (exitoso, mensaje, tiempo) {
+        if (tiempo == null || tiempo == undefined) {
+            tiempo = 2;
+        }
+        var color = exitoso ? 'green' : 'red';
+        this.mostrarNotificacion(tiempo, color, mensaje);
     }
 };
 

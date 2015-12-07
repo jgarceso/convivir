@@ -13,7 +13,7 @@ class Sesion_model extends CI_Model {
         return count($result) > 0;
     }
 
-    public function changePass($user, $pass) {
+    public function cambiarPassword($user, $pass) {
         $query = $this->db->query("UPDATE `user_pwd` SET `pass`='$pass' WHERE `name`='$user'");
         return true;
     }

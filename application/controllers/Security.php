@@ -68,7 +68,7 @@ class Security extends CI_Controller {
         header("Location: /convivir/");
     }
 
-    public function changePass() {
+    public function cambiarPassword() {
         try {
             if (isset($_POST["username"])) {
                 $username = $_POST["username"];
@@ -86,7 +86,7 @@ class Security extends CI_Controller {
                     $usuario = $_SESSION["usuario"];
 
                     if ($this->sesion_model->validarClaveActual($usuario, md5($passActual))) {
-                        if ($this->sesion_model->changePass($usuario, md5($pass))) {
+                        if ($this->sesion_model->cambiarPassword($usuario, md5($pass))) {
                             $url = "login";
                             $correcto = true;
                             $mensaje = "La contraseña fué cambiada. Ahora deberá iniciar sesión con su nueva contraseña.";
@@ -101,10 +101,9 @@ class Security extends CI_Controller {
             } else {
                 if (isset($username)) {
                     $mensaje = "";
-                    $this->load->model('sesion_model');
                     $userDesencriptado = Encrypter::decrypt($username);
 
-                        if ($this->sesion_model->changePass($userDesencriptado, md5($pass))) {
+                        if ($this->sesion_model->cambiarPassword($userDesencriptado, md5($pass))) {
                             $url = "login";
                             $correcto = true;
                             $mensaje = "La contraseña fué cambiada. Ahora debe iniciar sesión con su nueva contraseña.";
@@ -122,7 +121,7 @@ class Security extends CI_Controller {
         echo json_encode($obj);
     }
 
-    public function sendEmail() {
+    public function sendEmailRecuperaPassword() {
         $mensaje = "";
         $correcto = false;
 
@@ -151,27 +150,27 @@ class Security extends CI_Controller {
                 $this->email->from('Administrador');
                 $this->email->to($email);
                 $this->email->subject('Instrucciones de recuperaci&oacute;n de contrase&ntilde;a Convivir');
-                $this->email->message('<p>Hemos recibido su solicitud de recuperaci&oacute;n de contrase&ntilde;a.' .
-                        'Si hace click en el enlace, le enviaremos a una p&aacute;gina en donde' .
-                        'podr&aacute; cambiar o recuperar su contrase&ntilde;a.</p>' .
-                        '<p>Si el enlace no funciona, copie y pegue el enlace en la barra' .
-                        'de direcciones de su navegador.</p>' .
-                        '<p>Enlace: <a href="' . $enlace . '">' . $enlace . '</a></p><br><br>');
+                $this->email->subject('Instrucciones de recuperación de contraseña, Convivir');
+                $this->email->message('<p>Hemos recibido su solicitud de recuperaci&oacute;n de contrase&ntilde;a. '.
+                                                'Si hace click en el enlace, le enviaremos a una p&aacute;gina en donde '. 
+                                                'podr&aacute; cambiar o recuperar su contrase&ntilde;a.</p> '.
+                                                '<p>Si el enlace no funciona, copie y pegue el enlace en la barra '.
+                                                'de direcciones de su navegador.</p> '.
+                                                '<p>Enlace: <a href="'.$enlace.'">'.$enlace.'</a></p><br><br>');
 
-                if (!$this->email->send()) {
-                    show_error($this->email->print_debugger());
+                if ($this->email->send()) {
                     $correcto = true;
                     $mensaje = "El correo fué enviado.  Favor verifique y siga las instrucciones.";
                 } else {
                     $correcto = false;
                     $mensaje = "El correo electrónico no pudo ser enviado, intente más tarde.";
-                    echo 'tu email ha sido enviado.';
+                    //show_error($this->email->print_debugger()); DEJAR PARA DEBUG EN CASO DE FALLA
                 }
                 $correcto = true;
                 $mensaje = "El correo fué enviado.  Favor verifique y siga las instrucciones.";
             } else {
                 $correcto = false;
-                $mensaje = "La dirección de correo electrónico no coincide con la ingresada.  Favor verifique.";
+                $mensaje = "Email no registrado.  Favor verifique.";
             }
 
             $obj = (object) array('Correcto' => $correcto, 'Mensaje' => $mensaje);

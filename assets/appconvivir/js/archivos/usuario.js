@@ -131,7 +131,7 @@ function SetearEventosFormulario(){
 
 function CambiarClave (){
     $.ajax({
-		url : "Security/changePass",
+		url : "Security/cambiarPassword",
 		type : 'POST',
 		dataType : 'json',
 		data : {
