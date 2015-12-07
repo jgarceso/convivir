@@ -164,7 +164,7 @@ class Security extends CI_Controller {
                 } else {
                     $correcto = false;
                     $mensaje = "El correo electrónico no pudo ser enviado, intente más tarde.";
-                    //show_error($this->email->print_debugger()); DEJAR PARA DEBUG EN CASO DE FALLA
+                    // show_error($this->email->print_debugger()); DEJAR PARA DEBUG EN CASO DE FALLA
                 }
                 $correcto = true;
                 $mensaje = "El correo fué enviado.  Favor verifique y siga las instrucciones.";
