@@ -19,10 +19,9 @@ class Api_model  extends CI_Model  {
              $query = $this->db->select("*")->from("tipoproducto")->get();
              
             if($query->num_rows()>0){
-                return $query->result_array();
+                return $query->result();
             }
             return null;
-	
 	}
         
         public function get_Productos($id = null){
@@ -37,7 +36,6 @@ class Api_model  extends CI_Model  {
             if($query->num_rows()>0){
                 return $query->result_array();
             }
-            
             return null;
 	}
         

@@ -21,12 +21,23 @@ class RecuperaPass extends BaseController {
     
     public function test() {
         $name = $_POST["prueba"];
-        echo $name ;
         $mensaje = $name;
         $url = "";
-        $correcto = false;
+        $correcto = true;
+        $options="";
+        try{
+            $this->load->model('api_model');
+            $data["array_tipos"]=$this->api_model->get_Tipos();
+
+            foreach ($data["array_tipos"] as $row_tipo){
+                     $options .= '<option value="' . $row_tipo->IdTipo . '">' . $row_tipo->Nombre . '</option>';
+            }
+        }catch(Exception $e){
+            $mensaje="ocurrió un error al cargar los tipos asociados a las categorías.";
+        }
         
-         $obj = (object) array('Correcto' => $correcto, 'Url' => $url, 'Mensaje' => $mensaje);
+        
+        $obj = (object) array('Correcto' => $correcto, 'Url' => $url, 'Mensaje' => $mensaje, 'Opciones' => $options);
         echo json_encode($obj);
 
     }

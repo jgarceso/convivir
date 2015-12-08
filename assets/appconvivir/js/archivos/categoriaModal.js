@@ -56,8 +56,6 @@ function AgregarCategoria(){
                     '<span>Tipo</span>'+
                     '<select name="sometext" id="lista-tipo" class="combos_modales" >'+
                     '<option value="default">-- Seleccione Tipo --</option>'+
-                    '<option>Alimentos</option>'+
-                    '<option>Medicamentos</option>'+
                     '</select>'+
                 '</label>'+
             '</div>'+
@@ -95,7 +93,7 @@ function SetearEventosCategoriaForm(){
         
         $("#btn-nueva-categoria").on("click", function() {
 		if ($("#agrega-categoria-form").valid()) {
-                       alert('catt');
+                      
 		} else {
 			return;
 		}
@@ -108,17 +106,17 @@ function ObtieneTipos (){
 		type : 'POST',
 		dataType : 'json',
 		data : {
-			prueba : 'lalalalasssddddddddddddddd dsdvedbg vsgb',
+			prueba : 'lalalalasssdd',
                         validaual:true
 		},
                
-		success : function(data) {
-			if (data.Correcto == false) {
-			    //alert(data.Mensaje);
-                            $("#mySelect").append('<option value=1>My option</option>');
-			}else{
-                            alert(data.Mensaje);
-			}
+		success : function(resultado) {
+			FuncionesComunes.afterSave(resultado.Correcto, resultado.Mensaje);
+                        if(resultado.Correcto){
+                            setTimeout(function(){
+                                $("#lista-tipo").append(resultado.Opciones);
+                              }, 2500);
+                        }
 		},
 		error : function(xhr, ajaxOptions, thrownError) {
 		}

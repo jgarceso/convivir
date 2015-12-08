@@ -67,24 +67,10 @@ class Security extends CI_Controller {
         session_destroy();
         header("Location: /convivir/");
     }
-    
-    public function changePass()
-     {
-       try{
-           if(isset($_POST["username"])){
-                 $username =   $_POST["username"];
-           }
-         $pass = $_POST["pass"];
-         $validaPassActual = $_POST["validaPassActual"];
-         $url = "";
-         $correcto = false;
-          $this->load->model('sesion_model');
-             if(isset($_POST["passActual"])){
-                 $passActual = $_POST["passActual"];
 
-                 if($validaPassActual=='true'){
-                      session_start();
-                       $usuario = $_SESSION["usuario"];
+    public function cambiarPassword() {
+        try {
+            if (isset($_POST["username"])) {
                 $username = $_POST["username"];
             }
             $pass = $_POST["pass"];
@@ -186,9 +172,6 @@ class Security extends CI_Controller {
                 $correcto = false;
                 $mensaje = "Email no registrado.  Favor verifique.";
             }
-<<<<<<< HEAD
-	}
-=======
 
             $obj = (object) array('Correcto' => $correcto, 'Mensaje' => $mensaje);
         } catch (Expection $e) {
@@ -198,6 +181,5 @@ class Security extends CI_Controller {
 
         echo json_encode($obj);
     }
->>>>>>> master
 
 }
