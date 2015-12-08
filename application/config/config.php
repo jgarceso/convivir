@@ -14,7 +14,7 @@ $config['smtp_user_email'] = 'usuarioconvivir@gmail.com';
 $config['smtp_pass_email'] = 'convivir1234';
 $config['mailtype'] = 'html';
 $config['charset_email'] = 'utf-8';
-$config['newline_email'] = '\r\n';
+$config['newline_email'] = "\r\n";
 
 /*
 |--------------------------------------------------------------------------
