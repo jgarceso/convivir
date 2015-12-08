@@ -15,7 +15,7 @@ jQuery(function () {
         closeOnMouseleave: true,
         onCreated: function () {
             CrearModalCategoria();
-            //ObtieneTipos();
+            ObtieneTipos();
             
         }
     });    
@@ -102,26 +102,27 @@ function SetearEventosCategoriaForm(){
 	});
 };
 
-//function ObtieneTipos (){
-//    $.ajax({
-//		url : "RecuperaPass/test",
-//		type : 'POST',
-//		dataType : 'json',
-//		data : {
-//			prueba : 'lalalalasssddddddddddddddd dsdvedbg vsgb',
-//                        validaual:true
-//		},
-//               
-//		success : function(data) {
-//			if (data.Correcto == false) {
-//			    alert(data.Mensaje);
-//			}else{
-//                            alert(data.Mensaje);
-//			}
-//		},
-//		error : function(xhr, ajaxOptions, thrownError) {
-//		}
-//	});
-//}
+function ObtieneTipos (){
+    $.ajax({
+		url : SiteName+"RecuperaPass/test",
+		type : 'POST',
+		dataType : 'json',
+		data : {
+			prueba : 'lalalalasssddddddddddddddd dsdvedbg vsgb',
+                        validaual:true
+		},
+               
+		success : function(data) {
+			if (data.Correcto == false) {
+			    //alert(data.Mensaje);
+                            $("#mySelect").append('<option value=1>My option</option>');
+			}else{
+                            alert(data.Mensaje);
+			}
+		},
+		error : function(xhr, ajaxOptions, thrownError) {
+		}
+	});
+}
 
 

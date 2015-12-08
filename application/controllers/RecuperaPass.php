@@ -18,5 +18,19 @@ class RecuperaPass extends BaseController {
         $this->set_js_files(array("archivos/cambiaContrasena.js"));
         $this->mostrar_pagina("recuperaPass");
     }
+    
+    public function test() {
+        $name = $_POST["prueba"];
+        echo $name ;
+        $mensaje = $name;
+        $url = "";
+        $correcto = false;
+        
+         $obj = (object) array('Correcto' => $correcto, 'Url' => $url, 'Mensaje' => $mensaje);
+        echo json_encode($obj);
+
+    }
+    
+      
 
 }
