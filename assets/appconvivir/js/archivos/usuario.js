@@ -58,7 +58,7 @@ function ObtenerCambioClaveHtml(){
                         '<label>'+
                             '<span>Contraseña Actual</span>'+
                         '</label>'+
-                        '<input id="input-usuario" type="password" name="claveActual" maxlength="12" onpaste="return false;">'+
+                        '<input id="input-passwordActual" type="password" name="claveActual" maxlength="12" onpaste="return false;">'+
                         
                     '</div>'+
 
@@ -71,7 +71,7 @@ function ObtenerCambioClaveHtml(){
                      '<div class="form-row">'+
                        '<label>'+
                             '<span>Confirme Contraseña</span>'+
-                            '<input id="input-password" type="password" name="confClave" maxlength="12" onpaste="return false;">'+
+                            '<input id="input-confirmPass" type="password" name="confClave" maxlength="12" onpaste="return false;">'+
                         '</label>'+
                     '</div>'+
                     '<div class="form-row">'+
@@ -95,7 +95,7 @@ function SetearEventosFormulario(){
                         },
                         confClave:{
                                 required: true,
-                                equalTo: "#claveNueva"
+                                equalTo: "#input-password"
                         }
 		},
 		messages : {
@@ -130,7 +130,28 @@ function SetearEventosFormulario(){
 };
 
 function CambiarClave (){
-    
+    $.ajax({
+		url : SiteName+"Security/cambiarPassword",
+		type : 'POST',
+		dataType : 'json',
+		data : {
+			pass : $("#input-password").val(),
+                        validaPassActual:true,
+                        passActual:$("#input-passwordActual").val()
+		},
+               
+		success : function(resultado) {
+		FuncionesComunes.afterSave(resultado.Correcto, resultado.Mensaje);
+                        if(resultado.Correcto){
+                            setTimeout(function(){
+                                window.location = resultado.Url;
+                              }, 2500);
+                        }
+                        
+		},
+		error : function(xhr, ajaxOptions, thrownError) {
+		}
+	});
 }
 
 function ObtenerHtmlConfig() {
@@ -208,10 +229,10 @@ function GuardarSetting() {
         data: {
             setting: JSON.stringify(setting)
         },
-        success: function (exitoso) {
-            if(exitoso)
+        success: function (resultado) {
+            if(resultado.Correcto)
                 w2ui['gridConfig'].save();
-            FuncionesComunes.afterSave(exitoso);
+            FuncionesComunes.afterSave(resultado.Correcto, resultado.Mensaje);
         },
         error: function (xhr, ajaxOptions, thrownError) {
 

@@ -22,10 +22,13 @@ class Setting extends BaseController {
     public function guardar_settings (){
         $setting = json_decode($_POST["setting"]);
         $resultado = $this->setting_model->guardar_settings($setting);
+        $mensaje = 'Ha ocurrido un error al guardar los settings.';
         if($resultado){
             $this->get_settings(true);
+            $mensaje = 'Cambios guardados correctamente';
         }
-        echo json_encode($resultado);
+        $obj = (object) array('Correcto' => $resultado, 'Mensaje' => $mensaje);
+        echo json_encode($obj);
     }
     
     private function get_settings($recargar = null){

@@ -1,4 +1,5 @@
 $(document).ready(function() {
+    //eventos botones
 	$("#btn-login").on("click", function() {
 		if ($("#login-form").valid()) {
 			IniciarSesion();
@@ -52,7 +53,6 @@ function CheckButton() {
 };
 
 function IniciarSesion() {
-	//$("#validar-celular").loader();
 	$.ajax({
 		url : "Security/login",
 		type : 'POST',
@@ -69,17 +69,11 @@ function IniciarSesion() {
 			}else{
 				window.location = data.Url;
 			}
-			
-			//$.loader.close();
 		},
 		error : function(xhr, ajaxOptions, thrownError) {
-			//$.loader.close();
 		}
 	});
 };
 
-var nav4 = window.Event ? true : false;
-function AceptaNumero(evt) {
-	var key = nav4 ? evt.which : evt.keyCode;
-	return (key <= 13 || (key >= 48 && key <= 57));
-};
+
+

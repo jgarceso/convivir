@@ -120,10 +120,10 @@ function GuardarAlertas() {
         data: {
             alerta: JSON.stringify(alerta)
         },
-        success: function (exitoso) {
-            if(exitoso)
+        success: function (resultado) {
+            if(resultado.Correcto)
                 w2ui.grid.save();
-            FuncionesComunes.afterSave(exitoso);
+            FuncionesComunes.afterSave(resultado.Correcto, resultado.Mensaje);
         },
         error: function (xhr, ajaxOptions, thrownError) {
 

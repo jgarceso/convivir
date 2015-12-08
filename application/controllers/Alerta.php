@@ -23,8 +23,13 @@ class Alerta extends BaseController {
     }
     
     public function guardar_alertas (){
+        $mensaje = 'Ha ocurrido un error al guardar la alerta';
         $alerta = json_decode($_POST["alerta"]);
         $resultado = $this->alerta_model->guardar_alertas($alerta);
-        echo json_encode($resultado);
+        if($resultado){
+            $mensaje = 'Alerta guardada exitosamente.';
+        }
+        $obj = (object) array('Correcto' => $resultado, 'Mensaje' => $mensaje);
+        echo json_encode($obj);
     }
 }
