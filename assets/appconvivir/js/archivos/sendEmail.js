@@ -30,27 +30,20 @@ $(document).ready(function() {
 
 function enviarEmail() {
 	$.ajax({
-		url : "Security/sendEmail",
+		url : "Security/sendEmailRecuperaPassword",
 		type : 'POST',
 		dataType : 'json',
 		data : {
 			email : $("#input-email").val()
 		},
             
-		success : function(data) {
-			if (data.Correcto == false) {
-                            alert(data.Mensaje);
-			}else{
-                            alert(data.Mensaje);
-			}
+		success : function(resultado) {
+			FuncionesComunes.afterSave(resultado.Correcto, resultado.Mensaje,3);
 		},
 		error : function(xhr, ajaxOptions, thrownError) {
 		}
 	});
 };
-
-
-var nav4 = window.Event ? true : false;
 
 
 
