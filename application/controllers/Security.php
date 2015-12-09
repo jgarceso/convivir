@@ -133,7 +133,7 @@ class Security extends CI_Controller {
             if (isset($user)) {
                 $this->load->library("email");
                 //ejemplo 
-                $enlace = $this->config->site_url().'RecuperaPass?name=' . Encrypter::encrypt($user);
+                $enlace = $this->config->site_url().'RecuperaPass?username=' . Encrypter::encrypt($user);
                 $config = array(
                     'protocol' => $this->config->item('protocol_email'),
                     'smtp_host' => $this->config->item('smtp_host_email'),
