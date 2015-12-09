@@ -75,9 +75,6 @@ function IniciarSesion() {
 	});
 };
 
-
-
-<<<<<<< HEAD
 function getUrlVars()
 {
     var vars = [], hash;
@@ -90,5 +87,4 @@ function getUrlVars()
     }
     return vars;
 }
-=======
->>>>>>> master
+
