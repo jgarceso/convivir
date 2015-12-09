@@ -54,7 +54,7 @@ function AgregarCategoria(){
             '<div class="form-row">'+
                '<label>'+
                     '<span>Tipo</span>'+
-                    '<select name="sometext" id="lista-tipo" class="combos_modales" >'+
+                    '<select name="sometext" id="listaTipo" class="combos_modales" >'+
                     '<option value="default">-- Seleccione Tipo --</option>'+
                     '</select>'+
                 '</label>'+
@@ -77,27 +77,51 @@ function SetearEventosCategoriaForm(){
                         nombreCategoria:{
                                 required: true
                         },
-                        tipo:{
-                                SelectName: { valueNotEquals: "default" }
+                        listaTipo:{
+                                required: true
                         }
 		},
 		messages : {
                         nombreCategoria:{
                                 required: "Debe ingresar el nombre de la categoría."
                         },
-                        tipo:{
-                                SelectName: { valueNotEquals: "Porfavor seleccione un tipo de <categoría." }
+                        listaTipo:{
+                                 required: "Debe ingresar el nombre de la categoría."
                         }
 		}
 	});
         
+        $('#listaTipo').each(function() {
+           if ($(this).isChecked)
+              alert('this option is selected');
+           else
+              alert('this is not');
+       });
+        
         $("#btn-nueva-categoria").on("click", function() {
 		if ($("#agrega-categoria-form").valid()) {
-                      
+                    
+
 		} else {
 			return;
 		}
 	});
+        
+       
+        
+//        // add the rule here
+//        $.validator.addMethod("valueNotEquals", function(value, element, arg){
+//         return arg != value;
+//        }, "Value must not equal arg.");
+        
+//        $.validator.setDefaults({
+//            errorPlacement: function (error, element) {
+//                if (element.context.id.indexOf('lista-tipo') == -1)
+//                    error.insertAfter(element);
+//                else
+//                    error.appendTo(element.parent());
+//            }
+//        });
 };
 
 function ObtieneTipos (){
@@ -114,7 +138,7 @@ function ObtieneTipos (){
 			FuncionesComunes.afterSave(resultado.Correcto, resultado.Mensaje);
                         if(resultado.Correcto){
                             setTimeout(function(){
-                                $("#lista-tipo").append(resultado.Opciones);
+                                $("#listaTipo").append(resultado.Opciones);
                               }, 2500);
                         }
 		},
