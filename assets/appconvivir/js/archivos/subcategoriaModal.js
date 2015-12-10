@@ -14,6 +14,7 @@ jQuery(function () {
         closeOnMouseleave: true,
         onCreated: function () {
             CrearSubCategoriaModal();
+            ObtieneCategorias();
         }
     });    
 });
@@ -35,6 +36,24 @@ function CrearSubCategoriaModal(){
      });
 };
 
+function ObtieneCategorias(){
+    $.ajax({
+		url : SiteName+"Modales/getCategorias",
+		type : 'POST',
+		dataType : 'json',
+		success : function(resultado) {
+			FuncionesComunes.afterSave(resultado.Correcto, resultado.Mensaje);
+                        if(resultado.Correcto){
+                            setTimeout(function(){
+                                $("#comboSubCategorias").append(resultado.Opciones);
+                              }, 2500);
+                        }
+		},
+		error : function(xhr, ajaxOptions, thrownError) {
+		}
+	});
+}
+
 function AgregarSubCategoria(){
     var html = 
    '<form  id="agrega-subcategoria-form" class="form-login">'+
@@ -49,7 +68,9 @@ function AgregarSubCategoria(){
             '<div class="form-row">'+
                '<label>'+
                     '<span>Categoría</span>'+
-                    '<input id="input-tipo" type="text" name="categoria" maxlength="50" onpaste="return false;">'+
+                    '<select name="comboSubCategorias" id="comboSubCategorias" class="combos_modales" >'+
+                    '<option class="options_modales">-- Seleccione Categoría --</option>'+
+                    '</select>'+
                 '</label>'+
             '</div>'+
            '<div class="form-row">'+
@@ -82,9 +103,28 @@ function SetearEventosSubCateForm(){
          
         $("#btn-nueva-subcategoria").on("click", function() {
 		if ($("#agrega-subcategoria-form").valid()) {
-                       alert('lalal');
+                       GuardarSubCategoria();
 		} else {
 			return;
+		}
+	});
+}
+
+function GuardarSubCategoria(){
+    alert($("#comboSubCategorias").val());
+    $.ajax({
+		url: SiteName+"SubCategorias/index/insert",
+		type : 'POST',
+		dataType : 'json',
+		data : {
+			Nombre : $("#input-nombreSubCategoria").val(),
+                        IdCategoria: $("#comboSubCategorias").val()
+		},
+               
+		success : function(resultado) {
+			  FuncionesComunes.afterSave(resultado.success, resultado.success_message); 
+		},
+		error : function(xhr, ajaxOptions, thrownError) {
 		}
 	});
 }

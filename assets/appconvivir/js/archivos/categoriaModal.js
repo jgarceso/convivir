@@ -1,6 +1,5 @@
 $(document).ready(function() {
     $('<span class="addCategory-icon" Id="add-category"></span>').insertAfter('#IdCategoria_input_box');
-    //$('new_content').insertBefore('#input-tipo');
 });
 
 jQuery(function () {
@@ -16,7 +15,6 @@ jQuery(function () {
         onCreated: function () {
             CrearModalCategoria();
             ObtieneTipos();
-            
         }
     });    
 });
@@ -37,7 +35,6 @@ function CrearModalCategoria(){
                 $("#agrega-categoria-form").validate().resetForm();
             }
      });
-     
 };
 
 function AgregarCategoria(){
@@ -55,7 +52,7 @@ function AgregarCategoria(){
                '<label>'+
                     '<span>Tipo</span>'+
                     '<select name="sometext" id="listaTipo" class="combos_modales" >'+
-                    '<option value="default">-- Seleccione Tipo --</option>'+
+                    '<option>-- Seleccione Tipo --</option>'+
                     '</select>'+
                 '</label>'+
             '</div>'+
@@ -66,10 +63,6 @@ function AgregarCategoria(){
     '</form>';
     return html;
 };
- // add the rule here
- $.validator.addMethod("valueNotEquals", function(value, element, arg){
-  return arg != value;
- }, "Value must not equal arg.");
 
 function SetearEventosCategoriaForm(){
         $("#agrega-categoria-form").validate({
@@ -91,60 +84,63 @@ function SetearEventosCategoriaForm(){
 		}
 	});
         
-        $('#listaTipo').each(function() {
-           if ($(this).isChecked)
-              alert('this option is selected');
-           else
-              alert('this is not');
-       });
-        
         $("#btn-nueva-categoria").on("click", function() {
 		if ($("#agrega-categoria-form").valid()) {
-                    
-
+                    GuardarCategoria();
 		} else {
-			return;
+		    return;
 		}
 	});
-        
-       
-        
-//        // add the rule here
-//        $.validator.addMethod("valueNotEquals", function(value, element, arg){
-//         return arg != value;
-//        }, "Value must not equal arg.");
-        
-//        $.validator.setDefaults({
-//            errorPlacement: function (error, element) {
-//                if (element.context.id.indexOf('lista-tipo') == -1)
-//                    error.insertAfter(element);
-//                else
-//                    error.appendTo(element.parent());
-//            }
-//        });
 };
 
 function ObtieneTipos (){
     $.ajax({
-		url : SiteName+"RecuperaPass/test",
-		type : 'POST',
-		dataType : 'json',
-		data : {
-			prueba : 'lalalalasssdd',
-                        validaual:true
-		},
-               
-		success : function(resultado) {
-			FuncionesComunes.afterSave(resultado.Correcto, resultado.Mensaje);
-                        if(resultado.Correcto){
-                            setTimeout(function(){
-                                $("#listaTipo").append(resultado.Opciones);
-                              }, 2500);
-                        }
-		},
-		error : function(xhr, ajaxOptions, thrownError) {
-		}
+            url : SiteName+"Modales/getTipos",
+            type : 'POST',
+            dataType : 'json',
+            success : function(resultado) {
+                    FuncionesComunes.afterSave(resultado.Correcto, resultado.Mensaje);
+                    if(resultado.Correcto){
+                        setTimeout(function(){
+                            $("#listaTipo").append(resultado.Opciones);
+                          }, 2500);
+                    }
+            },
+            error : function(xhr, ajaxOptions, thrownError) {
+            }
 	});
 }
 
+function GuardarCategoria(){
+    $.ajax({
+            url: SiteName+"Categorias/index/insert",
+            type : 'POST',
+            dataType : 'json',
+            data : {
+                    Nombre : $("#input-nombreCategoria").val(),
+                    IdTipo: $("#listaTipo").val()
+            },
+            success : function(resultado) {
+                      FuncionesComunes.afterSave(resultado.success, resultado.success_message);
+                      //$('#selOUH li:first').appendTo('#selOUH');
+                      Recargar();
+            },
+            error : function(xhr, ajaxOptions, thrownError) {
+            }
+	});
+}
 
+    function Recargar(){
+        $.ajax({
+                url: SiteName+"Modales/categoria_dropdown_select",
+                type : 'POST',
+                dataType : 'json',
+                success : function(resultado) {
+                          
+                            $('#selLS3').find('option:not(:first)').remove();
+                           // $("#selOUH").append(resultado.Opciones);
+                },
+                error : function(xhr, ajaxOptions, thrownError) {
+                }
+            });
+}
