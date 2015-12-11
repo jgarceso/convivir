@@ -123,6 +123,7 @@ function GuardarSubCategoria(){
                
 		success : function(resultado) {
 			  FuncionesComunes.afterSave(resultado.success, resultado.success_message); 
+                           $('select[name="IdCategoria"]').val($('select[name="IdCategoria"]').val()).change();
 		},
 		error : function(xhr, ajaxOptions, thrownError) {
 		}

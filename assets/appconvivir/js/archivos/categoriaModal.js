@@ -122,25 +122,26 @@ function GuardarCategoria(){
             },
             success : function(resultado) {
                       FuncionesComunes.afterSave(resultado.success, resultado.success_message);
-                      //$('#selOUH li:first').appendTo('#selOUH');
-                      Recargar();
+                      if($("#field-IdTipo").val()!=0){
+                           $('#field-IdTipo').val($("#field-IdTipo").val()).change();
+                      }
             },
             error : function(xhr, ajaxOptions, thrownError) {
             }
 	});
 }
 
-    function Recargar(){
-        $.ajax({
-                url: SiteName+"Modales/categoria_dropdown_select",
-                type : 'POST',
-                dataType : 'json',
-                success : function(resultado) {
-                          
-                            $('#selLS3').find('option:not(:first)').remove();
-                           // $("#selOUH").append(resultado.Opciones);
-                },
-                error : function(xhr, ajaxOptions, thrownError) {
-                }
-            });
-}
+//    function Recargar(){
+//        $.ajax({
+//                url: SiteName+"Modales/categoria_dropdown_select",
+//                type : 'POST',
+//                dataType : 'json',
+//                success : function(resultado) {
+//                          
+//                            $('#selLS3').find('option:not(:first)').remove();
+//                           // $("#selOUH").append(resultado.Opciones);
+//                },
+//                error : function(xhr, ajaxOptions, thrownError) {
+//                }
+//            });
+//}

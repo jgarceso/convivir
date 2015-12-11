@@ -97,20 +97,28 @@ function SetearEventosEmpresaForm(){
 
 function GuardarEmpresa(){
     $.ajax({
-		url: SiteName+"Empresas/index/insert",
-		type : 'POST',
-		dataType : 'json',
-		data : {
-			Nombre : $("#input-nuevaEmpresa").val(),
-                        NombreContacto: $("#input-nombreContacto").val(),
-                        EmailContacto: $("#input-emailContacto").val(),
-                        TelefonoContacto: $("#input-fonoContacto").val(),
-		},
-		success : function(resultado) {
-			  FuncionesComunes.afterSave(resultado.success, resultado.success_message);
-		},
-		error : function(xhr, ajaxOptions, thrownError) {
-		}
+            url: SiteName+"Empresas/index/insert",
+            type : 'POST',
+            dataType : 'json',
+            data : {
+                    Nombre : $("#input-nuevaEmpresa").val(),
+                    NombreContacto: $("#input-nombreContacto").val(),
+                    EmailContacto: $("#input-emailContacto").val(),
+                    TelefonoContacto: $("#input-fonoContacto").val(),
+            },
+            success : function(resultado) {
+                      FuncionesComunes.afterSave(resultado.success, resultado.success_message);
+                     $('select[name="IdEmpresa"]').val('').change();
+                         // alert('if');
+                         // $('field-IdEmpresa').val('').change();
+                         // $('#field-IdEmpresa').empty().change();
+                       //$('#field-IdEmpresa').val($("#field-IdEmpresa").val()).change();
+                     
+
+
+            },
+            error : function(xhr, ajaxOptions, thrownError) {
+            }
 	});
 }
 
