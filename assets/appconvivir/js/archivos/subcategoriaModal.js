@@ -20,20 +20,21 @@ jQuery(function () {
 });
 
 function CrearSubCategoriaModal(){
-          new jBox('Modal', {
-            constructOnInit:true,
-            attach: $('#agrega-subcategoria'),
-            title: 'SubCategoría',
-            width:400,
-            content: AgregarSubCategoria(),
-            closeButton:'title',
-            onCreated: function () {
-                SetearEventosSubCateForm();
-            },
-            onClose: function(){
-                $("#agrega-subcategoria-form").validate().resetForm();
-            }
+   this.modal =   new jBox('Modal', {
+                constructOnInit:true,
+                attach: $('#agrega-subcategoria'),
+                title: 'SubCategor&iacute;a',
+                width:400,
+                content: AgregarSubCategoria(),
+                closeButton:'title',
+                onCreated: function () {
+                    SetearEventosSubCateForm();
+                },
+                onClose: function(){
+                    $("#agrega-subcategoria-form").validate().resetForm();
+                }
      });
+   this.modal.open();
 };
 
 function ObtieneCategorias(){
@@ -61,15 +62,15 @@ function AgregarSubCategoria(){
          '<div class="default-form">'+
             '<div class="form-row">'+
                         '<label>'+
-                            '<span>Nombre SubCategoría</span>'+
+                            '<span>Nombre SubCategor&iacute;a</span>'+
                         '</label>'+
                         '<input id="input-nombreSubCategoria" type="text" name="nombreSubCategoria" maxlength="50" onpaste="return false;">'+
             '</div>'+
             '<div class="form-row">'+
                '<label>'+
-                    '<span>Categoría</span>'+
+                    '<span>Categor&iacute;a</span>'+
                     '<select name="listaCategorias" id="listaCategorias" class="combos_modales" >'+
-                    '<option class="options_modales" value="0">-- Seleccione Categoría --</option>'+
+                    '<option class="options_modales" value="0">-- Seleccione Categor&iacute;a --</option>'+
                     '</select>'+
                 '</label>'+
                  '<label>'+
@@ -96,10 +97,10 @@ function SetearEventosSubCateForm(){
 		},
 		messages : {
                         nombreSubCategoria:{
-                                required: "Debe ingresar el nombre de la subcategoría."
+                                required: "Debe ingresar el nombre de la subcategor&iacute;a."
                         },
                         categoria:{
-                                required: "Debe ingresar una categoría."
+                                required: "Debe ingresar una categor&iacute;a."
                         }
 		}
 	});
@@ -113,7 +114,7 @@ function SetearEventosSubCateForm(){
                     }else{
                         $('#listaCategorias').addClass('selectRojo');
                         $("#validaCategoria").remove();
-                        $("#idValidaCategoria").append("<p class='textoRojo' id='validaCategoria'>Debe Seleccionar una Categoría.</p>");
+                        $("#idValidaCategoria").append("<p class='textoRojo' id='validaCategoria'>Debe Seleccionar una Categor&iacute;a.</p>");
                     }
 		} else {
 			return;
@@ -122,6 +123,7 @@ function SetearEventosSubCateForm(){
 }
 
 function GuardarSubCategoria(){
+   var page = this;
     $.ajax({
 		url: SiteName+"SubCategorias/index/insert",
 		type : 'POST',
@@ -133,7 +135,10 @@ function GuardarSubCategoria(){
                
 		success : function(resultado) {
 			  FuncionesComunes.afterSave(resultado.success, resultado.success_message); 
-                           $('select[name="IdCategoria"]').val($('select[name="IdCategoria"]').val()).change();
+                          if(resultado.success){
+                             $('select[name="IdCategoria"]').val($('select[name="IdCategoria"]').val()).change(); 
+                          }
+                          page.modal.close();
 		},
 		error : function(xhr, ajaxOptions, thrownError) {
 		}

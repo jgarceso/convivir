@@ -20,21 +20,21 @@ jQuery(function () {
 });
 
 function CrearModalCategoria(){
-    
-     new jBox('Modal', {
-            constructOnInit:true,
-            attach: $('#agrega-categoria'),
-            title: 'Categoría',
-            width:400,
-            content: AgregarCategoria(),
-            closeButton:'title',
-            onCreated: function () {
-                SetearEventosCategoriaForm();
-            },
-            onClose: function(){
-                $("#agrega-categoria-form").validate().resetForm();
-            }
+    this.modal = new jBox('Modal', {
+                constructOnInit:true,
+                attach: $('#agrega-categoria'),
+                title: 'Categor&iacute;a',
+                width:400,
+                content: AgregarCategoria(),
+                closeButton:'title',
+                onCreated: function () {
+                    SetearEventosCategoriaForm();
+                },
+                onClose: function(){
+                    $("#agrega-categoria-form").validate().resetForm();
+                }
      });
+     this.modal.open();
 };
 
 function AgregarCategoria(){
@@ -44,7 +44,7 @@ function AgregarCategoria(){
          '<div class="default-form">'+
             '<div class="form-row">'+
                         '<label>'+
-                            '<span>Nombre Categoría</span>'+
+                            '<span>Nombre Categor&iacute;a</span>'+
                         '</label>'+
                         '<input id="input-nombreCategoria" type="text" name="nombreCategoria" maxlength="50" onpaste="return false;">'+
             '</div>'+
@@ -80,10 +80,10 @@ function SetearEventosCategoriaForm(){
 		},
 		messages : {
                         nombreCategoria:{
-                                required: "Debe ingresar el nombre de la categoría."
+                                required: "Debe ingresar el nombre de la categor&iacute;a."
                         },
                         listaTipo:{
-                                 required: "Debe ingresar el nombre de la categoría."
+                                 required: "Debe ingresar el nombre de la categor&iacute;a."
                         }
 		}
 	});
@@ -97,7 +97,7 @@ function SetearEventosCategoriaForm(){
                     }else{
                         $('#listaTipo').addClass('selectRojo');
                         $("#validaTipo").remove();
-                        $("#idValidaTipo").append("<p class='textoRojo' id='validaTipo'>Debe Seleccionar un tipo de Categoría.</p>");
+                        $("#idValidaTipo").append("<p class='textoRojo' id='validaTipo'>Debe Seleccionar un tipo de Categor&iacute;a.</p>");
                     }
                     
 		} else {
@@ -124,8 +124,8 @@ function ObtieneTipos (){
 	});
 }
 
-function GuardarCategoria(){
-    
+function GuardarCategoria(modal){
+    var page = this;
     $.ajax({
             url: SiteName+"Categorias/index/insert",
             type : 'POST',
@@ -136,11 +136,10 @@ function GuardarCategoria(){
             },
             success : function(resultado) {
                       FuncionesComunes.afterSave(resultado.success, resultado.success_message);
-                      //var page = this;
                         if($("#field-IdTipo").val()!=0){
                              $('#field-IdTipo').val($("#field-IdTipo").val()).change();
                         }
-                     //page.modal.close();
+                       page.modal.close();
             },
             error : function(xhr, ajaxOptions, thrownError) {
             }

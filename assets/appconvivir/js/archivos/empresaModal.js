@@ -19,20 +19,21 @@ jQuery(function () {
 });
 
 function CrearModalEmpresa(){
-      new jBox('Modal', {
-            constructOnInit:true,
-            attach: $('#agrega-empresa'),
-            title: 'Empresa',
-            width:400,
-            content: AgregarEmpresaHtml(),
-            closeButton:'title',
-            onCreated: function () {
-                SetearEventosEmpresaForm();
-            },
-            onClose: function(){
-                $("#agrega-empresa-form").validate().resetForm();
-            }
+   this.modal = new jBox('Modal', {
+                constructOnInit:true,
+                attach: $('#agrega-empresa'),
+                title: 'Empresa',
+                width:400,
+                content: AgregarEmpresaHtml(),
+                closeButton:'title',
+                onCreated: function () {
+                    SetearEventosEmpresaForm();
+                },
+                onClose: function(){
+                    $("#agrega-empresa-form").validate().resetForm();
+                }
      });
+    this.modal.open();
 };
 
 function AgregarEmpresaHtml(){
@@ -60,7 +61,7 @@ function AgregarEmpresaHtml(){
            '</div>'+
            '<div class="form-row">'+
               '<label>'+
-                   '<span>TelÃ©fono Contacto</span>'+
+                   '<span>Teléfono Contacto</span>'+
                    '<input id="input-fonoContacto" type="text" name="fonoContacto" maxlength="12" onpaste="return false;">'+
                '</label>'+
            '</div>'+
@@ -101,7 +102,8 @@ function SetearEventosEmpresaForm(){
     });  
 };
 
-function GuardarEmpresa(){
+function GuardarEmpresa(modal){
+    var page = this;
     $.ajax({
             url: SiteName+"Empresas/index/insert",
             type : 'POST',
@@ -126,12 +128,12 @@ function GuardarEmpresa(){
 //                            .append('<option value="whatever">text</option>')
 //                            .val('whatever')
 //                        ;
-                        alert('lllll');
-                        $('#field-IdEmpresa option:selected').each( function() {
-                            $('#field-IdEmpresa').append("<option value='"+$(this).val()+"'>"+$(this).text()+"</option>");
-                            $(this).remove();
-                        });
-                        document.getElementById("field-IdEmpresa").options.length = 0;
+//                        $('#field-IdEmpresa option:selected').each( function() {
+//                            $('#field-IdEmpresa').append("<option value='"+$(this).val()+"'>"+$(this).text()+"</option>");
+//                            $(this).remove();
+//                        });
+//                        document.getElementById("field-IdEmpresa").options.length = 0;
+                        page.modal.close();
                       }
                       
             },
