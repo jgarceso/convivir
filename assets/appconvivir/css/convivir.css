@@ -353,3 +353,12 @@ input[type="submit"]{
     -moz-border-radius: 4px;
     border-radius: 4px;
 }
+.textoRojo{
+    color: #F00707;
+    font-style:italic;
+}
+
+.selectRojo{
+  border: 1px solid #F00707;
+  width: 100%;
+}
