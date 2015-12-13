@@ -24,7 +24,7 @@ class Modales extends BaseController {
                          $options .= '<option value="' . $row_tipo->IdTipo . '">' . $row_tipo->Nombre . '</option>';
                 }
             }catch(Exception $e){
-                $mensaje="ocurriÃ³ un error al cargar los tipos asociados a las categorÃ­as.";
+                $mensaje="ocurrió un error al cargar los tipos asociados a las categorías.";
             }
         $obj = (object) array('Correcto' => $correcto, 'Url' => $url, 'Mensaje' => $mensaje, 'Opciones' => $options);
         echo json_encode($obj);
@@ -42,28 +42,28 @@ class Modales extends BaseController {
                          $options .= '<option value="' . $row_tipo->IdCategoria . '">' . $row_tipo->Nombre . '</option>';
                 }
             }catch(Exception $e){
-                $mensaje="ocurriÃ³ un error al cargar las categorÃ­as.";
+                $mensaje="ocurrió un error al cargar las categorías.";
             }
             $obj = (object) array('Correcto' => $correcto, 'Url' => $url, 'Mensaje' => $mensaje, 'Opciones' => $options);
             echo json_encode($obj);
      }
      
      function getEmpresas() {
-        $mensaje = "";
-        $url = "";
-        $correcto = true;
-        $options="";
-            try{
-                $this->load->model('api_model');
-                $data["array_cat"]=$this->api_model->get_CategoriasxTipo();
-                foreach ($data["array_cat"] as $row_tipo){
-                         $options .= '<option value="' . $row_tipo->IdCategoria . '">' . $row_tipo->Nombre . '</option>';
-                }
-            }catch(Exception $e){
-                $mensaje="ocurriÃ³ un error al cargar las categorÃ­as.";
-            }
-            $obj = (object) array('Correcto' => $correcto, 'Url' => $url, 'Mensaje' => $mensaje, 'Opciones' => $options);
-            echo json_encode($obj);
+//        $mensaje = "";
+//        $url = "";
+//        $correcto = true;
+//        $options="";
+//            try{
+//                $this->load->model('api_model');
+//                $data["array_cat"]=$this->api_model->get_CategoriasxTipo();
+//                foreach ($data["array_cat"] as $row_tipo){
+//                         $options .= '<option value="' . $row_tipo->IdCategoria . '">' . $row_tipo->Nombre . '</option>';
+//                }
+//            }catch(Exception $e){
+//                $mensaje="ocurrió un error al cargar las categorías.";
+//            }
+//            $obj = (object) array('Correcto' => $correcto, 'Url' => $url, 'Mensaje' => $mensaje, 'Opciones' => $options);
+//            echo json_encode($obj);
             
     }
     
