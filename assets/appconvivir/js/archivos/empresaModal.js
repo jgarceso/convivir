@@ -77,11 +77,17 @@ function SetearEventosEmpresaForm(){
 		rules : {
                         nuevaEmpresa:{
                                 required: true
+                        },
+                        emailContacto:{
+                                email: true
                         }
 		},
 		messages : {
                         nuevaEmpresa:{
                                 required: "Debe ingresar el nombre de la empresa."
+                        },
+                        email:{
+                            email: "Ingrese un email valido.",
                         }
 		}
 	});
@@ -108,17 +114,49 @@ function GuardarEmpresa(){
             },
             success : function(resultado) {
                       FuncionesComunes.afterSave(resultado.success, resultado.success_message);
-                     $('select[name="IdEmpresa"]').val('').change();
-                         // alert('if');
-                         // $('field-IdEmpresa').val('').change();
-                         // $('#field-IdEmpresa').empty().change();
-                       //$('#field-IdEmpresa').val($("#field-IdEmpresa").val()).change();
-                     
-
-
+                      if(resultado.success){
+                        //  $('#field-IdEmpresa').remove();
+                        //$('#field-IdEmpresa').find('option').remove().end().append('<option value="whatever">text</option>').val('whatever');
+                        //$('#field-IdEmpresa').children().remove().end().append('<option selected value="whatever">text</option>') ;
+                        //$('#field-IdEmpresa').empty();
+//                        $('#field-IdEmpresa')
+//                            .find('option')
+//                            .remove()
+//                            .end()
+//                            .append('<option value="whatever">text</option>')
+//                            .val('whatever')
+//                        ;
+                        alert('lllll');
+                        $('#field-IdEmpresa option:selected').each( function() {
+                            $('#field-IdEmpresa').append("<option value='"+$(this).val()+"'>"+$(this).text()+"</option>");
+                            $(this).remove();
+                        });
+                        document.getElementById("field-IdEmpresa").options.length = 0;
+                      }
+                      
             },
             error : function(xhr, ajaxOptions, thrownError) {
             }
 	});
 }
+
+function getEmpresas(){
+    $.ajax({
+            url: SiteName+"Modales/getEmpresas",
+            type : 'POST',
+            dataType : 'json',
+
+            success : function(resultado) {
+                      FuncionesComunes.afterSave(resultado.success, resultado.success_message);
+                      $("#selectBox option[value='option']").remove();
+            },
+            error : function(xhr, ajaxOptions, thrownError) {
+            }
+	});
+}
+
+//var mySelect = document.getElementById('field-IdEmpresa');
+//mySelect.options.length = 0;
+//mySelect.options[0] = new Option ("Foo (only choice)", "Foo");
+//mySelect.options[0].selected="true";
 
