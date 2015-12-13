@@ -45,7 +45,7 @@ function ObtieneCategorias(){
 			FuncionesComunes.afterSave(resultado.Correcto, resultado.Mensaje);
                         if(resultado.Correcto){
                             setTimeout(function(){
-                                $("#comboSubCategorias").append(resultado.Opciones);
+                                $("#listaCategorias").append(resultado.Opciones);
                               }, 2500);
                         }
 		},
@@ -68,9 +68,12 @@ function AgregarSubCategoria(){
             '<div class="form-row">'+
                '<label>'+
                     '<span>Categoría</span>'+
-                    '<select name="comboSubCategorias" id="comboSubCategorias" class="combos_modales" >'+
-                    '<option class="options_modales">-- Seleccione Categoría --</option>'+
+                    '<select name="listaCategorias" id="listaCategorias" class="combos_modales" >'+
+                    '<option class="options_modales" value="0">-- Seleccione Categoría --</option>'+
                     '</select>'+
+                '</label>'+
+                 '<label>'+
+                            '<span id="idValidaCategoria"></span>'+
                 '</label>'+
             '</div>'+
            '<div class="form-row">'+
@@ -103,22 +106,29 @@ function SetearEventosSubCateForm(){
          
         $("#btn-nueva-subcategoria").on("click", function() {
 		if ($("#agrega-subcategoria-form").valid()) {
-                       GuardarSubCategoria();
+                     if($("#listaCategorias").val()!=0){
+                        $("#validaCategoria").remove();
+                        $('#listaCategorias').removeClass('selectRojo');
+                         GuardarSubCategoria();
+                    }else{
+                        $('#listaCategorias').addClass('selectRojo');
+                        $("#validaCategoria").remove();
+                        $("#idValidaCategoria").append("<p class='textoRojo' id='validaCategoria'>Debe Seleccionar una Categoría.</p>");
+                    }
 		} else {
 			return;
 		}
-	});
+	});     
 }
 
 function GuardarSubCategoria(){
-    alert($("#comboSubCategorias").val());
     $.ajax({
 		url: SiteName+"SubCategorias/index/insert",
 		type : 'POST',
 		dataType : 'json',
 		data : {
 			Nombre : $("#input-nombreSubCategoria").val(),
-                        IdCategoria: $("#comboSubCategorias").val()
+                        IdCategoria: $("#listaCategorias").val()
 		},
                
 		success : function(resultado) {
