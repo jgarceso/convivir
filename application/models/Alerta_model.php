@@ -7,10 +7,9 @@ class Alerta_model extends CI_Model {
         $this->load->database();
     }
 
-    public function obtener_productos_en_alerta($diasCertificacionMenosAlerta) {
-        
+    public function obtener_productos_en_alerta($diasCertificacionMenosAlerta, $diasCertificacion) {
         $query = $this->db->query("SELECT p.IdProducto as recid, p.Descripcion, ap.FechaRecordatorio, DATE_FORMAT(FechaCertificacion, '%d-%m-%Y') as FechaCertificacion, 
-                                    DATE_FORMAT(DATE_ADD(FechaCertificacion,INTERVAL 365 DAY),'%d-%m-%Y') as FechaVencimiento,
+                                    DATE_FORMAT(DATE_ADD(FechaCertificacion,INTERVAL ".$diasCertificacion." DAY),'%d-%m-%Y') as FechaVencimiento,
                                     e.Nombre as Empresa, e.NombreContacto,e.EmailContacto,e.TelefonoContacto
                                     FROM producto p
                                     INNER JOIN empresa e

@@ -216,9 +216,8 @@ function CrearGrillaConfig(data) {
 
 function GuardarSetting() {
     var setting = w2ui['gridConfig'].getChanges()[0];
-     if(setting.Valor == "")
+     if(setting.Valor === "")
     {
-       w2ui.gridConfig.save();//guardar solo en forma local
        return; 
     }
     

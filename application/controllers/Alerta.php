@@ -18,7 +18,7 @@ class Alerta extends BaseController {
         $diasCertificacion = $this->setting_model->obtener_setting_por_nombre('CantDiasCertificacion');
         $diasAlerta = $this->setting_model->obtener_setting_por_nombre('CantDiasAlertaVencimiento');
         $diasCertificacionMenosAlerta = $diasCertificacion - $diasAlerta;
-        $resultado = $this->alerta_model->obtener_productos_en_alerta($diasCertificacionMenosAlerta);
+        $resultado = $this->alerta_model->obtener_productos_en_alerta($diasCertificacionMenosAlerta, $diasCertificacion);
         echo json_encode($resultado);
     }
     
