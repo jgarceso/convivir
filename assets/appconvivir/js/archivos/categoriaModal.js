@@ -51,9 +51,12 @@ function AgregarCategoria(){
             '<div class="form-row">'+
                '<label>'+
                     '<span>Tipo</span>'+
-                    '<select name="sometext" id="listaTipo" class="combos_modales" >'+
-                    '<option>-- Seleccione Tipo --</option>'+
+                    '<select name="listaTipo" id="listaTipo" class="combos_modales" >'+
+                    '<option value="0">-- Seleccione Tipo --</option>'+
                     '</select>'+
+                '</label>'+
+                '<label>'+
+                            '<span id="idValidaTipo"></span>'+
                 '</label>'+
             '</div>'+
            '<div class="form-row">'+
@@ -70,6 +73,7 @@ function SetearEventosCategoriaForm(){
                         nombreCategoria:{
                                 required: true
                         },
+                        
                         listaTipo:{
                                 required: true
                         }
@@ -86,7 +90,16 @@ function SetearEventosCategoriaForm(){
         
         $("#btn-nueva-categoria").on("click", function() {
 		if ($("#agrega-categoria-form").valid()) {
-                    GuardarCategoria();
+                    if($("#listaTipo").val()!=0){
+                        $("#validaTipo").remove();
+                        $('#listaTipo').removeClass('selectRojo');
+                        GuardarCategoria();
+                    }else{
+                        $('#listaTipo').addClass('selectRojo');
+                        $("#validaTipo").remove();
+                        $("#idValidaTipo").append("<p class='textoRojo' id='validaTipo'>Debe Seleccionar un tipo de Categoría.</p>");
+                    }
+                    
 		} else {
 		    return;
 		}
@@ -112,6 +125,7 @@ function ObtieneTipos (){
 }
 
 function GuardarCategoria(){
+    
     $.ajax({
             url: SiteName+"Categorias/index/insert",
             type : 'POST',
@@ -122,26 +136,13 @@ function GuardarCategoria(){
             },
             success : function(resultado) {
                       FuncionesComunes.afterSave(resultado.success, resultado.success_message);
-                      if($("#field-IdTipo").val()!=0){
-                           $('#field-IdTipo').val($("#field-IdTipo").val()).change();
-                      }
+                      //var page = this;
+                        if($("#field-IdTipo").val()!=0){
+                             $('#field-IdTipo').val($("#field-IdTipo").val()).change();
+                        }
+                     //page.modal.close();
             },
             error : function(xhr, ajaxOptions, thrownError) {
             }
 	});
 }
-
-//    function Recargar(){
-//        $.ajax({
-//                url: SiteName+"Modales/categoria_dropdown_select",
-//                type : 'POST',
-//                dataType : 'json',
-//                success : function(resultado) {
-//                          
-//                            $('#selLS3').find('option:not(:first)').remove();
-//                           // $("#selOUH").append(resultado.Opciones);
-//                },
-//                error : function(xhr, ajaxOptions, thrownError) {
-//                }
-//            });
-//}
