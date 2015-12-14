@@ -33,7 +33,6 @@ function CrearModalEmpresa(){
                     $("#agrega-empresa-form").validate().resetForm();
                 }
      });
-    this.modal.open();
 };
 
 function AgregarEmpresaHtml(){
@@ -117,25 +116,10 @@ function GuardarEmpresa(modal){
             success : function(resultado) {
                       FuncionesComunes.afterSave(resultado.success, resultado.success_message);
                       if(resultado.success){
-                        getEmpresas();
+                        $('#field-IdEmpresa').append($('<option>').text($("#input-nuevaEmpresa").val()).attr('value', resultado.insert_primary_key));
+                        $('#field-IdEmpresa').trigger('liszt:updated');
                         page.modal.close();
                       }
-            },
-            error : function(xhr, ajaxOptions, thrownError) {
-            }
-	});
-}
-
-function getEmpresas(){
-    $.ajax({
-            url: SiteName+"Modales/getEmpresas",
-            type : 'POST',
-            dataType : 'json',
-
-            success : function(resultado) {
-                      FuncionesComunes.afterSave(resultado.success, resultado.success_message);
-                      $("#field_IdEmpresa_chzn").remove();
-                      $("#IdEmpresa_input_box").append(resultado.Opciones);
             },
             error : function(xhr, ajaxOptions, thrownError) {
             }

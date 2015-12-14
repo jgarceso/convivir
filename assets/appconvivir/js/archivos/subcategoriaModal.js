@@ -20,7 +20,7 @@ jQuery(function () {
 });
 
 function CrearSubCategoriaModal(){
-   this.modal =   new jBox('Modal', {
+   this.modal = new jBox('Modal', {
                 constructOnInit:true,
                 attach: $('#agrega-subcategoria'),
                 title: 'SubCategor&iacute;a',
@@ -34,7 +34,6 @@ function CrearSubCategoriaModal(){
                     $("#agrega-subcategoria-form").validate().resetForm();
                 }
      });
-   this.modal.open();
 };
 
 function ObtieneCategorias(){
@@ -122,7 +121,7 @@ function SetearEventosSubCateForm(){
 	});     
 }
 
-function GuardarSubCategoria(){
+function GuardarSubCategoria(modal){
    var page = this;
     $.ajax({
 		url: SiteName+"SubCategorias/index/insert",

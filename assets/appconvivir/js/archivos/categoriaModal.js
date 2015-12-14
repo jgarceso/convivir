@@ -34,7 +34,6 @@ function CrearModalCategoria(){
                     $("#agrega-categoria-form").validate().resetForm();
                 }
      });
-     this.modal.open();
 };
 
 function AgregarCategoria(){
