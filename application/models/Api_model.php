@@ -84,9 +84,9 @@ class Api_model  extends CI_Model  {
                 }
                 return null;
             }
-             $query = $this->db->select("*")->from("empresa")->get();
+             $query = $this->db->select("*")->from("empresa")->order_by("Nombre")->get();
             if($query->num_rows()>0){
-                return $query->result_array();
+                return $query->result();
             }
             
             return null;
