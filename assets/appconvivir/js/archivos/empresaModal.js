@@ -61,7 +61,7 @@ function AgregarEmpresaHtml(){
            '</div>'+
            '<div class="form-row">'+
               '<label>'+
-                   '<span>Teléfono Contacto</span>'+
+                   '<span>Tel&eacute;fono Contacto</span>'+
                    '<input id="input-fonoContacto" type="text" name="fonoContacto" maxlength="12" onpaste="return false;">'+
                '</label>'+
            '</div>'+
@@ -88,7 +88,7 @@ function SetearEventosEmpresaForm(){
                                 required: "Debe ingresar el nombre de la empresa."
                         },
                         email:{
-                            email: "Ingrese un email valido.",
+                            email: "Ingrese un email vÃ¡lido.",
                         }
 		}
 	});
@@ -117,25 +117,9 @@ function GuardarEmpresa(modal){
             success : function(resultado) {
                       FuncionesComunes.afterSave(resultado.success, resultado.success_message);
                       if(resultado.success){
-                        //  $('#field-IdEmpresa').remove();
-                        //$('#field-IdEmpresa').find('option').remove().end().append('<option value="whatever">text</option>').val('whatever');
-                        //$('#field-IdEmpresa').children().remove().end().append('<option selected value="whatever">text</option>') ;
-                        //$('#field-IdEmpresa').empty();
-//                        $('#field-IdEmpresa')
-//                            .find('option')
-//                            .remove()
-//                            .end()
-//                            .append('<option value="whatever">text</option>')
-//                            .val('whatever')
-//                        ;
-//                        $('#field-IdEmpresa option:selected').each( function() {
-//                            $('#field-IdEmpresa').append("<option value='"+$(this).val()+"'>"+$(this).text()+"</option>");
-//                            $(this).remove();
-//                        });
-//                        document.getElementById("field-IdEmpresa").options.length = 0;
+                        getEmpresas();
                         page.modal.close();
                       }
-                      
             },
             error : function(xhr, ajaxOptions, thrownError) {
             }
@@ -150,15 +134,10 @@ function getEmpresas(){
 
             success : function(resultado) {
                       FuncionesComunes.afterSave(resultado.success, resultado.success_message);
-                      $("#selectBox option[value='option']").remove();
+                      $("#field_IdEmpresa_chzn").remove();
+                      $("#IdEmpresa_input_box").append(resultado.Opciones);
             },
             error : function(xhr, ajaxOptions, thrownError) {
             }
 	});
 }
-
-//var mySelect = document.getElementById('field-IdEmpresa');
-//mySelect.options.length = 0;
-//mySelect.options[0] = new Option ("Foo (only choice)", "Foo");
-//mySelect.options[0].selected="true";
-
