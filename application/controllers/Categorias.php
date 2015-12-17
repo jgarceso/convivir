@@ -25,7 +25,7 @@ class Categorias extends BaseController {
         $this->grocery_crud->set_relation('IdTipo', 'tipoproducto', 'Nombre');
         
         $this->grocery_crud->callback_before_delete(array($this, 'valida_categoria'));
-        //$this->grocery_crud->set_lang_string('delete_error_message', 'Existen registros asociados a esta categoría.');
+        $this->grocery_crud->set_lang_string('delete_error_message', 'Existen registros asociados a esta categoría.');
 
         $output = $this->grocery_crud->render();
 
@@ -37,26 +37,26 @@ class Categorias extends BaseController {
        
        $integridad = false;
        try{
-//            $this->db->select("*")
-//                    ->from('subcategoriaproducto')
-//                    ->where('IdCategoria', $primary_key);
-//            $resultCat = $this->db->get();
-//            echo '111';
-//            $this->db->select("*")
-//                    ->from('producto')
-//                    ->where('IdCategoria', $primary_key);
-//            $resultSub = $this->db->get();
-//            echo '222';
-//            if(count($resultCat)>0){
-//                $integridad = false;
-//            }
-//            if(count($resultSub)>0){
-//                $integridad = false;
-//            }
-//
-//            echo $integridad;
-//            return $integridad;
- return false;
+            $this->db->select("*")
+                    ->from('subcategoriaproducto')
+                    ->where('IdCategoria', $primary_key);
+            $resultCat = $this->db->get();
+            echo '111';
+            $this->db->select("*")
+                    ->from('producto')
+                    ->where('IdCategoria', $primary_key);
+            $resultSub = $this->db->get();
+            echo '222';
+            if(count($resultCat)>0){
+                $integridad = false;
+            }
+            if(count($resultSub)>0){
+                $integridad = false;
+            }
+//$this->grocery_crud->set_lang_string('delete_error_message', 'Existeoría.');
+            echo $integridad;
+            return $integridad;
+
        }catch(Exception $e){
            echo 'error';
            return false;
