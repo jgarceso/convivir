@@ -32,7 +32,7 @@ class Categorias extends BaseController {
     }
     
    function valida_categoria($primary_key) {
-     $integridad = false;
+     $guardar = false;
        try{
             $this->db->select("*")
                     ->from('subcategoriaproducto')
@@ -44,14 +44,14 @@ class Categorias extends BaseController {
                     ->where('IdCategoria', $primary_key);
             $resultSub = $this->db->get();
             echo '222';
-            if(count($resultCat)>0){
-                $integridad = false;
+            if(empty($resultCat)){
+                $guardar = true;
             }
-            if(count($resultSub)>0){
-                $integridad = false;
+            if(empty($resultSub)){
+                $guardar = true;
             }
-            echo $integridad;
-            return $integridad;
+            echo $guardar;
+            return $guardar;
 
        }catch(Exception $e){
            echo 'error';
