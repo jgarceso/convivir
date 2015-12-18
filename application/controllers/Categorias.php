@@ -28,14 +28,11 @@ class Categorias extends BaseController {
         $this->grocery_crud->set_lang_string('delete_error_message', 'Si desea eliminar la categor&iacute;a primero debe eliminar los productos y subcategorías asociadas.');
 
         $output = $this->grocery_crud->render();
-
         $this->mostrar_pagina("categorias", $output);
     }
     
    function valida_categoria($primary_key) {
-       echo 'laaaaaala';
-       
-       $integridad = false;
+     $integridad = false;
        try{
             $this->db->select("*")
                     ->from('subcategoriaproducto')
@@ -53,7 +50,6 @@ class Categorias extends BaseController {
             if(count($resultSub)>0){
                 $integridad = false;
             }
-//$this->grocery_crud->set_lang_string('delete_error_message', 'Existeoría.');
             echo $integridad;
             return $integridad;
 
@@ -61,41 +57,5 @@ class Categorias extends BaseController {
            echo 'error';
            return false;
        }
-
-        
-       
-       
-//        $IdTipo = $this->uri->segment(3);
-//        $this->db->select("*")
-//                ->from('categoriaproducto')
-//                ->where('IdTipo', $IdTipo)
-//                ->order_by('Nombre');
-//        $db = $this->db->get();
-//        $array = array();
-//        foreach ($db->result() as $row):
-//            $array[] = array("value" => $row->IdCategoria, "property" => $row->Nombre);
-//        endforeach;
-//        echo json_encode($array);
-//        exit;
-        
-//        $mensaje = "";
-//        $url = "";
-//        $correcto = true;
-//        $options="";
-//        
-//            try{
-//                $this->load->model('api_model');
-//                $data["array_cat"]=$this->api_model->get_CategoriasxTipo();
-//                foreach ($data["array_cat"] as $row_tipo){
-//                         $options .= '<option value="' . $row_tipo->IdCategoria . '">' . $row_tipo->Nombre . '</option>';
-//                }
-//            }catch(Exception $e){
-//                $mensaje="ocurrió un error al cargar las categorías.";
-//            }
-//        $obj = (object) array('Correcto' => $correcto, 'Url' => $url, 'Mensaje' => $mensaje, 'Opciones' => $options);
-//        echo json_encode($obj);
     }
-    
-    
-
 }

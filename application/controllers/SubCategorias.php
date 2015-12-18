@@ -28,5 +28,33 @@ class SubCategorias extends BaseController {
 
         $this->mostrar_pagina("subcategorias", $output);
     }
+    
+     function valida_subcategoria($primary_key) {
+     $integridad = false;
+       try{
+            $this->db->select("*")
+                    ->from('subcategoriaproducto')
+                    ->where('IdCategoria', $primary_key);
+            $resultCat = $this->db->get();
+            echo '111';
+            $this->db->select("*")
+                    ->from('producto')
+                    ->where('IdCategoria', $primary_key);
+            $resultSub = $this->db->get();
+            echo '222';
+            if(count($resultCat)>0){
+                $integridad = false;
+            }
+            if(count($resultSub)>0){
+                $integridad = false;
+            }
+            echo $integridad;
+            return $integridad;
+
+       }catch(Exception $e){
+           echo 'error';
+           return false;
+       }
+    }
 
 }
