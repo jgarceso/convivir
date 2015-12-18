@@ -63,7 +63,7 @@ class Format {
      *
      * @var mixed
      */
-    protected $_data = array();
+    protected $_data = [];
 
     /**
      * Type to convert from
@@ -93,7 +93,7 @@ class Format {
         {
             if (method_exists($this, '_from_' . $from_type))
             {
-                $data = call_user_func(array($this, '_from_' . $from_type), $data);
+                $data = call_user_func([$this, '_from_' . $from_type], $data);
             }
             else
             {
@@ -116,14 +116,10 @@ class Format {
      */
     public function factory($data, $from_type = NULL)
     {
-        // Added by Ivan Tcholakov, 01-JUL-2015.
-        $class = __CLASS__;
-        return new $class($data, $from_type);
-        //
+        // $class = __CLASS__;
+        // return new $class();
 
-        // Removed by Ivan Tcholakov, 01-JUL-2015.
-        //return new static($data, $from_type);
-        //
+        return new static($data, $from_type);
     }
 
     // FORMATTING OUTPUT ---------------------------------------------------------
@@ -150,7 +146,7 @@ class Format {
             $data = (array) $data;
         }
 
-        $array = array();
+        $array = [];
         foreach ((array) $data as $key => $value)
         {
             if (is_object($value) === TRUE || is_array($value) === TRUE)
@@ -283,7 +279,7 @@ class Format {
         {
             // Single array
             $headings = array_keys($data);
-            $data = array($data);
+            $data = [$data];
         }
 
         // Load the table library
@@ -295,7 +291,7 @@ class Format {
         {
             // Suppressing the "array to string conversion" notice
             // Keep the "evil" @ here
-            $row = @ array_map('strval', $row);
+            $row = @array_map('strval', $row);
 
             $this->_CI->table->add_row($row);
         }
@@ -357,7 +353,7 @@ class Format {
         {
             // Single array
             $headings = array_keys($data);
-            $data = array($data);
+            $data = [$data];
         }
 
         // Apply the headings
@@ -476,7 +472,7 @@ class Format {
      */
     protected function _from_xml($data)
     {
-        return $data ? (array) simplexml_load_string($data, 'SimpleXMLElement', LIBXML_NOCDATA) : array();
+        return $data ? (array) simplexml_load_string($data, 'SimpleXMLElement', LIBXML_NOCDATA) : [];
     }
 
     /**

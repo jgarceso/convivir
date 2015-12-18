@@ -149,7 +149,6 @@ class Security extends CI_Controller {
                 $this->email->set_newline("\r\n");
                 $this->email->from('Administrador');
                 $this->email->to($email);
-                $this->email->subject('Instrucciones de recuperaci&oacute;n de contrase&ntilde;a Convivir');
                 $this->email->subject('Instrucciones de recuperación de contraseña, Convivir');
                 $this->email->message('<p>Hemos recibido su solicitud de recuperaci&oacute;n de contrase&ntilde;a. '.
                                                 'Si hace click en el enlace, le enviaremos a una p&aacute;gina en donde '. 
@@ -162,24 +161,18 @@ class Security extends CI_Controller {
                     $correcto = true;
                     $mensaje = "El correo fué enviado.  Favor verifique y siga las instrucciones.";
                 } else {
-                    $correcto = false;
                     $mensaje = "El correo electrónico no pudo ser enviado, intente más tarde.";
-                    // show_error($this->email->print_debugger()); DEJAR PARA DEBUG EN CASO DE FALLA
+                    //show_error($this->email->print_debugger()); //DEJAR PARA DEBUG EN CASO DE FALLA
                 }
-                $correcto = true;
-                $mensaje = "El correo fué enviado.  Favor verifique y siga las instrucciones.";
             } else {
-                $correcto = false;
                 $mensaje = "Email no registrado.  Favor verifique.";
-            }
-
-            $obj = (object) array('Correcto' => $correcto, 'Mensaje' => $mensaje);
+            }          
         } catch (Expection $e) {
-            $obj = (object) array('Correcto' => $correcto, 'Mensaje' => $mensaje);
             $mensaje = 'Ha ocurrido un error al tratar de enviar el email. Favor intente más tarde.';
         }
-
+        finally {
+        $obj = (object) array('Correcto' => $correcto, 'Mensaje' => $mensaje);
         echo json_encode($obj);
+        }
     }
-
 }

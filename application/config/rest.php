@@ -43,7 +43,7 @@ $config['rest_default_format'] = 'json';
 | REST_Controller initialization.
 |
 */
-$config['rest_supported_formats'] = [
+$config['rest_supported_formats'] = array(
     'json',
     'array',
     'csv',
@@ -52,7 +52,7 @@ $config['rest_supported_formats'] = [
     'php',
     'serialized',
     'xml',
-];
+);
 
 /*
 |--------------------------------------------------------------------------
@@ -199,7 +199,7 @@ $config['auth_library_function'] = '';
 | Array of usernames and passwords for login, if ldap is configured this is ignored
 |
 */
-$config['rest_valid_logins'] = ['userAdminConvivir' => 'a?{TO53i..'];
+$config['rest_valid_logins'] = array('userAdminConvivir' => 'a?{TO53i..');
 
 /*
 |--------------------------------------------------------------------------
