@@ -25,7 +25,7 @@ class Categorias extends BaseController {
         $this->grocery_crud->set_relation('IdTipo', 'tipoproducto', 'Nombre');
         
         $this->grocery_crud->callback_before_delete(array($this, 'valida_categoria'));
-        $this->grocery_crud->set_lang_string('delete_error_message', 'Existen productos y/o subcategor&iacute;as asociadas a este &iacute;tem.<br><br>No fu&eacute; posible eliminar la categor&iacute;a.');
+        $this->grocery_crud->set_lang_string('delete_error_message', 'Si desea eliminar la categor&iacute;a primero debe eliminar los productos y subcategorías asociadas.');
 
         $output = $this->grocery_crud->render();
 
