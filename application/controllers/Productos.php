@@ -8,8 +8,6 @@ require_once 'BaseController.php';
 class Productos extends BaseController {
     
     private $archivos_js = array(
-        "lib/jquery-1.10.2.min.js",
-        "lib/jquery.validate.min.js",
         "archivos/empresaModal.js",
         "archivos/categoriaModal.js",
         "archivos/subcategoriaModal.js"
@@ -25,6 +23,7 @@ class Productos extends BaseController {
 
     public function index() {
         try {
+            $this->set_js_core_files(array("jquery-1.11.1.min.js"));
             $this->set_js_files($this->archivos_js);
             $this->grocery_crud->set_model('producto_model');
             $this->grocery_crud->set_table('producto');
@@ -41,20 +40,14 @@ class Productos extends BaseController {
             $this->grocery_crud->set_relation('IdEmpresa', 'empresa', 'Nombre');
             $this->grocery_crud->callback_column($this->unique_field_name('IdEstadoCertificacion'), array($this, 'showImage'));
             $this->grocery_crud->set_relation('IdEstadoCertificacion', 'estadocertificacion', 'Nombre');
-            
-           // $this->grocery_crud->callback_add_field('IdCategoria', array($this, 'empty_categoria_dropdown_select'));
-             $this->grocery_crud->callback_add_field('IdCategoria', array($this, 'empty_categoria_dropdown_select'));
-            //$this->grocery_crud->callback_add_field('IdEmpresa',array($this,'add_field_callback_1'));
-            
-           
-          //  $this->grocery_crud->callback_edit_field('IdCategoria', array($this, 'empty_categoria_dropdown_select'));
-            $this->grocery_crud->callback_add_field('IdSubcategoria', array($this, 'empty_subcategoria_select'));
-            $this->grocery_crud->callback_edit_field('IdSubcategoria', array($this, 'empty_subcategoria_select'));
+            $this->grocery_crud->callback_field('IdCategoria', array($this, 'empty_categoria_dropdown_select'));
+            $this->grocery_crud->callback_field('IdSubcategoria', array($this, 'empty_subcategoria_select'));
             $this->grocery_crud->order_by('Descripcion', 'asc');
             $this->grocery_crud->change_field_type('FechaModificacion', 'readonly', date('d-m-Y H:i:s'));
             $this->grocery_crud->callback_after_insert(array($this, 'log_producto_after_insert'));
             $this->grocery_crud->callback_after_update(array($this, 'log_producto_after_update'));
             $this->grocery_crud->callback_before_delete(array($this, 'log_producto_before_delete'));
+            
             $output = $this->grocery_crud->render();
             $dd_data = array(
                 'dd_state' => $this->grocery_crud->getState(),
@@ -68,15 +61,6 @@ class Productos extends BaseController {
             show_error($e->getMessage() . ' --- ' . $e->getTraceAsString());
         }
     }
-    
-    
-function add_field_callback_1()
-{
-    $empty_select = '<select name="IdEmpresa" class="chosen-select" data-placeholder="Seleccione Empresa"><a href="#" style="color:black;" id="link-Empresa">Tizag Home</a>';
-    $empty_select_closed = '</select>';
-    return $empty_select . $empty_select_closed;
-}
-
 
     function showImage($value) {
         if ($value == 'Vigente') {

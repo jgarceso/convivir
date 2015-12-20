@@ -153,7 +153,7 @@ header a{
     float:right;
 }
 
-.addEmpresa-icon{
+.add-icon{
     background: url(../imagenes/glyphicons-halflings.png) no-repeat;
     cursor: pointer;
     width: 16px;
@@ -161,40 +161,15 @@ header a{
     border: none !important;
     padding: 8px !important;
     padding-bottom: 0px !important;
-    margin-left: 635px;
     margin-top:7px;
     display: block;
     background-position: -407px -96px;
-    float:center;
-}
-.addCategory-icon{
-    background: url(../imagenes/glyphicons-halflings.png) no-repeat;
-    cursor: pointer;
-    width: 16px;
-    height: 16px;
-    border: none !important;
-    padding: 8px !important;
-    padding-bottom: 0px !important;
-    margin-left: 635px;
-    margin-top:7px;
-    display: block;
-    background-position: -407px -96px;
-    float:center;
+    float:left;
+    opacity: 0.7;
 }
 
-.addSubCategory-icon{
-    background: url(../imagenes/glyphicons-halflings.png) no-repeat;
-    cursor: pointer;
-    width: 16px;
-    height: 16px;
-    border: none !important;
-    padding: 8px !important;
-    padding-bottom: 0px !important;
-    margin-left: 635px;
-    margin-top:7px;
-    display: block;
-    background-position: -407px -96px;
-    float:center;
+.add-icon:hover{
+    opacity: 1;
 }
 
 .contenedor-blanco
@@ -280,7 +255,7 @@ header a{
     border: 1px solid #dbdbdb;
 }
 
-.default-form button{
+.default-form button, .default-btn button{
     display: block;
     border-radius: 2px;
     background-color:  #6caee0;
@@ -293,7 +268,16 @@ header a{
     cursor: pointer;
 }
 
-input.error{
+.default-btn button{
+    margin:0;
+}
+
+.default-form button:hover, .default-btn button:hover{
+    background-color:#357ebd;
+}
+
+
+input.error, .selector .error{
     border-color:red !important;
 }
 
@@ -353,12 +337,18 @@ input[type="submit"]{
     -moz-border-radius: 4px;
     border-radius: 4px;
 }
-.textoRojo{
-    color: #F00707;
-    font-style:italic;
-}
 
-.selectRojo{
-  border: 1px solid #F00707;
-  width: 100%;
+.icon-mano{
+    background: url(../imagenes/glyphicons-halflings.png) no-repeat;
+    cursor: pointer;
+    width: 16px;
+    height: 16px;
+    border: none !important;
+    padding: 10px !important;
+    padding-bottom: 0px !important;
+    margin-left: 30px !important;
+    margin-top:3px;
+    display: block;
+    background-position: -357px -143px;
+
 }
