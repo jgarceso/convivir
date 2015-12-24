@@ -1,5 +1,7 @@
-jQuery(function () {
-    $('#icono-usuario').jBox('Tooltip', {
+var menuUsuario = {
+  inicializar: function(){
+      var me = this;
+       $('#icono-usuario').jBox('Tooltip', {
         position: {
 			x: 'center',
 			y: 'bottom'
@@ -11,21 +13,22 @@ jQuery(function () {
                 '</ul>',
         closeOnMouseleave: true,
         onCreated: function () {
-            CrearModales();
+            me.crearModales();
         }
     });    
-});
-
-function CrearModales(){
+  }, 
+  
+crearModales: function(){
+    var me = this;
     new jBox('Modal', {
             constructOnInit:true,
             attach: $('#cambio-clave'),
             title: 'Cambiar Contraseña',
             width:400,
-            content: ObtenerCambioClaveHtml(),
+            content: me.obtenerCambioClaveHtml(),
             closeButton:'title',
             onCreated: function () {
-                SetearEventosFormulario();
+                me.setearEventosFormulario();
             },
             onClose: function(){
                 $("#cambiar-pass-form").validate().resetForm();
@@ -37,19 +40,18 @@ function CrearModales(){
             attach: $('#config-sistema'),
             title: 'Configuración Sistema',
             width:400,
-            content: ObtenerHtmlConfig(),
+            content: me.obtenerHtmlConfig(),
             closeButton:'title',
             onCreated: function () {
-                ObtenerSettings();
-                SetearEventosConfig(this);
+                me.obtenerSettings();
+                me.setearEventosConfig(this);
             },
             onClose: function(){
                 
             }
      });
-};
-
-function ObtenerCambioClaveHtml(){
+},
+obtenerCambioClaveHtml: function(){
     var html = 
    '<form  id="cambiar-pass-form" >'+
 
@@ -59,30 +61,28 @@ function ObtenerCambioClaveHtml(){
                             '<span>Contraseña Actual</span>'+
                         '</label>'+
                         '<input id="input-passwordActual" type="password" name="claveActual" maxlength="12" onpaste="return false;">'+
-                        
-                    '</div>'+
-
-                    '<div class="form-row">'+
-                       '<label>'+
-                            '<span>Nueva Contraseña</span>'+
-                            '<input id="input-password" type="password" name="claveNueva" maxlength="12" onpaste="return false;">'+
-                        '</label>'+
-                    '</div>'+
-                     '<div class="form-row">'+
-                       '<label>'+
-                            '<span>Confirme Contraseña</span>'+
-                            '<input id="input-confirmPass" type="password" name="confClave" maxlength="12" onpaste="return false;">'+
-                        '</label>'+
-                    '</div>'+
-                    '<div class="form-row">'+
-                        '<button id="btn-cambio-clave" type="button">Cambiar</button>'+
-                    '</div>'+
-          '</div>'+
+            '</div>'+
+            '<div class="form-row">'+
+               '<label>'+
+                    '<span>Nueva Contraseña</span>'+
+                    '<input id="input-password" type="password" name="claveNueva" maxlength="12" onpaste="return false;">'+
+                '</label>'+
+            '</div>'+
+            '<div class="form-row">'+
+              '<label>'+
+                   '<span>Confirme Contraseña</span>'+
+                   '<input id="input-confirmPass" type="password" name="confClave" maxlength="12" onpaste="return false;">'+
+               '</label>'+
+           '</div>'+
+           '<div class="form-row">'+
+                '<button id="btn-cambio-clave" type="button">Cambiar</button>'+
+            '</div>'+
+           '</div>'+
     '</form>';
             return html;
-};
-
-function SetearEventosFormulario(){
+},
+setearEventosFormulario: function(){
+    var me = this;
      $("#cambiar-pass-form").validate({
 		rules : {
                         claveActual:{
@@ -122,14 +122,13 @@ function SetearEventosFormulario(){
         
         $("#btn-cambio-clave").on("click", function() {
 		if ($("#cambiar-pass-form").valid()) {
-                       CambiarClave();
+                       me.cambiarClave();
 		} else {
 			return;
 		}
 	});
-};
-
-function CambiarClave (){
+},
+cambiarClave: function (){
     $.ajax({
 		url : SiteName+"Security/cambiarPassword",
 		type : 'POST',
@@ -143,18 +142,16 @@ function CambiarClave (){
 		success : function(resultado) {
 		FuncionesComunes.afterSave(resultado.Correcto, resultado.Mensaje);
                         if(resultado.Correcto){
-                            setTimeout(function(){
+                        FuncionesComunes.delayAction(function(){
                                 window.location = resultado.Url;
                               }, 2500);
-                        }
-                        
+                        }                        
 		},
 		error : function(xhr, ajaxOptions, thrownError) {
 		}
 	});
-}
-
-function ObtenerHtmlConfig() {
+},
+obtenerHtmlConfig: function() {
     var html = '<div>' +
                 '<div style="margin-bottom:10px;">En esta grilla puede modificar parámetros usados por el sistema</div>' +
                     '<div id="grid-configuracion" style=" width:370px; height: 200px;"></div>' +
@@ -166,28 +163,25 @@ function ObtenerHtmlConfig() {
                 '</div>' +
             '</div>';
     return html;
-}
+},
 
-function ObtenerSettings() {
+obtenerSettings: function() {
+    var me = this;
     $.ajax({
         url: SiteName+"Setting/obtener_settings",
         type: 'POST',
         dataType: 'json',
         success: function (data) {
             if (data.length > 0) {
-                CrearGrillaConfig(data);
+                me.crearGrillaConfig(data);
             }
-            //$.loader.close();
         },
         error: function (xhr, ajaxOptions, thrownError) {
-            //$.loader.close();
         }
     });
-}
-
-
-function CrearGrillaConfig(data) {
-
+},
+crearGrillaConfig:function(data) {
+    var me = this;
     $('#grid-configuracion').w2grid({
         name: 'gridConfig',
         fixedBody: true,
@@ -195,26 +189,26 @@ function CrearGrillaConfig(data) {
             {field: 'Descripcion', caption: 'Setting', size: '300px'},
             {field: 'Valor', caption: 'Valor', size: '68px',render: 'int', editable: { type: 'int', min: 0, max: 1000 },
             render: function (record, index, col_index) {
-                    var html = '<div title="Click para editar" onClick="w2ui.gridConfig.editField('+record.recid+','+col_index+');">'+record.Valor+'</div>';
+                    var html = '<div style="cursor:pointer;" title="Click para editar" onClick="w2ui.gridConfig.editField('+record.recid+','+col_index+');">'+record.Valor+'</div>';
                     return html;
                 }}
         ],
         records: data,
         onChange: function (target, event) {
             event.onComplete = function () {
-                GuardarSetting();
-            }
+                me.guardarSetting();
+            };
         }
     });
- };
+ },
  
- function SetearEventosConfig(modal) {
+ setearEventosConfig: function(modal) {
        $("#btn-config").on("click", function () {
         modal.close();
     });
-}
+},
 
-function GuardarSetting() {
+guardarSetting: function() {
     var setting = w2ui['gridConfig'].getChanges()[0];
      if(setting.Valor === "")
     {
@@ -238,3 +232,8 @@ function GuardarSetting() {
         }
     });
 }
+};
+
+jQuery(function () {
+    menuUsuario.inicializar();   
+});

@@ -4,7 +4,6 @@ if (!defined('BASEPATH')) {
     exit('No direct script access allowed');
 }
 require_once 'BaseController.php';
-require_once 'Encripter.php';
 
 class RecuperaPass extends BaseController {
 
@@ -18,5 +17,4 @@ class RecuperaPass extends BaseController {
         $this->set_js_files(array("archivos/cambiaContrasena.js"));
         $this->mostrar_pagina("recuperaPass");
     }
-
 }

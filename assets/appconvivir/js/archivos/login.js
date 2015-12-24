@@ -1,8 +1,10 @@
-$(document).ready(function() {
-    //eventos botones
+var loginPage = {
+    inicializar: function(){
+         //eventos botones
+         var me = this;
 	$("#btn-login").on("click", function() {
 		if ($("#login-form").valid()) {
-			IniciarSesion();
+			me.iniciarSesion();
 		} else {
 			return;
 		}
@@ -42,17 +44,16 @@ $(document).ready(function() {
         $("#refresh-captcha").on("click", function(){
             $("#captcha-result").attr("src","Security/obtenerCaptcha?rnd=" + Math.random());
         });
-});
-
-function CheckButton() {
+    },
+    
+    checkButton: function() {
 	if ($("#login-form").valid()) {
 		$('#btn-login').prop('disabled', false);
 	} else {
 		$('#btn-login').prop('disabled', 'disabled');
 	}
-};
-
-function IniciarSesion() {
+    },
+    iniciarSesion: function() {
 	$.ajax({
 		url : "Security/login",
 		type : 'POST',
@@ -65,7 +66,7 @@ function IniciarSesion() {
 		success : function(data) {
 			if (data.Correcto == false) {
                             $("#captcha-result").attr("src","Security/obtenerCaptcha?rnd=" + Math.random());
-				alert(data.Mensaje);
+                            FuncionesComunes.mostrarNotificacion(2,"red",data.Mensaje);	
 			}else{
 				window.location = data.Url;
 			}
@@ -73,7 +74,9 @@ function IniciarSesion() {
 		error : function(xhr, ajaxOptions, thrownError) {
 		}
 	});
+    }    
 };
 
-
-
+jQuery(function () { 
+    loginPage.inicializar();
+});

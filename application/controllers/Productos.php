@@ -6,6 +6,13 @@ if (!defined('BASEPATH')) {
 require_once 'BaseController.php';
 
 class Productos extends BaseController {
+    
+    private $archivos_js = array(
+        "archivos/empresaModal.js",
+        "archivos/categoriaModal.js",
+        "archivos/subcategoriaModal.js"
+    );
+        
 
     public function __construct() {
         parent::__construct();
@@ -16,6 +23,8 @@ class Productos extends BaseController {
 
     public function index() {
         try {
+            $this->set_js_core_files(array("jquery-1.11.1.min.js"));
+            $this->set_js_files($this->archivos_js);
             $this->grocery_crud->set_model('producto_model');
             $this->grocery_crud->set_table('producto');
             $this->grocery_crud->set_subject('Productos');
@@ -31,15 +40,14 @@ class Productos extends BaseController {
             $this->grocery_crud->set_relation('IdEmpresa', 'empresa', 'Nombre');
             $this->grocery_crud->callback_column($this->unique_field_name('IdEstadoCertificacion'), array($this, 'showImage'));
             $this->grocery_crud->set_relation('IdEstadoCertificacion', 'estadocertificacion', 'Nombre');
-            $this->grocery_crud->callback_add_field('IdCategoria', array($this, 'empty_categoria_dropdown_select'));
-            $this->grocery_crud->callback_edit_field('IdCategoria', array($this, 'empty_categoria_dropdown_select'));
-            $this->grocery_crud->callback_add_field('IdSubcategoria', array($this, 'empty_subcategoria_select'));
-            $this->grocery_crud->callback_edit_field('IdSubcategoria', array($this, 'empty_subcategoria_select'));
+            $this->grocery_crud->callback_field('IdCategoria', array($this, 'empty_categoria_dropdown_select'));
+            $this->grocery_crud->callback_field('IdSubcategoria', array($this, 'empty_subcategoria_select'));
             $this->grocery_crud->order_by('Descripcion', 'asc');
             $this->grocery_crud->change_field_type('FechaModificacion', 'readonly', date('d-m-Y H:i:s'));
             $this->grocery_crud->callback_after_insert(array($this, 'log_producto_after_insert'));
             $this->grocery_crud->callback_after_update(array($this, 'log_producto_after_update'));
             $this->grocery_crud->callback_before_delete(array($this, 'log_producto_before_delete'));
+            
             $output = $this->grocery_crud->render();
             $dd_data = array(
                 'dd_state' => $this->grocery_crud->getState(),

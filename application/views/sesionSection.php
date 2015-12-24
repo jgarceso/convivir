@@ -6,7 +6,6 @@ echo '<div class="contenedor-user-info">';
 
                                 echo '<a href="'.$this->config->site_url().'Security/salir" class="icon-salir" title="Cerrar Sesión"></a>';
                                 echo '<a href="'.$this->config->site_url().'Inicio" class="icon-inicio" title="Inicio"></a>';
-
 		echo	'</div>';
 		echo	'<div></div>';
 	echo	'</div>';
