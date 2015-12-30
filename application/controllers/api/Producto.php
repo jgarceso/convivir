@@ -7,10 +7,20 @@ class Producto extends REST_Controller{
     
     
     function __construct() {
+        header('Access-Control-Allow-Origin: *');
+        header("Access-Control-Allow-Headers: X-API-KEY, Origin, X-Requested-With, Content-Type, Accept, Access-Control-Request-Method, Authorization");
+        header("Access-Control-Allow-Methods: GET, POST, OPTIONS, PUT, DELETE");
+        $method = $_SERVER['REQUEST_METHOD'];
+        if ($method === "OPTIONS") {
+            die();
+        }
         parent::__construct();
         $this->load->model('data_model');
+        $this->load->model('api_model');
     }
-
+    public function index_options() {
+        return $this->response(NULL, 200);
+    }
      public function index_post(){
         echo 'index_post';
          if(! $this->post('product')){
