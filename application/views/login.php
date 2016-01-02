@@ -1,7 +1,12 @@
 <!DOCTYPE html>
 <html>
 
-<?php require_once 'head.php'; ?>
+<?php 
+
+if (strpos($_SERVER['SERVER_NAME'],'www.') !== false) {
+header("Location:".$this->config->site_url());
+}
+require_once 'head.php'; ?>
 <body>
 	<header class="cabecera" style="padding-bottom: 30px;">
              <?php require_once 'logo.php';?>
