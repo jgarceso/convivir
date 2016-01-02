@@ -170,9 +170,7 @@ class Security extends CI_Controller {
         } catch (Expection $e) {
             $mensaje = 'Ha ocurrido un error al tratar de enviar el email. Favor intente más tarde.';
         }
-        finally {
         $obj = (object) array('Correcto' => $correcto, 'Mensaje' => $mensaje);
         echo json_encode($obj);
-        }
     }
 }
