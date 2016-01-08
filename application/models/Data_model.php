@@ -41,9 +41,11 @@ class Data_model extends CI_Model {
         return null;
     }
 
-    public function buscar_productos($strBusqueda, $camposBusqueda, $limite) {
+    public function buscar_productos($strBusqueda, $camposBusqueda, $inicio, $largoPagina, $incluirTotal) {
         $likeInicio = "LIKE '" . $strBusqueda . "%'";
         $likeNormal = "LIKE '%" . $strBusqueda . "%'";
+        $numFilas = null;
+        
         $sqlComun = "SELECT p.Descripcion AS Producto, t.Nombre AS Tipo, c.Nombre AS Categoria, sc.Nombre AS SubCategoria, e.Nombre as Empresa, p.IdEstadoCertificacion
                                 FROM producto p
                                   INNER JOIN tipoproducto t ON p.IdTipo = t.IdTipo
@@ -53,19 +55,22 @@ class Data_model extends CI_Model {
                                 WHERE t.IdTipo IN(" . $camposBusqueda['tipo'] . ")";
 
 
-        $sql = "SELECT * FROM (
+        $sql = "SELECT  * FROM (
                                ".$sqlComun;
         $sql = $sql." ".$this->obtener_condiciones_sql_productos($camposBusqueda,$likeInicio);
         $sql = $sql."\n UNION ";
         $sql = $sql."\n ".$sqlComun;
         $sql = $sql." ".$this->obtener_condiciones_sql_productos($camposBusqueda,$likeNormal);
         $sql = $sql . "\n          ) a
-                ORDER BY a.IdEstadoCertificacion
-                LIMIT " . $limite . "";
+                ORDER BY a.IdEstadoCertificacion";
+        if($incluirTotal === 'true'){
+            $numFilas = $this->db->query($sql)->num_rows();
+        }
+        $sql = $sql ." LIMIT " . $inicio . ",".$largoPagina;
 
-        $query = $this->db->query($sql);
-        $result = $query->result_array();
-        return $result;
+        $datos = $this->db->query($sql)->result_array();
+        $resultado = (object) array('Total' => $numFilas, 'Datos' => $datos);
+        return $resultado;
     }
 
     private function obtener_condiciones_sql_productos($camposBusqueda, $likeStr) {

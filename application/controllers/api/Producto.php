@@ -50,7 +50,7 @@ class Producto extends REST_Controller{
 //          ), REST_Controller::HTTP_NOT_FOUND); // NOT_FOUND (404) being the HTTP response code
 //        }
         
-        $result = $this->data_model->buscar_productos($this->post("strBusqueda"),$this->post("opciones"),$this->post("limite"));
+        $result = $this->data_model->buscar_productos($this->post("strBusqueda"),$this->post("opciones"),$this->post("inicio"),$this->post("largoPagina"),$this->post("incluirTotal"));
         
         $this->response($result, REST_Controller::HTTP_OK); // OK (200) being the HTTP response code
 //        if(! is_null($product_id)){

@@ -70,7 +70,7 @@ var alertas = {
             records: data,
             onChange: function (target, event) {
                 event.onComplete = function () {
-                    me.GuardarAlerta();
+                    me.guardarAlerta();
                 }
             }
         });
