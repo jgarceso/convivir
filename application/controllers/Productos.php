@@ -65,7 +65,7 @@ class Productos extends BaseController {
     function showImage($value) {
         if ($value == 'Vigente') {
             return '<div class="circulo-estado-verde" title="' . $value . '"></div>';
-        } else if ($value == 'Caducada') {
+        } else if ($value == 'Vencida') {
             return '<div class="circulo-estado-rojo" title="' . $value . '"></div>';
         } else if ($value == 'En Renovación') {
             return '<div class="circulo-estado-amarillo" title="' . $value . '"></div>';
