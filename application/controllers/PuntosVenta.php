@@ -20,7 +20,7 @@ class PuntosVenta extends BaseController {
 
     public function index() {
         $this->grocery_crud->set_table('puntoventa');
-        $this->grocery_crud->set_subject('Punto de Venta');
+        $this->grocery_crud->set_subject('Lugar de Interés');
         $this->grocery_crud->columns('Nombre', 'Direccion');
         $this->grocery_crud->fields('Nombre', 'Direccion', 'IdRegion', 'IdProvincia', 'IdComuna', 'Latitud', 'Longitud');
         $this->grocery_crud->change_field_type('Latitud', 'invisible');

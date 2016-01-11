@@ -1015,7 +1015,9 @@ textarea.texteditor, textarea.mini-texteditor
 .btn-primary {
   background-color: #337ab7;
   *background-color: #0055cc;
-  border-color: #2e6da4;
+  border-color: #2e6da4 !important;
+  color:#FFFFFF !important;
+  background-image: none !important;
 }
 
 .btn-primary:hover,
@@ -1056,7 +1058,9 @@ textarea.texteditor, textarea.mini-texteditor
 .btn-danger {
   background-color: #d9534f;
   *background-color: #bd362f;
-  border-color: #d43f3a;
+  border-color: #d43f3a !important;
+  color:#FFFFFF !important;
+  background-image: none !important;
 }
 
 .btn-danger:hover,
